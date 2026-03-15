@@ -1,0 +1,2568 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="JANESKIN — Kosmetický salon Jana Szymiková, Dolní Lutyně. Specializovaná kosmetická ošetření s kosmeceutikou Larens, masáže, laminace řas a obočí, vizážistika.">
+  <title>JANESKIN — Kosmetický salon Jana Szymiková</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --color-bg: #FBF8F4;
+      --color-bg-alt: #F3EDE5;
+      --color-text: #2C2420;
+      --color-text-soft: #6B5D4F;
+      --color-accent: #C9A96E;
+      --color-accent-hover: #B8963E;
+      --color-white: #FFFFFF;
+      --color-border: #E5DDD3;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
+      --max-width: 1100px;
+      --radius: 12px;
+      --transition: 0.3s ease;
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== TYPOGRAPHY ===== */
+    h1, h2, h3, h4 {
+      font-family: var(--font-serif);
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    h1 { font-size: clamp(2.4rem, 6vw, 4rem); }
+    h2 { font-size: clamp(2rem, 4vw, 3rem); }
+    h3 { font-size: clamp(1.3rem, 2.5vw, 1.8rem); }
+
+    .label {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-accent);
+    }
+
+    /* ===== LAYOUT ===== */
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 80px 0; }
+    @media (max-width: 768px) { section { padding: 56px 0; } }
+
+    .bg-alt { background-color: var(--color-bg-alt); }
+    .bg-white { background-color: var(--color-white); }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-header .label { margin-bottom: 12px; display: block; }
+    .section-header h2 { margin-bottom: 16px; }
+    .section-header p {
+      font-size: 1.05rem;
+      color: var(--color-text-soft);
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all var(--transition);
+      border: 2px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--color-accent);
+      color: var(--color-text);
+      border-color: var(--color-accent);
+    }
+    .btn-primary:hover {
+      background: var(--color-accent-hover);
+      border-color: var(--color-accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(201, 169, 110, 0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-white);
+      border-color: rgba(255,255,255,0.7);
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--color-white);
+    }
+
+    .btn-outline-dark {
+      background: transparent;
+      color: var(--color-text);
+      border-color: var(--color-border);
+    }
+    .btn-outline-dark:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .link-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--color-accent);
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: gap var(--transition), color var(--transition);
+    }
+    .link-arrow:hover { gap: 10px; color: var(--color-accent-hover); }
+
+    /* ===== PLACEHOLDERS ===== */
+    .photo-placeholder {
+      background-color: var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .photo-placeholder svg {
+      opacity: 0.4;
+    }
+
+    /* ===== SCROLL ANIMATIONS ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in.delay-1 { transition-delay: 0.1s; }
+    .fade-in.delay-2 { transition-delay: 0.2s; }
+    .fade-in.delay-3 { transition-delay: 0.3s; }
+    .fade-in.delay-4 { transition-delay: 0.4s; }
+
+    /* ===========================
+       1. NAVIGATION
+    =========================== */
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 0;
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+
+    #nav.scrolled {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--color-border);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .nav-logo img {
+      display: block;
+      filter: brightness(0) invert(1);
+      transition: filter var(--transition);
+    }
+
+    #nav.scrolled .nav-logo img {
+      filter: brightness(0);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.85);
+      transition: color var(--transition);
+      position: relative;
+    }
+
+    #nav.scrolled .nav-links a {
+      color: var(--color-text-soft);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--color-accent);
+      transform: scaleX(0);
+      transition: transform var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--color-text); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-cta { flex-shrink: 0; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      background: none;
+      border: none;
+      z-index: 110;
+      position: relative;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--color-white);
+      transition: all var(--transition);
+      transform-origin: center;
+    }
+
+    #nav.scrolled .hamburger span {
+      background: var(--color-text);
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 280px;
+      background: var(--color-bg);
+      z-index: 105;
+      padding: 100px 32px 48px;
+      flex-direction: column;
+      gap: 0;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: -8px 0 40px rgba(44, 36, 32, 0.12);
+    }
+
+    .mobile-menu.open { transform: translateX(0); }
+
+    .mobile-menu a {
+      display: block;
+      padding: 16px 0;
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--color-text);
+      border-bottom: 1px solid var(--color-border);
+      transition: color var(--transition), padding-left var(--transition);
+    }
+
+    .mobile-menu a:hover { color: var(--color-accent); padding-left: 8px; }
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    .mobile-menu .mobile-cta {
+      margin-top: 32px;
+      display: block;
+      text-align: center;
+      padding: 14px 28px;
+      background: var(--color-accent);
+      color: var(--color-text);
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-bottom: none;
+    }
+
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(44, 36, 32, 0.4);
+      z-index: 104;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .mobile-overlay.open { opacity: 1; }
+
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+      .mobile-overlay { display: block; }
+    }
+
+    /* ===========================
+       2. HERO
+    =========================== */
+    #hero {
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #2C2420 0%, #4A3728 50%, #3D2E22 100%);
+    }
+
+    .hero-bg-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(20,14,12,0.88) 0%, rgba(20,14,12,0.68) 60%, rgba(20,14,12,0.45) 100%);
+    }
+
+    .hero-texture {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse at 70% 50%, rgba(201, 169, 110, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(201, 169, 110, 0.05) 0%, transparent 50%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 120px 24px 60px;
+      width: 100%;
+    }
+
+    .hero-label {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: var(--color-accent);
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .hero-content h1 {
+      color: var(--color-white);
+      max-width: 700px;
+      margin-bottom: 24px;
+      font-weight: 400;
+    }
+
+    .hero-content h1 em {
+      font-style: italic;
+      color: var(--color-accent);
+    }
+
+    .hero-subtitle {
+      color: rgba(255,255,255,0.75);
+      font-size: 1.05rem;
+      max-width: 540px;
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+
+    .hero-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 64px;
+    }
+
+    .trust-strip {
+      position: relative;
+      z-index: 2;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 32px 24px;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .trust-item::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 600px) {
+      .trust-strip { justify-content: flex-start; }
+    }
+
+    /* ===========================
+       3. O MNĚ
+    =========================== */
+    #about .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 16px;
+    }
+
+    .about-photo-inner {
+      width: 100%;
+      height: 100%;
+      background: var(--color-border);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-text .label { margin-bottom: 12px; display: block; }
+    .about-text h2 { margin-bottom: 24px; }
+
+    .about-text p {
+      color: var(--color-text-soft);
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+
+    .about-text .link-arrow { margin-top: 16px; }
+
+    @media (max-width: 768px) {
+      #about .about-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .about-photo { max-width: 320px; margin: 0 auto; }
+    }
+
+    /* ===========================
+       4. SLUŽBY
+    =========================== */
+    #services {
+      background-color: var(--color-bg-alt);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .services-grid { grid-template-columns: 1fr; }
+    }
+
+    .service-card {
+      background: var(--color-white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(44, 36, 32, 0.06);
+      transition: transform var(--transition), box-shadow var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(44, 36, 32, 0.12);
+    }
+
+    .service-card-img {
+      height: 200px;
+      background: var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .service-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.5s ease;
+    }
+
+    .service-card:hover .service-card-img img {
+      transform: scale(1.05);
+    }
+
+    .service-card-body {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card-body h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .service-card-body p {
+      color: var(--color-text-soft);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 16px;
+    }
+
+    .service-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .service-price {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--color-accent);
+    }
+
+    .service-duration {
+      font-size: 0.8rem;
+      color: var(--color-text-soft);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ===========================
+       5. PRVNÍ NÁVŠTĚVA
+    =========================== */
+    #first-visit { background: var(--color-bg-alt); }
+
+    .first-visit-content {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .first-visit-content h2 { margin-bottom: 24px; }
+    .first-visit-content p { color: var(--color-text-soft); margin-bottom: 16px; }
+
+    .info-boxes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 40px 0;
+    }
+
+    .info-box {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .info-box-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(201, 169, 110, 0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+
+    .info-box p {
+      font-size: 0.85rem;
+      color: var(--color-text-soft);
+      font-weight: 500;
+      margin: 0;
+    }
+
+    @media (max-width: 600px) {
+      .info-boxes { grid-template-columns: 1fr; }
+    }
+
+    /* ===========================
+       6. LARENS
+    =========================== */
+    #larens { background: var(--color-bg); }
+
+    .larens-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .larens-text .label { margin-bottom: 12px; display: block; }
+    .larens-text h2 { margin-bottom: 20px; }
+    .larens-text p { color: var(--color-text-soft); margin-bottom: 24px; }
+
+    .larens-benefits {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .benefit-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(201, 169, 110, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .benefit-item span {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .larens-visual {
+      background: var(--color-border);
+      border-radius: 16px;
+      aspect-ratio: 4/5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+      .larens-inner { grid-template-columns: 1fr; gap: 32px; }
+      .larens-visual { aspect-ratio: 16/9; }
+    }
+
+    /* ===========================
+       7. PRO NEVĚSTY
+    =========================== */
+    #brides {
+      background: linear-gradient(135deg, #3D2E22 0%, #2C2420 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #brides::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 80% 20%, rgba(201, 169, 110, 0.1) 0%, transparent 60%);
+    }
+
+    #brides .container { position: relative; z-index: 1; }
+
+    #brides .section-header .label { color: var(--color-accent); }
+    #brides .section-header h2 { color: var(--color-white); }
+    #brides .section-header p { color: rgba(255,255,255,0.65); }
+
+    .brides-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .bride-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      text-align: center;
+      backdrop-filter: blur(4px);
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .bride-card:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(201, 169, 110, 0.4);
+    }
+
+    .bride-card-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(201, 169, 110, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .bride-card h3 {
+      color: var(--color-white);
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .bride-card .bride-price {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      color: var(--color-accent);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .bride-card p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .brides-note {
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.875rem;
+      font-style: italic;
+      margin-bottom: 36px;
+    }
+
+    .brides-cta { text-align: center; }
+
+    @media (max-width: 768px) {
+      .brides-grid { grid-template-columns: 1fr; max-width: 360px; margin-left: auto; margin-right: auto; }
+    }
+
+    /* ===========================
+       8. RECENZE
+    =========================== */
+    #reviews { background: var(--color-bg-alt); }
+
+    .reviews-carousel {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .reviews-track {
+      display: flex;
+      gap: 24px;
+      transition: transform 0.4s ease;
+    }
+
+    .review-card {
+      flex: 0 0 calc(33.333% - 16px);
+      background: var(--color-white);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: 0 2px 12px rgba(44, 36, 32, 0.06);
+    }
+
+    .review-stars {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+
+    .review-stars svg { width: 16px; height: 16px; fill: var(--color-accent); }
+
+    .review-text {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--color-text);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .review-author {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text-soft);
+    }
+
+    .reviews-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .reviews-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      background: var(--color-white);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+    }
+
+    .reviews-btn:hover {
+      border-color: var(--color-accent);
+      background: var(--color-accent);
+    }
+
+    .reviews-btn:hover svg { stroke: var(--color-white); }
+
+    .reviews-btn svg { stroke: var(--color-text-soft); width: 16px; height: 16px; fill: none; stroke-width: 2; }
+
+    .reviews-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .reviews-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-border);
+      transition: background var(--transition), width var(--transition);
+      cursor: pointer;
+    }
+
+    .reviews-dot.active {
+      background: var(--color-accent);
+      width: 20px;
+      border-radius: 3px;
+    }
+
+    .reviews-google {
+      text-align: center;
+      margin-top: 28px;
+    }
+
+    @media (max-width: 900px) {
+      .review-card { flex: 0 0 calc(100% - 0px); }
+    }
+
+    /* ===========================
+       9. DÁRKOVÉ POUKAZY
+    =========================== */
+    #vouchers { background: var(--color-bg); }
+
+    .vouchers-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .vouchers-text .label { margin-bottom: 12px; display: block; }
+    .vouchers-text h2 { margin-bottom: 20px; }
+    .vouchers-text p { color: var(--color-text-soft); margin-bottom: 32px; }
+
+    .vouchers-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .voucher-feature {
+      background: var(--color-bg-alt);
+      border-radius: var(--radius);
+      padding: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .voucher-feature-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(201, 169, 110, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .voucher-feature span {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: 1.4;
+    }
+
+    .vouchers-visual {
+      background: linear-gradient(135deg, var(--color-bg-alt), var(--color-border));
+      border-radius: 16px;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--color-border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .voucher-card-mockup {
+      background: white;
+      border-radius: 12px;
+      padding: 28px;
+      width: 85%;
+      box-shadow: 0 8px 32px rgba(44, 36, 32, 0.12);
+    }
+
+    .voucher-card-mockup .vcm-label {
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-accent);
+      margin-bottom: 4px;
+    }
+
+    .voucher-card-mockup .vcm-name {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 12px;
+    }
+
+    .voucher-card-mockup .vcm-line {
+      height: 1px;
+      background: var(--color-border);
+      margin-bottom: 12px;
+    }
+
+    .voucher-card-mockup .vcm-value {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--color-accent);
+    }
+
+    @media (max-width: 768px) {
+      .vouchers-inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    /* ===========================
+       10. PŘÍSTROJE
+    =========================== */
+    #equipment { background: var(--color-bg-alt); }
+
+    .equipment-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .equipment-card {
+      background: var(--color-white);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(44, 36, 32, 0.06);
+      transition: transform var(--transition);
+    }
+
+    .equipment-card:hover { transform: translateY(-4px); }
+
+    .equipment-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(201, 169, 110, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .equipment-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+
+    .equipment-card p {
+      font-size: 0.875rem;
+      color: var(--color-text-soft);
+    }
+
+    @media (max-width: 768px) {
+      .equipment-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+    }
+
+    /* ===========================
+       11. NUTRIVI
+    =========================== */
+    #nutrivi { background: var(--color-bg); }
+
+    .nutrivi-inner {
+      display: flex;
+      align-items: center;
+      gap: 64px;
+    }
+
+    .nutrivi-content { flex: 1; }
+    .nutrivi-content .label { margin-bottom: 12px; display: block; }
+    .nutrivi-content h2 { margin-bottom: 20px; }
+    .nutrivi-content p { color: var(--color-text-soft); margin-bottom: 24px; max-width: 520px; }
+
+    .nutrivi-visual {
+      width: 280px;
+      height: 280px;
+      flex-shrink: 0;
+      background: var(--color-border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+      .nutrivi-inner { flex-direction: column; gap: 32px; }
+      .nutrivi-visual { width: 200px; height: 200px; }
+    }
+
+    /* ===========================
+       12. KONTAKT
+    =========================== */
+    #contact { background: var(--color-white); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .contact-info .label { margin-bottom: 16px; display: block; }
+    .contact-info h2 { margin-bottom: 28px; }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .contact-item-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(201, 169, 110, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-item-text strong {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-soft);
+      margin-bottom: 2px;
+    }
+
+    .contact-item-text a,
+    .contact-item-text p {
+      font-size: 0.95rem;
+      color: var(--color-text);
+      margin: 0;
+    }
+
+    .contact-item-text a:hover { color: var(--color-accent); }
+
+    .contact-payment {
+      background: var(--color-white);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+    }
+
+    .payment-tag {
+      background: rgba(201, 169, 110, 0.1);
+      border: 1px solid rgba(201, 169, 110, 0.3);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .map-placeholder {
+      background: var(--color-border);
+      border-radius: 16px;
+      height: 100%;
+      min-height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      color: var(--color-text-soft);
+      text-align: center;
+    }
+
+    .map-placeholder p { font-size: 0.9rem; }
+
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .map-placeholder { min-height: 240px; }
+    }
+
+    /* ===========================
+       13. FINAL CTA + FOOTER
+    =========================== */
+    #final-cta {
+      background: linear-gradient(135deg, var(--color-bg-alt) 0%, #E8D9C8 100%);
+      text-align: center;
+      padding: 96px 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    #final-cta .label { margin-bottom: 12px; display: block; }
+    #final-cta h2 { margin-bottom: 16px; }
+    #final-cta p {
+      color: var(--color-text-soft);
+      max-width: 480px;
+      margin: 0 auto 40px;
+    }
+
+    .final-cta-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      background: #000000;
+      color: rgba(255,255,255,0.65);
+      padding: 64px 0 32px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand .footer-logo {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-white);
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand p {
+      font-size: 0.875rem;
+      line-height: 1.7;
+      max-width: 280px;
+    }
+
+    .footer-brand .footer-social {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .footer-social a {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition);
+    }
+
+    .footer-social a:hover { background: var(--color-accent); }
+
+    .footer-nav h4 {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+      color: var(--color-white);
+      margin-bottom: 16px;
+    }
+
+    .footer-nav ul { list-style: none; }
+    .footer-nav ul li { margin-bottom: 8px; }
+    .footer-nav ul a {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.6);
+      transition: color var(--transition);
+    }
+    .footer-nav ul a:hover { color: var(--color-accent); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-bottom p { font-size: 0.8rem; }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      transition: color var(--transition);
+    }
+    .footer-legal a:hover { color: var(--color-accent); }
+
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ===========================
+       FOCUS STATES & ACCESSIBILITY
+    =========================== */
+    :focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* ===========================
+       INSTAGRAM
+    =========================== */
+    #instagram {
+      background: var(--color-bg-alt);
+      padding: 80px 0 0;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) { #instagram { padding: 56px 0 0; } }
+
+    .instagram-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      max-width: var(--max-width);
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 24px;
+    }
+
+    .instagram-header h2 { margin-top: 8px; }
+
+    .instagram-handle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--color-text-soft);
+      border: 1px solid var(--color-border);
+      border-radius: 24px;
+      padding: 8px 16px;
+      transition: all var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .instagram-handle:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    /* Carousel wrapper — full bleed */
+    .instagram-carousel-wrap {
+      position: relative;
+    }
+
+    .instagram-carousel-viewport {
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .instagram-carousel-viewport:active { cursor: grabbing; }
+
+    .instagram-track {
+      display: flex;
+      gap: 10px;
+      padding: 0 24px 40px;
+      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+
+    .instagram-tile {
+      position: relative;
+      width: 304px;
+      height: 450px;
+      flex-shrink: 0;
+      overflow: hidden;
+      border-radius: 10px;
+      display: block;
+      background: var(--color-border);
+    }
+
+    .instagram-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform 0.5s ease;
+      display: block;
+      pointer-events: none;
+    }
+
+    .instagram-tile-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(44, 36, 32, 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition);
+    }
+
+    .instagram-tile-overlay svg {
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity var(--transition), transform var(--transition);
+    }
+
+    .instagram-tile:hover img { transform: scale(1.06); }
+    .instagram-tile:hover .instagram-tile-overlay { background: rgba(44, 36, 32, 0.45); }
+    .instagram-tile:hover .instagram-tile-overlay svg { opacity: 1; transform: scale(1); }
+
+    /* Nav arrows */
+    .instagram-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      padding: 0 24px 48px;
+    }
+
+    .instagram-arrow {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      background: var(--color-white);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+      flex-shrink: 0;
+    }
+
+    .instagram-arrow:hover {
+      border-color: var(--color-accent);
+      background: var(--color-accent);
+    }
+
+    .instagram-arrow:hover svg { stroke: white; }
+    .instagram-arrow svg { stroke: var(--color-text-soft); width: 18px; height: 18px; fill: none; stroke-width: 2; }
+    .instagram-arrow:disabled { opacity: 0.35; pointer-events: none; }
+
+    .instagram-cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text-soft);
+      transition: color var(--transition);
+      padding: 0 16px;
+    }
+
+    .instagram-cta-link:hover { color: var(--color-accent); }
+
+    @media (max-width: 768px) {
+      .instagram-tile { width: 240px; height: 355px; }
+      .instagram-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+
+    @media (max-width: 480px) {
+      .instagram-tile { width: 200px; height: 296px; }
+    }
+
+    /* ===========================
+       PRINT STYLES
+    =========================== */
+    @media print {
+      #nav, .hamburger, .mobile-menu, .mobile-overlay, #hero::before,
+      .reviews-nav, #final-cta, footer .footer-social { display: none !important; }
+
+      body { background: white; color: black; font-size: 11pt; }
+      section { padding: 24px 0; page-break-inside: avoid; }
+      .container { padding: 0; }
+      h1, h2, h3 { color: black; }
+      .btn-primary, .btn-outline {
+        border: 1px solid black;
+        background: transparent;
+        color: black;
+        print-color-adjust: exact;
+      }
+      .hero-content { padding: 24px 0; }
+      .hero-content h1, .hero-subtitle, .trust-item { color: black; }
+      #brides { background: white; }
+      #brides .section-header h2, .bride-card h3 { color: black; }
+      footer { background: white; color: black; }
+    }
+
+    /* Utility */
+    .text-center { text-align: center; }
+    .mt-8 { margin-top: 8px; }
+    .mt-16 { margin-top: 16px; }
+    .mt-24 { margin-top: 24px; }
+    .mt-32 { margin-top: 32px; }
+  </style>
+</head>
+<body>
+
+  <!-- ===========================
+       1. NAVIGACE
+  =========================== -->
+  <header id="nav" role="banner">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" aria-label="JANESKIN — přejít na úvod"><img src="logo-janeskin.svg" alt="JANESKIN" width="180"></a>
+
+      <nav aria-label="Hlavní navigace">
+        <ul class="nav-links">
+          <li><a href="#services">Služby</a></li>
+          <li><a href="#about">O mně</a></li>
+          <li><a href="#contact">Ceník</a></li>
+          <li><a href="#brides">Pro nevěsty</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+        </ul>
+      </nav>
+
+      <a href="https://noona.app/cs/janeskinsalonjanaszymikova" target="_blank" rel="noopener" class="btn btn-primary nav-cta">Objednat se</a>
+
+      <button class="hamburger" id="hamburger" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
+
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobilní navigace">
+    <a href="#services" class="mobile-nav-link">Služby</a>
+    <a href="#about" class="mobile-nav-link">O mně</a>
+    <a href="#contact" class="mobile-nav-link">Ceník</a>
+    <a href="#brides" class="mobile-nav-link">Pro nevěsty</a>
+    <a href="#contact" class="mobile-nav-link">Kontakt</a>
+    <a href="https://noona.app/cs/janeskinsalonjanaszymikova" target="_blank" rel="noopener" class="mobile-cta">Objednat se</a>
+  </nav>
+
+  <main id="main">
+
+    <!-- ===========================
+         2. HERO
+    =========================== -->
+    <section id="hero" aria-label="Uvítací sekce">
+      <div class="hero-bg" aria-hidden="true">
+        <img src="hero-hp.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;">
+      </div>
+      <div class="hero-bg-placeholder" aria-hidden="true"></div>
+      <div class="hero-texture" aria-hidden="true"></div>
+
+      <div class="hero-content fade-in">
+        <span class="hero-label">Kosmetický salon Dolní Lutyně</span>
+        <h1>Péče o Vaši pleť<br>s <em>láskou</em>, odborností<br>a vědou</h1>
+        <p class="hero-subtitle">Osobní přístup, kosmeceutická péče Larens a více než 15 specializovaných ošetření pro každý typ pleti. Pro ženy i muže, bez rozdílu věku.</p>
+        <div class="hero-btns">
+          <a href="#contact" class="btn btn-primary">
+            Objednat se online
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#services" class="btn btn-outline">Prohlédnout služby →</a>
+        </div>
+      </div>
+
+      <div class="trust-strip" role="list" aria-label="Naše přednosti">
+        <div class="trust-item" role="listitem">12+ let zkušeností</div>
+        <div class="trust-item" role="listitem">Kosmeceutika Larens</div>
+        <div class="trust-item" role="listitem">Certifikovaná vizážistka</div>
+        <div class="trust-item" role="listitem">Osobní přístup</div>
+      </div>
+    </section>
+
+    <!-- ===========================
+         3. O MNĚ
+    =========================== -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-photo fade-in">
+            <img src="DSC_9524.jpg" alt="Jana Szymiková — majitelka salonu JANESKIN" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:16px;display:block;">
+          </div>
+          <div class="about-text fade-in delay-2">
+            <span class="label">O mně</span>
+            <h2 id="about-heading">Jana Szymiková</h2>
+            <p>Jmenuji se Jana a kosmetika je moje vášeň. Svůj salon jsem vybudovala s jedinou myšlenkou — abyste se u mě cítili příjemně, v bezpečí a v dobrých rukou.</p>
+            <p>Každého klienta vnímám jako celek. Nejde mi jen o vzhled, ale o to, abyste odcházeli s pocitem, že jste si dopřáli něco skutečně dobrého.</p>
+            <p>Pravidelně se školím v oblasti kosmeceutiky, moderních ošetření i dekorativní kosmetiky, abych vám mohla nabídnout to nejlepší ze světa vědy i přírody.</p>
+            <a href="#contact" class="link-arrow mt-16">
+              Více o mně
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================
+         4. SLUŽBY
+    =========================== -->
+    <section id="services" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="label">Naše služby</span>
+          <h2 id="services-heading">Co pro Vás mohu udělat</h2>
+          <p>Vyberte si z široké nabídky služeb přizpůsobených právě Vaší pleti a potřebám</p>
+        </div>
+
+        <div class="services-grid">
+
+          <!-- Karta 1 -->
+          <article class="service-card fade-in delay-1" aria-labelledby="svc1-title">
+            <div class="service-card-img">
+              <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80" alt="Kosmetická péče — ošetření pleti">
+            </div>
+            <div class="service-card-body">
+              <h3 id="svc1-title">Kosmetická péče</h3>
+              <p>Specializovaná ošetření s kosmeceutikou Larens — od hluboké hydratace přes lifting až po řešení akné, pigmentací či citlivé pleti.</p>
+              <div class="service-meta">
+                <span class="service-price">od 1 100 Kč</span>
+                <span class="service-duration">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  60–120 min
+                </span>
+              </div>
+              <a href="#contact" class="link-arrow">Zjistit více <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </article>
+
+          <!-- Karta 2 -->
+          <article class="service-card fade-in delay-2" aria-labelledby="svc2-title">
+            <div class="service-card-img">
+              <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=600&q=80" alt="Chemické peelingy — péče o pleť">
+            </div>
+            <div class="service-card-body">
+              <h3 id="svc2-title">Chemické peelingy</h3>
+              <p>Povrchové chemické peelingy s přírodními peptidy rybího kolagenu. Pleť se zjemní, vyhladí a projasní bez olupování.</p>
+              <div class="service-meta">
+                <span class="service-price">od 1 100 Kč</span>
+                <span class="service-duration">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  60 min
+                </span>
+              </div>
+              <a href="#contact" class="link-arrow">Zjistit více <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </article>
+
+          <!-- Karta 3 -->
+          <article class="service-card fade-in delay-1" aria-labelledby="svc3-title">
+            <div class="service-card-img">
+              <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=600&q=80" alt="Microneedling s Exosomy — ošetření">
+            </div>
+            <div class="service-card-body">
+              <h3 id="svc3-title">Microneedling s Exosomy</h3>
+              <p>Moderní estetická procedura spojující exosomy, kyselinu hyaluronovou a růstové faktory pro omlazení a zpevnění pleti.</p>
+              <div class="service-meta">
+                <span class="service-price">2 300 Kč</span>
+                <span class="service-duration">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  90 min
+                </span>
+              </div>
+              <a href="#contact" class="link-arrow">Zjistit více <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </article>
+
+          <!-- Karta 4 -->
+          <article class="service-card fade-in delay-2" aria-labelledby="svc4-title">
+            <div class="service-card-img">
+              <img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=600&q=80" alt="Anti Spot Therapy — rozjasnění pleti">
+            </div>
+            <div class="service-card-body">
+              <h3 id="svc4-title">Anti Spot Therapy</h3>
+              <p>Rozjasňující procedura zaměřená na pigmentové skvrny — po slunci, hormonální, po akné. Sjednocení tónu pleti.</p>
+              <div class="service-meta">
+                <span class="service-price">1 100 Kč</span>
+                <span class="service-duration">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  60 min
+                </span>
+              </div>
+              <a href="#contact" class="link-arrow">Zjistit více <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </article>
+
+          <!-- Karta 5 -->
+          <article class="service-card fade-in delay-1" aria-labelledby="svc5-title">
+            <div class="service-card-img">
+              <img src="https://images.unsplash.com/photo-1583241475880-083f84372725?auto=format&fit=crop&w=600&q=80" alt="Kosmetické masáže — masáž obličeje">
+            </div>
+            <div class="service-card-body">
+              <h3 id="svc5-title">Kosmetické masáže</h3>
+              <p>Tři typy masáží obličeje, krku a dekoltu — klasická, liftingová a mikromasáž očního okolí. Relaxace i omlazení.</p>
+              <div class="service-meta">
+                <span class="service-price">od 600 Kč</span>
+                <span class="service-duration">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  45–90 min
+                </span>
+              </div>
+              <a href="#contact" class="link-arrow">Zjistit více <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </article>
+
+          <!-- Karta 6 -->
+          <article class="service-card fade-in delay-2" aria-labelledby="svc6-title">
+            <div class="service-card-img">
+              <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Laminace řas a obočí">
+            </div>
+            <div class="service-card-body">
+              <h3 id="svc6-title">Laminace řas a obočí</h3>
+              <p>Pokročilá laminace od InLei® — natočení, barvení a výživa řas i obočí. Zahušťuje řasy až o 25 %.</p>
+              <div class="service-meta">
+                <span class="service-price">od 450 Kč</span>
+                <span class="service-duration">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  45–120 min
+                </span>
+              </div>
+              <a href="#contact" class="link-arrow">Zjistit více <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </article>
+
+          <!-- Karta 7 -->
+          <article class="service-card fade-in delay-1" aria-labelledby="svc7-title">
+            <div class="service-card-img">
+              <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=600&q=80" alt="Make-up a vizážistika">
+            </div>
+            <div class="service-card-body">
+              <h3 id="svc7-title">Make-up a vizážistika</h3>
+              <p>Svatební líčení, foto vizáž, kurzy líčení s Larens Colour i kompletní make-up proměny včetně účesů.</p>
+              <div class="service-meta">
+                <span class="service-price">od 800 Kč</span>
+                <span class="service-duration">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  60–210 min
+                </span>
+              </div>
+              <a href="#contact" class="link-arrow">Zjistit více <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </article>
+
+          <!-- Karta 8 -->
+          <article class="service-card fade-in delay-2" aria-labelledby="svc8-title">
+            <div class="service-card-img">
+              <img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=600&q=80" alt="Doplňkové kosmetické služby">
+            </div>
+            <div class="service-card-body">
+              <h3 id="svc8-title">Doplňkové služby</h3>
+              <p>Barvení a úprava obočí a řas, epilace, nadstandardní masky a ampule, lehké denní líčení po ošetření.</p>
+              <div class="service-meta">
+                <span class="service-price">od 80 Kč</span>
+                <span class="service-duration">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  15–30 min
+                </span>
+              </div>
+              <a href="#contact" class="link-arrow">Zjistit více <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================
+         5. PRVNÍ NÁVŠTĚVA
+    =========================== -->
+    <section id="first-visit" aria-labelledby="first-visit-heading">
+      <div class="container">
+        <div class="first-visit-content">
+          <div class="fade-in">
+            <span class="label">Začněme spolu</span>
+            <h2 id="first-visit-heading">Jste u nás poprvé?</h2>
+          </div>
+          <div class="fade-in delay-1">
+            <p>Při první návštěvě si spolu v klidu sedneme a probereme vaši současnou péči, požadavky a přání. Pomůžu vám se zorientovat v nabídce a společně nastavíme plán péče — jak v salonu, tak doma.</p>
+            <p>Jako první ošetření nejčastěji volím <strong>Collagen Intensive Hydroboost</strong>, kterým vaší pleti dodám hydrataci a zářivost. Je to ideální seznámení s přípravky Larens.</p>
+          </div>
+
+          <div class="info-boxes fade-in delay-2">
+            <div class="info-box">
+              <div class="info-box-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <p>Vstupní konzultace<br><strong>30 minut</strong></p>
+            </div>
+            <div class="info-box">
+              <div class="info-box-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <p>Pro ženy<br><strong>i muže</strong></p>
+            </div>
+            <div class="info-box">
+              <div class="info-box-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </div>
+              <p>Kontraindikace:<br><strong>alergie na bílkoviny z ryb</strong></p>
+            </div>
+          </div>
+
+          <div class="fade-in delay-3">
+            <a href="#contact" class="btn btn-primary">Objednat první návštěvu →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================
+         8. RECENZE
+    =========================== -->
+    <section id="reviews" aria-labelledby="reviews-heading">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="label">Spokojené klientky</span>
+          <h2 id="reviews-heading">Co říkají moje klientky</h2>
+        </div>
+
+        <div class="reviews-carousel fade-in" role="region" aria-label="Recenze klientů">
+          <div class="reviews-track" id="reviews-track">
+            <article class="review-card" aria-label="Recenze od Kláry">
+              <div class="review-stars" aria-label="Hodnocení 5 z 5 hvězdiček">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <p class="review-text">"Krásný salón a hlavně úžasná kosmetička, vše vysvětlí, doporučí nejlepší péči. Pleť se mi po ní krásně zlepšila. Jsem alergik a tato kosmetika mi opravdu sedla."</p>
+              <p class="review-author">— Klára</p>
+            </article>
+            <article class="review-card" aria-label="Recenze od Markéty">
+              <div class="review-stars" aria-label="Hodnocení 5 z 5 hvězdiček">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <p class="review-text">"Jana je naprosto skvělá profesionálka. Její holistický přístup a osobní péče mě nadchly. Salon je nádherný a útulný, cítíte se tam jako doma."</p>
+              <p class="review-author">— Markéta</p>
+            </article>
+            <article class="review-card" aria-label="Recenze od Petry">
+              <div class="review-stars" aria-label="Hodnocení 5 z 5 hvězdiček">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <p class="review-text">"Po první návštěvě jsem věděla, že jsem našla svou kosmetičku. Profesionální přístup, příjemné prostředí a výsledky, které mluví samy za sebe."</p>
+              <p class="review-author">— Petra</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="reviews-nav" role="group" aria-label="Ovládání karuselu">
+          <button class="reviews-btn" id="reviews-prev" aria-label="Předchozí recenze">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="reviews-dots" role="tablist" aria-label="Přejít na recenzi">
+            <button class="reviews-dot active" role="tab" aria-selected="true" aria-label="Recenze 1" data-index="0"></button>
+            <button class="reviews-dot" role="tab" aria-selected="false" aria-label="Recenze 2" data-index="1"></button>
+            <button class="reviews-dot" role="tab" aria-selected="false" aria-label="Recenze 3" data-index="2"></button>
+          </div>
+          <button class="reviews-btn" id="reviews-next" aria-label="Další recenze">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+
+        <div class="reviews-google fade-in">
+          <a href="https://www.google.com/search?sca_esv=8d848c16371de09d&rlz=1C5CHFA_enCZ976CZ976&sxsrf=ANbL-n6sN_yBkUbXvzaNRPSY1aoBQl_1gQ:1773587040081&q=janeskin&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOec0MbZLMhFjO_1Qm6GizUhZsuRt69kwGl2FYfX1LUUfwH1NnaHZ4f4acuPpixa9jXGgbsc%3D&uds=ALYpb_kiiUNHkONghgvqB_3sKPHu_sxwk550hz-2TmnLMrI1dQOHF7YP5Em3w_tRnhbZiPN697l-fz2URUpJs91QOgrkwnr8v-qf2v27g1VLjSQkLK8NsZU&sa=X&ved=2ahUKEwiP-4HMlqKTAxUhgv0HHWF4KpgQ3PALegQINBAF&biw=1710&bih=900&dpr=2" target="_blank" rel="noopener" class="link-arrow">
+            Více recenzí na Google
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================
+         6. LARENS
+    =========================== -->
+    <section id="larens" aria-labelledby="larens-heading">
+      <div class="container">
+        <div class="larens-inner">
+          <div class="larens-text fade-in">
+            <span class="label">Kosmeceutika</span>
+            <h2 id="larens-heading">Proč Larens?</h2>
+            <p>V salonu pracuji výhradně s kosmeceutikou Larens — přípravky, které stojí na rozhraní kosmetiky a farmacie. Vysoké koncentrace aktivních látek, liposomální technologie, přírodní peptidy rybího kolagenu — a žádné parabeny, silikony ani syntetické konzervanty. Výsledky potvrzeny vědeckým výzkumem.</p>
+            <div class="larens-benefits" role="list">
+              <div class="benefit-item" role="listitem">
+                <div class="benefit-icon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <span>Vědecky ověřené účinné látky</span>
+              </div>
+              <div class="benefit-item" role="listitem">
+                <div class="benefit-icon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <span>Přírodní složení bez parabenů a silikonů</span>
+              </div>
+              <div class="benefit-item" role="listitem">
+                <div class="benefit-icon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <span>Pro všechny typy pleti, včetně citlivé</span>
+              </div>
+            </div>
+            <a href="#contact" class="link-arrow">Více o značce Larens <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+          <div class="larens-visual fade-in delay-2">
+            <img src="ReHarmony Serum PRO.jpeg" alt="Larens ReHarmony Serum PRO — kosmeceutické sérum" style="width:100%;height:100%;object-fit:cover;object-position:center;border-radius:16px;display:block;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================
+         7. PRO NEVĚSTY
+    =========================== -->
+    <section id="brides" aria-labelledby="brides-heading">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="label">Svatební péče</span>
+          <h2 id="brides-heading">Váš svatební den začíná zdravím a krásou</h2>
+          <p>Připravím vaši pleť na velký den od základu — od kosmetických ošetření až po svatební líčení a účes, které vydrží do rána.</p>
+        </div>
+
+        <div class="brides-grid">
+          <div class="bride-card fade-in delay-1">
+            <div class="bride-card-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Zvýhodněný balíček</h3>
+            <span class="bride-price">3 500 Kč</span>
+            <p>3× kosmetické ošetření<br>pro přípravu pleti</p>
+          </div>
+          <div class="bride-card fade-in delay-2">
+            <div class="bride-card-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.8"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>
+            </div>
+            <h3>Svatební vizáž</h3>
+            <span class="bride-price">od 3 500 Kč</span>
+            <p>Včetně zkoušky líčení</p>
+          </div>
+          <div class="bride-card fade-in delay-3">
+            <div class="bride-card-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </div>
+            <h3>Kompletní vizáž</h3>
+            <span class="bride-price">od 4 500 Kč</span>
+            <p>Make-up + účes v jeden den</p>
+          </div>
+        </div>
+
+        <p class="brides-note fade-in">Ideálně začněte přípravu pleti 3 měsíce před svatbou.</p>
+
+        <div class="brides-cta fade-in">
+          <a href="#contact" class="btn btn-primary">Domluvit konzultaci →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================
+         INSTAGRAM
+    =========================== -->
+    <section id="instagram" aria-labelledby="instagram-heading">
+
+      <div class="instagram-header fade-in">
+        <div>
+          <span class="label">Sociální sítě</span>
+          <h2 id="instagram-heading">Sledujte nás na Instagramu</h2>
+        </div>
+        <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" class="instagram-handle" aria-label="Instagram profil @salon_janaszymikova">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          @salon_janaszymikova
+        </a>
+      </div>
+
+      <div class="instagram-carousel-wrap fade-in delay-1">
+        <div class="instagram-carousel-viewport" id="ig-viewport">
+          <div class="instagram-track" id="ig-track">
+
+            <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" class="instagram-tile" aria-label="Foto 1 na Instagramu">
+              <img src="DSC_9524.jpg" alt="Jana Szymiková — kosmetička JANESKIN">
+              <div class="instagram-tile-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            </a>
+
+            <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" class="instagram-tile" aria-label="Foto 2 na Instagramu">
+              <img src="DSC_9511.jpg" alt="JANESKIN — microneedling ošetření" style="object-position: center 20%;">
+              <div class="instagram-tile-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            </a>
+
+            <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" class="instagram-tile" aria-label="Foto 3 na Instagramu">
+              <img src="hero-hp.webp" alt="JANESKIN salon — ošetření pleti">
+              <div class="instagram-tile-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            </a>
+
+            <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" class="instagram-tile" aria-label="Foto 4 na Instagramu">
+              <img src="foto-hero.webp" alt="JANESKIN — kosmetické ošetření" style="object-position: center 30%;">
+              <div class="instagram-tile-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            </a>
+
+            <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" class="instagram-tile" aria-label="Foto 5 na Instagramu">
+              <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=608&h=900&q=80" alt="Kosmetická péče o pleť">
+              <div class="instagram-tile-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            </a>
+
+            <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" class="instagram-tile" aria-label="Foto 6 na Instagramu">
+              <img src="https://images.unsplash.com/photo-1583241475880-083f84372725?auto=format&fit=crop&w=608&h=900&q=80" alt="Masáž obličeje">
+              <div class="instagram-tile-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            </a>
+
+            <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" class="instagram-tile" aria-label="Foto 7 na Instagramu">
+              <img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=608&h=900&q=80" alt="Péče o pleť">
+              <div class="instagram-tile-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            </a>
+
+          </div>
+        </div>
+
+        <div class="instagram-nav">
+          <button class="instagram-arrow" id="ig-prev" aria-label="Předchozí fotky">
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" class="instagram-cta-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            Sledovat na Instagramu
+          </a>
+          <button class="instagram-arrow" id="ig-next" aria-label="Další fotky">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ===========================
+         9. DÁRKOVÉ POUKAZY
+    =========================== -->
+    <section id="vouchers" aria-labelledby="vouchers-heading">
+      <div class="container">
+        <div class="vouchers-inner">
+          <div class="vouchers-text fade-in">
+            <span class="label">Dárkové poukazy</span>
+            <h2 id="vouchers-heading">Darujte krásu a relaxaci</h2>
+            <p>Dárkový poukaz na kosmetické ošetření, masáž, laminaci nebo vizáž — ideální dárek pro každou příležitost.</p>
+            <div class="vouchers-features">
+              <div class="voucher-feature">
+                <div class="voucher-feature-icon" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M19 8V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v2"/><line x1="12" y1="8" x2="12" y2="21"/></svg>
+                </div>
+                <span>Tištěný poukaz v luxusní obálce</span>
+              </div>
+              <div class="voucher-feature">
+                <div class="voucher-feature-icon" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <span>Elektronický poukaz emailem obratem</span>
+              </div>
+              <div class="voucher-feature">
+                <div class="voucher-feature-icon" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </div>
+                <span>Hodnota 1 000 / 1 500 / 2 000 Kč</span>
+              </div>
+              <div class="voucher-feature">
+                <div class="voucher-feature-icon" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                </div>
+                <span>Platnost 6 měsíců od zakoupení</span>
+              </div>
+            </div>
+            <a href="#contact" class="btn btn-primary mt-32">Objednat poukaz →</a>
+          </div>
+          <div class="vouchers-visual fade-in delay-2" aria-hidden="true">
+            <div class="voucher-card-mockup">
+              <p class="vcm-label">Dárkový poukaz</p>
+              <p class="vcm-name">JANESKIN</p>
+              <div class="vcm-line"></div>
+              <p class="vcm-value">1 500 Kč</p>
+              <p style="font-size: 0.75rem; color: #6B5D4F; margin-top: 8px;">Platnost 6 měsíců</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================
+         10. PŘÍSTROJE
+    =========================== -->
+    <section id="equipment" aria-labelledby="equipment-heading">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="label">Vybavení salonu</span>
+          <h2 id="equipment-heading">Moderní přístroje v salonu</h2>
+        </div>
+
+        <div class="equipment-grid">
+          <div class="equipment-card fade-in delay-1">
+            <div class="equipment-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.5">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <h3>Ultrazvuková špachtle</h3>
+            <p>Hloubkové čištění pórů a zapracování účinných látek do hloubky pokožky.</p>
+          </div>
+          <div class="equipment-card fade-in delay-2">
+            <div class="equipment-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.5">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4"/>
+              </svg>
+            </div>
+            <h3>Mikrojehličkovací pero</h3>
+            <p>Stimulace přirozené tvorby kolagenu a elastinu pro pevnější a mladší pleť.</p>
+          </div>
+          <div class="equipment-card fade-in delay-3">
+            <div class="equipment-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.5">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <h3>Galvanická žehlička s LED</h3>
+            <p>Čištění, ionoforéza a fotonová terapie v jednom. Viditelné výsledky od první aplikace.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================
+         12. KONTAKT
+    =========================== -->
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-info fade-in">
+            <span class="label">Kde nás najdete</span>
+            <h2 id="contact-heading">Přijďte nás navštívit</h2>
+
+            <div class="contact-details">
+              <div class="contact-item">
+                <div class="contact-item-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div class="contact-item-text">
+                  <strong>Adresa</strong>
+                  <p>Dolní Lutyně<br>Moravskoslezský kraj</p>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-item-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.98-.98a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div class="contact-item-text">
+                  <strong>Telefon</strong>
+                  <a href="tel:+420000000000">+420 000 000 000</a>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-item-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <div class="contact-item-text">
+                  <strong>E-mail</strong>
+                  <a href="mailto:info@janeskin.cz">info@janeskin.cz</a>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-item-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <div class="contact-item-text">
+                  <strong>Parkování</strong>
+                  <p>Vyhrazené parkoviště nad domem</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-payment" role="region" aria-label="Způsoby platby">
+              <strong style="font-size: 0.8rem; color: var(--color-text-soft); align-self: center; flex-shrink: 0;">Platba:</strong>
+              <span class="payment-tag">QR kód / převod</span>
+              <span class="payment-tag">Hotovost</span>
+            </div>
+          </div>
+
+          <div class="fade-in delay-2">
+            <div style="border-radius:16px;overflow:hidden;height:100%;min-height:360px;box-shadow:0 2px 12px rgba(44,36,32,0.08);">
+              <iframe
+                src="https://maps.google.com/maps?q=U+Koupaliste+472,+Dolni+Lutyne&output=embed&hl=cs&z=16"
+                width="100%"
+                height="100%"
+                style="border:0;display:block;min-height:360px;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="JANESKIN — U Koupaliště 472, Dolní Lutyně"
+                aria-label="Interaktivní mapa — JANESKIN salon, U Koupaliště 472, Dolní Lutyně">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================
+         13a. ZÁVĚREČNÉ CTA
+    =========================== -->
+    <section id="final-cta" aria-label="Výzva k akci">
+      <div class="container">
+        <div class="fade-in">
+          <span class="label">Začněte dnes</span>
+          <h2>Připravte své pleti to nejlepší</h2>
+          <p>Rezervujte si termín online nebo nám zavolejte. Rádi vám poradíme s výběrem ošetření.</p>
+          <div class="final-cta-btns">
+            <a href="#contact" class="btn btn-primary">Objednat se online</a>
+            <a href="tel:+420000000000" class="btn btn-outline-dark">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.98-.98a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              Zavolat
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===========================
+       13b. FOOTER
+  =========================== -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="footer-logo" aria-label="JANESKIN — zpět na začátek">JANESKIN</a>
+          <p>Kosmetický salon Jana Szymiková<br>Dolní Lutyně — Specializovaná péče o pleť</p>
+          <div class="footer-social" role="list" aria-label="Sociální sítě">
+            <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" role="listitem" aria-label="Instagram JANESKIN">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </a>
+            <a href="#" role="listitem" aria-label="Facebook JANESKIN">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" aria-hidden="true">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <nav class="footer-nav" aria-label="Navigace footeru">
+          <h4>Navigace</h4>
+          <ul>
+            <li><a href="#services">Služby</a></li>
+            <li><a href="#about">O mně</a></li>
+            <li><a href="#contact">Ceník</a></li>
+            <li><a href="#brides">Pro nevěsty</a></li>
+            <li><a href="#vouchers">Dárkové poukazy</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer-nav">
+          <h4>Kontakt</h4>
+          <ul>
+            <li><a href="tel:+420000000000">+420 000 000 000</a></li>
+            <li><a href="mailto:info@janeskin.cz">info@janeskin.cz</a></li>
+            <li style="color: rgba(255,255,255,0.6); font-size: 0.875rem; padding: 4px 0;">Dolní Lutyně</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 JANESKIN — Salon Jana Szymiková. Všechna práva vyhrazena.</p>
+        <nav class="footer-legal" aria-label="Právní dokumenty">
+          <a href="#">Obchodní podmínky</a>
+          <a href="#">Reklamační řád</a>
+          <a href="#">Ochrana osobních údajů (GDPR)</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== NAVIGATION: Sticky + blur =====
+    const nav = document.getElementById('nav');
+    const scrollThreshold = 40;
+
+    function updateNav() {
+      if (window.scrollY > scrollThreshold) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }
+
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
+
+    // ===== HAMBURGER MENU =====
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link, .mobile-cta');
+
+    function openMenu() {
+      hamburger.classList.add('open');
+      mobileMenu.classList.add('open');
+      mobileOverlay.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      mobileOverlay.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', () => {
+      if (hamburger.classList.contains('open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    mobileOverlay.addEventListener('click', closeMenu);
+    mobileNavLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && hamburger.classList.contains('open')) {
+        closeMenu();
+      }
+    });
+
+    // ===== SMOOTH SCROLL =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          const navHeight = nav.offsetHeight;
+          const targetTop = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 16;
+          window.scrollTo({ top: targetTop, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== SCROLL ANIMATIONS =====
+    const fadeEls = document.querySelectorAll('.fade-in');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    fadeEls.forEach(el => observer.observe(el));
+
+    // ===== INSTAGRAM CAROUSEL =====
+    (function() {
+      const viewport = document.getElementById('ig-viewport');
+      const track = document.getElementById('ig-track');
+      const btnPrev = document.getElementById('ig-prev');
+      const btnNext = document.getElementById('ig-next');
+      if (!track) return;
+
+      const TILE_W = 304 + 10; // width + gap
+      let currentOffset = 0;
+
+      function getMaxOffset() {
+        return track.scrollWidth - viewport.offsetWidth;
+      }
+
+      function scrollBy(delta) {
+        currentOffset = Math.max(0, Math.min(currentOffset + delta, getMaxOffset()));
+        track.style.transform = `translateX(-${currentOffset}px)`;
+        btnPrev.disabled = currentOffset <= 0;
+        btnNext.disabled = currentOffset >= getMaxOffset();
+      }
+
+      btnPrev.addEventListener('click', () => scrollBy(-TILE_W * 2));
+      btnNext.addEventListener('click', () => scrollBy(TILE_W * 2));
+      btnPrev.disabled = true;
+
+      // Drag / swipe
+      let dragStart = null;
+      let dragOffset = 0;
+
+      viewport.addEventListener('mousedown', e => {
+        dragStart = e.clientX;
+        dragOffset = currentOffset;
+        track.style.transition = 'none';
+      });
+
+      window.addEventListener('mousemove', e => {
+        if (dragStart === null) return;
+        const delta = dragStart - e.clientX;
+        const raw = Math.max(0, Math.min(dragOffset + delta, getMaxOffset()));
+        track.style.transform = `translateX(-${raw}px)`;
+      });
+
+      window.addEventListener('mouseup', e => {
+        if (dragStart === null) return;
+        const delta = dragStart - e.clientX;
+        currentOffset = Math.max(0, Math.min(dragOffset + delta, getMaxOffset()));
+        track.style.transition = '';
+        track.style.transform = `translateX(-${currentOffset}px)`;
+        btnPrev.disabled = currentOffset <= 0;
+        btnNext.disabled = currentOffset >= getMaxOffset();
+        dragStart = null;
+      });
+
+      // Touch
+      let touchStartX = 0;
+      viewport.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX;
+        dragOffset = currentOffset;
+        track.style.transition = 'none';
+      }, { passive: true });
+
+      viewport.addEventListener('touchmove', e => {
+        const delta = touchStartX - e.touches[0].clientX;
+        const raw = Math.max(0, Math.min(dragOffset + delta, getMaxOffset()));
+        track.style.transform = `translateX(-${raw}px)`;
+      }, { passive: true });
+
+      viewport.addEventListener('touchend', e => {
+        const delta = touchStartX - e.changedTouches[0].clientX;
+        currentOffset = Math.max(0, Math.min(dragOffset + delta, getMaxOffset()));
+        track.style.transition = '';
+        track.style.transform = `translateX(-${currentOffset}px)`;
+        btnPrev.disabled = currentOffset <= 0;
+        btnNext.disabled = currentOffset >= getMaxOffset();
+      }, { passive: true });
+
+      window.addEventListener('resize', () => {
+        currentOffset = Math.min(currentOffset, getMaxOffset());
+        track.style.transform = `translateX(-${currentOffset}px)`;
+        btnNext.disabled = currentOffset >= getMaxOffset();
+      }, { passive: true });
+    })();
+
+    // ===== REVIEWS CAROUSEL =====
+    const track = document.getElementById('reviews-track');
+    const dots = document.querySelectorAll('.reviews-dot');
+    const cards = track ? track.querySelectorAll('.review-card') : [];
+    let currentReview = 0;
+    let totalReviews = cards.length;
+    let isDesktop = window.innerWidth > 900;
+
+    function goToReview(index) {
+      if (!track || totalReviews === 0) return;
+
+      currentReview = (index + totalReviews) % totalReviews;
+
+      if (isDesktop && window.innerWidth > 900) {
+        // Desktop: show all 3
+        track.style.transform = 'translateX(0)';
+        currentReview = 0;
+      } else {
+        // Mobile: slide one at a time
+        const cardWidth = cards[0].offsetWidth + 24;
+        track.style.transform = `translateX(-${currentReview * cardWidth}px)`;
+      }
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentReview);
+        dot.setAttribute('aria-selected', i === currentReview ? 'true' : 'false');
+      });
+    }
+
+    document.getElementById('reviews-prev')?.addEventListener('click', () => {
+      goToReview(currentReview - 1);
+    });
+
+    document.getElementById('reviews-next')?.addEventListener('click', () => {
+      goToReview(currentReview + 1);
+    });
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        goToReview(parseInt(dot.dataset.index));
+      });
+    });
+
+    // Handle resize
+    window.addEventListener('resize', () => {
+      isDesktop = window.innerWidth > 900;
+      goToReview(isDesktop ? 0 : currentReview);
+    }, { passive: true });
+
+    // Auto-advance on mobile
+    let autoplay;
+    function startAutoplay() {
+      autoplay = setInterval(() => {
+        if (window.innerWidth <= 900) {
+          goToReview(currentReview + 1);
+        }
+      }, 5000);
+    }
+
+    function stopAutoplay() {
+      clearInterval(autoplay);
+    }
+
+    startAutoplay();
+    track?.parentElement?.addEventListener('mouseenter', stopAutoplay);
+    track?.parentElement?.addEventListener('mouseleave', startAutoplay);
+    track?.parentElement?.addEventListener('touchstart', stopAutoplay, { passive: true });
+
+    // Touch swipe support for reviews
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    track?.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    track?.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        goToReview(diff > 0 ? currentReview + 1 : currentReview - 1);
+      }
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
