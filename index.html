@@ -258,6 +258,113 @@
     .nav-links a:hover { color: var(--color-text); }
     .nav-links a:hover::after { transform: scaleX(1); }
 
+    /* ===== DROPDOWN SLUŽBY ===== */
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown > a {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-dropdown > a .chevron-down {
+      width: 10px;
+      height: 10px;
+      transition: transform var(--transition);
+    }
+
+    .nav-dropdown:hover > a .chevron-down {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+      display: none; /* zatím skryté */
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-4px);
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+      z-index: 99;
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      height: 52px;
+      gap: 0;
+    }
+
+    .dropdown-menu a {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--color-text-soft) !important;
+      padding: 14px 20px;
+      white-space: nowrap;
+      transition: color var(--transition);
+      border-right: 1px solid var(--color-border);
+    }
+
+    .dropdown-menu a:first-child {
+      padding-left: 0;
+    }
+
+    .dropdown-menu a:last-of-type {
+      border-right: none;
+    }
+
+    .dropdown-menu a::after {
+      display: none !important;
+    }
+
+    .dropdown-menu a:hover {
+      color: var(--color-accent) !important;
+    }
+
+    .dropdown-cta {
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .dropdown-cta a {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 24px !important;
+      background: var(--color-text);
+      color: var(--color-white) !important;
+      font-size: 0.75rem !important;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: 0;
+      border-right: none !important;
+      transition: background var(--transition);
+    }
+
+    .dropdown-cta a:hover {
+      background: var(--color-accent-hover);
+      color: var(--color-white) !important;
+    }
+
     .nav-cta { flex-shrink: 0; }
 
     .hamburger {
@@ -632,54 +739,6 @@
     /* ===========================
        5. PRVNÍ NÁVŠTĚVA
     =========================== */
-    #first-visit { background: var(--color-bg-alt); }
-
-    .first-visit-content {
-      max-width: 760px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .first-visit-content h2 { margin-bottom: 24px; }
-    .first-visit-content p { color: var(--color-text-soft); margin-bottom: 16px; }
-
-    .info-boxes {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 40px 0;
-    }
-
-    .info-box {
-      background: var(--color-white);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      padding: 20px 16px;
-      text-align: center;
-    }
-
-    .info-box-icon {
-      width: 40px;
-      height: 40px;
-      background: rgba(201, 169, 110, 0.12);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 12px;
-    }
-
-    .info-box p {
-      font-size: 0.85rem;
-      color: var(--color-text-soft);
-      font-weight: 500;
-      margin: 0;
-    }
-
-    @media (max-width: 600px) {
-      .info-boxes { grid-template-columns: 1fr; }
-    }
-
     /* ===========================
        6. LARENS
     =========================== */
@@ -862,9 +921,9 @@
     .review-stars svg { width: 16px; height: 16px; fill: var(--color-accent); }
 
     .review-text {
-      font-family: var(--font-serif);
-      font-size: 1.15rem;
-      font-style: italic;
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      font-style: normal;
       color: var(--color-text);
       line-height: 1.7;
       margin-bottom: 20px;
@@ -1432,6 +1491,7 @@
       inset: 0;
       background: rgba(44, 36, 32, 0);
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       transition: background var(--transition);
@@ -1443,9 +1503,29 @@
       transition: opacity var(--transition), transform var(--transition);
     }
 
+    .instagram-tile-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px;
+      background: linear-gradient(transparent, rgba(44, 36, 32, 0.85));
+      color: white;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity var(--transition), transform var(--transition);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
     .instagram-tile:hover img { transform: scale(1.06); }
-    .instagram-tile:hover .instagram-tile-overlay { background: rgba(44, 36, 32, 0.45); }
+    .instagram-tile:hover .instagram-tile-overlay { background: rgba(44, 36, 32, 0.35); }
     .instagram-tile:hover .instagram-tile-overlay svg { opacity: 1; transform: scale(1); }
+    .instagram-tile:hover .instagram-tile-caption { opacity: 1; transform: translateY(0); }
 
     /* Nav arrows */
     .instagram-nav {
@@ -1544,7 +1624,24 @@
 
       <nav aria-label="Hlavní navigace">
         <ul class="nav-links">
-          <li><a href="#services">Služby</a></li>
+          <li class="nav-dropdown">
+            <a href="#services">Služby <svg class="chevron-down" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
+            <div class="dropdown-menu">
+              <div class="dropdown-inner">
+                <a href="#svc1-title">Kosmetická péče</a>
+                <a href="#svc2-title">Chemické peelingy</a>
+                <a href="#svc3-title">Microneedling</a>
+                <a href="#svc4-title">Anti Spot Therapy</a>
+                <a href="#svc5-title">Masáže</a>
+                <a href="#svc6-title">Laminace řas a obočí</a>
+                <a href="#svc7-title">Make-up</a>
+                <a href="#svc8-title">Doplňkové služby</a>
+                <div class="dropdown-cta">
+                  <a href="https://noona.app/cs/janeskinsalonjanaszymikova" target="_blank" rel="noopener">OBJEDNAT SE</a>
+                </div>
+              </div>
+            </div>
+          </li>
           <li><a href="#about">O mně</a></li>
           <li><a href="#contact">Ceník</a></li>
           <li><a href="#brides">Pro nevěsty</a></li>
@@ -1804,48 +1901,8 @@
           </article>
 
         </div>
-      </div>
-    </section>
-
-    <!-- ===========================
-         5. PRVNÍ NÁVŠTĚVA
-    =========================== -->
-    <section id="first-visit" aria-labelledby="first-visit-heading">
-      <div class="container">
-        <div class="first-visit-content">
-          <div class="fade-in">
-            <span class="label">Začněme spolu</span>
-            <h2 id="first-visit-heading">Jste u nás poprvé?</h2>
-          </div>
-          <div class="fade-in delay-1">
-            <p>Při první návštěvě si spolu v klidu sedneme a probereme vaši současnou péči, požadavky a přání. Pomůžu vám se zorientovat v nabídce a společně nastavíme plán péče — jak v salonu, tak doma.</p>
-            <p>Jako první ošetření nejčastěji volím <strong>Collagen Intensive Hydroboost</strong>, kterým vaší pleti dodám hydrataci a zářivost. Je to ideální seznámení s přípravky Larens.</p>
-          </div>
-
-          <div class="info-boxes fade-in delay-2">
-            <div class="info-box">
-              <div class="info-box-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              </div>
-              <p>Vstupní konzultace<br><strong>30 minut</strong></p>
-            </div>
-            <div class="info-box">
-              <div class="info-box-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              </div>
-              <p>Pro ženy<br><strong>i muže</strong></p>
-            </div>
-            <div class="info-box">
-              <div class="info-box-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-              </div>
-              <p>Kontraindikace:<br><strong>alergie na bílkoviny z ryb</strong></p>
-            </div>
-          </div>
-
-          <div class="fade-in delay-3">
-            <a href="#contact" class="btn btn-primary">Objednat první návštěvu →</a>
-          </div>
+        <div style="text-align:center; margin-top: 48px;" class="fade-in">
+          <a href="https://noona.app/cs/janeskinsalonjanaszymikova" target="_blank" rel="noopener" class="btn btn-primary">Objednat první návštěvu →</a>
         </div>
       </div>
     </section>
@@ -1895,6 +1952,50 @@
               <p class="review-text">"Po první návštěvě jsem věděla, že jsem našla svou kosmetičku. Profesionální přístup, příjemné prostředí a výsledky, které mluví samy za sebe."</p>
               <p class="review-author">— Petra</p>
             </article>
+            <article class="review-card" aria-label="Recenze od Lenky">
+              <div class="review-stars" aria-label="Hodnocení 5 z 5 hvězdiček">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <p class="review-text">"Chodím k Janě už přes rok a moje pleť se úplně proměnila. Zbavila jsem se akné a konečně mám zdravou, zářivou pleť. Každé ošetření je zážitek."</p>
+              <p class="review-author">— Lenka</p>
+            </article>
+            <article class="review-card" aria-label="Recenze od Terezy">
+              <div class="review-stars" aria-label="Hodnocení 5 z 5 hvězdiček">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <p class="review-text">"Laminace obočí a řas u Jany je naprosto dokonalá. Konečně nemusím řešit řasenku. Výdrž je skvělá a celý proces příjemný a relaxační."</p>
+              <p class="review-author">— Tereza</p>
+            </article>
+            <article class="review-card" aria-label="Recenze od Moniky">
+              <div class="review-stars" aria-label="Hodnocení 5 z 5 hvězdiček">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <p class="review-text">"Microneedling s exosomy mi úplně změnil pleť. Vrásky kolem očí jsou viditelně menší a pleť je pružnější. Jana přesně věděla, co moje pleť potřebuje."</p>
+              <p class="review-author">— Monika</p>
+            </article>
+            <article class="review-card" aria-label="Recenze od Veroniky">
+              <div class="review-stars" aria-label="Hodnocení 5 z 5 hvězdiček">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <p class="review-text">"Svatební líčení od Jany bylo přesně to, co jsem si přála — přirozené, elegantní a vydrželo celý den i noc. Všechny kamarádky se ptaly, kdo mě líčil."</p>
+              <p class="review-author">— Veronika</p>
+            </article>
           </div>
         </div>
 
@@ -1902,10 +2003,7 @@
           <button class="reviews-btn" id="reviews-prev" aria-label="Předchozí recenze">
             <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
           </button>
-          <div class="reviews-dots" role="tablist" aria-label="Přejít na recenzi">
-            <button class="reviews-dot active" role="tab" aria-selected="true" aria-label="Recenze 1" data-index="0"></button>
-            <button class="reviews-dot" role="tab" aria-selected="false" aria-label="Recenze 2" data-index="1"></button>
-            <button class="reviews-dot" role="tab" aria-selected="false" aria-label="Recenze 3" data-index="2"></button>
+          <div class="reviews-dots" id="reviews-dots" role="tablist" aria-label="Přejít na stránku recenzí">
           </div>
           <button class="reviews-btn" id="reviews-next" aria-label="Další recenze">
             <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
@@ -2025,42 +2123,7 @@
       <div class="instagram-carousel-wrap fade-in delay-1">
         <div class="instagram-carousel-viewport" id="ig-viewport">
           <div class="instagram-track" id="ig-track">
-
-            <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" class="instagram-tile" aria-label="Foto 1 na Instagramu">
-              <img src="DSC_9524.jpg" alt="Jana Szymiková — kosmetička JANESKIN">
-              <div class="instagram-tile-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
-            </a>
-
-            <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" class="instagram-tile" aria-label="Foto 2 na Instagramu">
-              <img src="DSC_9511.jpg" alt="JANESKIN — microneedling ošetření" style="object-position: center 20%;">
-              <div class="instagram-tile-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
-            </a>
-
-            <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" class="instagram-tile" aria-label="Foto 3 na Instagramu">
-              <img src="hero-hp.webp" alt="JANESKIN salon — ošetření pleti">
-              <div class="instagram-tile-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
-            </a>
-
-            <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" class="instagram-tile" aria-label="Foto 4 na Instagramu">
-              <img src="foto-hero.webp" alt="JANESKIN — kosmetické ošetření" style="object-position: center 30%;">
-              <div class="instagram-tile-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
-            </a>
-
-            <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" class="instagram-tile" aria-label="Foto 5 na Instagramu">
-              <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=608&h=900&q=80" alt="Kosmetická péče o pleť">
-              <div class="instagram-tile-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
-            </a>
-
-            <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" class="instagram-tile" aria-label="Foto 6 na Instagramu">
-              <img src="https://images.unsplash.com/photo-1583241475880-083f84372725?auto=format&fit=crop&w=608&h=900&q=80" alt="Masáž obličeje">
-              <div class="instagram-tile-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
-            </a>
-
-            <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" class="instagram-tile" aria-label="Foto 7 na Instagramu">
-              <img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=608&h=900&q=80" alt="Péče o pleť">
-              <div class="instagram-tile-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
-            </a>
-
+            <!-- Dynamicky naplněno z Instagram API -->
           </div>
         </div>
 
@@ -2420,172 +2483,198 @@
 
     fadeEls.forEach(el => observer.observe(el));
 
-    // ===== INSTAGRAM CAROUSEL =====
+    // ===== INSTAGRAM FEED + CAROUSEL =====
     (function() {
+      // ▼▼▼ VLOŽ SVŮJ INSTAGRAM ACCESS TOKEN ▼▼▼
+      const IG_TOKEN = '';
+      const IG_COUNT = 12;
+      const IG_PROFILE = 'https://www.instagram.com/salon_janaszymikova/';
+
       const viewport = document.getElementById('ig-viewport');
       const track = document.getElementById('ig-track');
       const btnPrev = document.getElementById('ig-prev');
       const btnNext = document.getElementById('ig-next');
       if (!track) return;
 
-      const TILE_W = 304 + 10; // width + gap
-      let currentOffset = 0;
+      const igIcon = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>';
 
-      function getMaxOffset() {
-        return track.scrollWidth - viewport.offsetWidth;
+      function renderTile(post) {
+        const caption = post.caption ? post.caption.split('\n')[0].substring(0, 120) : '';
+        const link = post.permalink || IG_PROFILE;
+        const img = post.media_url || '';
+        return `<a href="${link}" target="_blank" rel="noopener" class="instagram-tile">
+          <img src="${img}" alt="${caption ? caption.substring(0, 60) : 'Instagram foto'}" loading="lazy">
+          <div class="instagram-tile-overlay" aria-hidden="true">${igIcon}${caption ? `<span class="instagram-tile-caption">${caption}</span>` : ''}</div>
+        </a>`;
       }
 
-      function scrollBy(delta) {
-        currentOffset = Math.max(0, Math.min(currentOffset + delta, getMaxOffset()));
-        track.style.transform = `translateX(-${currentOffset}px)`;
-        btnPrev.disabled = currentOffset <= 0;
-        btnNext.disabled = currentOffset >= getMaxOffset();
+      function renderFallback() {
+        const fallback = [
+          { src: 'DSC_9524.jpg', alt: 'Jana Szymiková — kosmetička JANESKIN' },
+          { src: 'DSC_9511.jpg', alt: 'JANESKIN — microneedling ošetření', pos: 'center 20%' },
+          { src: 'hero-hp.webp', alt: 'JANESKIN salon — ošetření pleti' },
+          { src: 'foto-hero.webp', alt: 'JANESKIN — kosmetické ošetření', pos: 'center 30%' },
+        ];
+        track.innerHTML = fallback.map(f =>
+          `<a href="${IG_PROFILE}" target="_blank" rel="noopener" class="instagram-tile">
+            <img src="${f.src}" alt="${f.alt}"${f.pos ? ` style="object-position: ${f.pos}"` : ''}>
+            <div class="instagram-tile-overlay" aria-hidden="true">${igIcon}</div>
+          </a>`
+        ).join('');
       }
 
-      btnPrev.addEventListener('click', () => scrollBy(-TILE_W * 2));
-      btnNext.addEventListener('click', () => scrollBy(TILE_W * 2));
-      btnPrev.disabled = true;
+      function initCarousel() {
+        const TILE_W = 304 + 10;
+        let currentOffset = 0;
 
-      // Drag / swipe
-      let dragStart = null;
-      let dragOffset = 0;
+        function getMaxOffset() {
+          return Math.max(0, track.scrollWidth - viewport.offsetWidth);
+        }
 
-      viewport.addEventListener('mousedown', e => {
-        dragStart = e.clientX;
-        dragOffset = currentOffset;
-        track.style.transition = 'none';
-      });
+        function scrollBy(delta) {
+          currentOffset = Math.max(0, Math.min(currentOffset + delta, getMaxOffset()));
+          track.style.transform = `translateX(-${currentOffset}px)`;
+          btnPrev.disabled = currentOffset <= 0;
+          btnNext.disabled = currentOffset >= getMaxOffset();
+        }
 
-      window.addEventListener('mousemove', e => {
-        if (dragStart === null) return;
-        const delta = dragStart - e.clientX;
-        const raw = Math.max(0, Math.min(dragOffset + delta, getMaxOffset()));
-        track.style.transform = `translateX(-${raw}px)`;
-      });
+        btnPrev.addEventListener('click', () => scrollBy(-TILE_W * 2));
+        btnNext.addEventListener('click', () => scrollBy(TILE_W * 2));
+        btnPrev.disabled = true;
+        btnNext.disabled = getMaxOffset() <= 0;
 
-      window.addEventListener('mouseup', e => {
-        if (dragStart === null) return;
-        const delta = dragStart - e.clientX;
-        currentOffset = Math.max(0, Math.min(dragOffset + delta, getMaxOffset()));
-        track.style.transition = '';
-        track.style.transform = `translateX(-${currentOffset}px)`;
-        btnPrev.disabled = currentOffset <= 0;
-        btnNext.disabled = currentOffset >= getMaxOffset();
-        dragStart = null;
-      });
+        let dragStart = null, dragOffset = 0;
 
-      // Touch
-      let touchStartX = 0;
-      viewport.addEventListener('touchstart', e => {
-        touchStartX = e.touches[0].clientX;
-        dragOffset = currentOffset;
-        track.style.transition = 'none';
-      }, { passive: true });
+        viewport.addEventListener('mousedown', e => {
+          dragStart = e.clientX; dragOffset = currentOffset; track.style.transition = 'none';
+        });
+        window.addEventListener('mousemove', e => {
+          if (dragStart === null) return;
+          const raw = Math.max(0, Math.min(dragOffset + (dragStart - e.clientX), getMaxOffset()));
+          track.style.transform = `translateX(-${raw}px)`;
+        });
+        window.addEventListener('mouseup', e => {
+          if (dragStart === null) return;
+          currentOffset = Math.max(0, Math.min(dragOffset + (dragStart - e.clientX), getMaxOffset()));
+          track.style.transition = ''; track.style.transform = `translateX(-${currentOffset}px)`;
+          btnPrev.disabled = currentOffset <= 0; btnNext.disabled = currentOffset >= getMaxOffset();
+          dragStart = null;
+        });
 
-      viewport.addEventListener('touchmove', e => {
-        const delta = touchStartX - e.touches[0].clientX;
-        const raw = Math.max(0, Math.min(dragOffset + delta, getMaxOffset()));
-        track.style.transform = `translateX(-${raw}px)`;
-      }, { passive: true });
+        let touchStartX = 0;
+        viewport.addEventListener('touchstart', e => {
+          touchStartX = e.touches[0].clientX; dragOffset = currentOffset; track.style.transition = 'none';
+        }, { passive: true });
+        viewport.addEventListener('touchmove', e => {
+          const raw = Math.max(0, Math.min(dragOffset + (touchStartX - e.touches[0].clientX), getMaxOffset()));
+          track.style.transform = `translateX(-${raw}px)`;
+        }, { passive: true });
+        viewport.addEventListener('touchend', e => {
+          currentOffset = Math.max(0, Math.min(dragOffset + (touchStartX - e.changedTouches[0].clientX), getMaxOffset()));
+          track.style.transition = ''; track.style.transform = `translateX(-${currentOffset}px)`;
+          btnPrev.disabled = currentOffset <= 0; btnNext.disabled = currentOffset >= getMaxOffset();
+        }, { passive: true });
 
-      viewport.addEventListener('touchend', e => {
-        const delta = touchStartX - e.changedTouches[0].clientX;
-        currentOffset = Math.max(0, Math.min(dragOffset + delta, getMaxOffset()));
-        track.style.transition = '';
-        track.style.transform = `translateX(-${currentOffset}px)`;
-        btnPrev.disabled = currentOffset <= 0;
-        btnNext.disabled = currentOffset >= getMaxOffset();
-      }, { passive: true });
+        window.addEventListener('resize', () => {
+          currentOffset = Math.min(currentOffset, getMaxOffset());
+          track.style.transform = `translateX(-${currentOffset}px)`;
+          btnNext.disabled = currentOffset >= getMaxOffset();
+        }, { passive: true });
+      }
 
-      window.addEventListener('resize', () => {
-        currentOffset = Math.min(currentOffset, getMaxOffset());
-        track.style.transform = `translateX(-${currentOffset}px)`;
-        btnNext.disabled = currentOffset >= getMaxOffset();
-      }, { passive: true });
+      // Fetch z Instagram Graph API
+      if (IG_TOKEN) {
+        fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink,media_type&limit=${IG_COUNT}&access_token=${IG_TOKEN}`)
+          .then(r => r.json())
+          .then(data => {
+            if (!data.data) throw new Error('No data');
+            const posts = data.data.filter(p => p.media_type === 'IMAGE' || p.media_type === 'CAROUSEL_ALBUM');
+            track.innerHTML = posts.map(renderTile).join('');
+            initCarousel();
+          })
+          .catch(() => { renderFallback(); initCarousel(); });
+      } else {
+        renderFallback();
+        initCarousel();
+      }
     })();
 
     // ===== REVIEWS CAROUSEL =====
     const track = document.getElementById('reviews-track');
-    const dots = document.querySelectorAll('.reviews-dot');
+    const dotsContainer = document.getElementById('reviews-dots');
     const cards = track ? track.querySelectorAll('.review-card') : [];
-    let currentReview = 0;
-    let totalReviews = cards.length;
+    let currentPage = 0;
     let isDesktop = window.innerWidth > 900;
 
-    function goToReview(index) {
-      if (!track || totalReviews === 0) return;
+    function getPerPage() { return window.innerWidth > 900 ? 3 : 1; }
+    function getTotalPages() { return Math.ceil(cards.length / getPerPage()); }
 
-      currentReview = (index + totalReviews) % totalReviews;
-
-      if (isDesktop && window.innerWidth > 900) {
-        // Desktop: show all 3
-        track.style.transform = 'translateX(0)';
-        currentReview = 0;
-      } else {
-        // Mobile: slide one at a time
-        const cardWidth = cards[0].offsetWidth + 24;
-        track.style.transform = `translateX(-${currentReview * cardWidth}px)`;
+    function buildDots() {
+      if (!dotsContainer) return;
+      dotsContainer.innerHTML = '';
+      const total = getTotalPages();
+      for (let i = 0; i < total; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'reviews-dot' + (i === currentPage ? ' active' : '');
+        btn.setAttribute('role', 'tab');
+        btn.setAttribute('aria-selected', i === currentPage ? 'true' : 'false');
+        btn.setAttribute('aria-label', `Stránka ${i + 1}`);
+        btn.dataset.index = i;
+        btn.addEventListener('click', () => goToPage(i));
+        dotsContainer.appendChild(btn);
       }
+    }
 
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentReview);
-        dot.setAttribute('aria-selected', i === currentReview ? 'true' : 'false');
+    function goToPage(index) {
+      if (!track || cards.length === 0) return;
+      const totalPages = getTotalPages();
+      currentPage = ((index % totalPages) + totalPages) % totalPages;
+      const gap = 24;
+      const cardWidth = cards[0].offsetWidth + gap;
+      const perPage = getPerPage();
+      const maxOffset = (cards.length - perPage) * cardWidth;
+      const offset = Math.min(currentPage * perPage * cardWidth, maxOffset);
+      track.style.transform = `translateX(-${offset}px)`;
+      dotsContainer?.querySelectorAll('.reviews-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentPage);
+        dot.setAttribute('aria-selected', i === currentPage ? 'true' : 'false');
       });
     }
 
-    document.getElementById('reviews-prev')?.addEventListener('click', () => {
-      goToReview(currentReview - 1);
-    });
+    buildDots();
+    goToPage(0);
 
-    document.getElementById('reviews-next')?.addEventListener('click', () => {
-      goToReview(currentReview + 1);
-    });
+    document.getElementById('reviews-prev')?.addEventListener('click', () => goToPage(currentPage - 1));
+    document.getElementById('reviews-next')?.addEventListener('click', () => goToPage(currentPage + 1));
 
-    dots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        goToReview(parseInt(dot.dataset.index));
-      });
-    });
-
-    // Handle resize
     window.addEventListener('resize', () => {
+      const wasDesktop = isDesktop;
       isDesktop = window.innerWidth > 900;
-      goToReview(isDesktop ? 0 : currentReview);
+      if (wasDesktop !== isDesktop) { currentPage = 0; buildDots(); }
+      goToPage(currentPage);
     }, { passive: true });
 
-    // Auto-advance on mobile
+    // Auto-advance
     let autoplay;
     function startAutoplay() {
-      autoplay = setInterval(() => {
-        if (window.innerWidth <= 900) {
-          goToReview(currentReview + 1);
-        }
-      }, 5000);
+      autoplay = setInterval(() => goToPage(currentPage + 1), 5000);
     }
-
-    function stopAutoplay() {
-      clearInterval(autoplay);
-    }
+    function stopAutoplay() { clearInterval(autoplay); }
 
     startAutoplay();
     track?.parentElement?.addEventListener('mouseenter', stopAutoplay);
     track?.parentElement?.addEventListener('mouseleave', startAutoplay);
     track?.parentElement?.addEventListener('touchstart', stopAutoplay, { passive: true });
 
-    // Touch swipe support for reviews
+    // Touch swipe
     let touchStartX = 0;
-    let touchEndX = 0;
-
     track?.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
     }, { passive: true });
 
     track?.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      const diff = touchStartX - touchEndX;
-      if (Math.abs(diff) > 50) {
-        goToReview(diff > 0 ? currentReview + 1 : currentReview - 1);
-      }
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) goToPage(diff > 0 ? currentPage + 1 : currentPage - 1);
     }, { passive: true });
   </script>
 
