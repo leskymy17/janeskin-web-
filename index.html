@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="JANESKIN — Kosmetický salon Jana Szymiková, Dolní Lutyně. Specializovaná kosmetická ošetření s kosmeceutikou Larens, masáže, laminace řas a obočí, vizážistika.">
   <title>JANESKIN — Kosmetický salon Jana Szymiková</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -1599,6 +1600,11 @@
       margin-left: auto;
       margin-right: auto;
       padding: 0 24px;
+      text-align: center;
+    }
+
+    .instagram-header > div {
+      flex: 1;
     }
 
     .instagram-header h2 { margin-top: 8px; }
@@ -1626,29 +1632,36 @@
     /* Carousel wrapper — full bleed */
     .instagram-carousel-wrap {
       position: relative;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
     }
 
     .instagram-carousel-viewport {
-      overflow: hidden;
-      cursor: grab;
-      user-select: none;
+      width: 100%;
     }
-
-    .instagram-carousel-viewport:active { cursor: grabbing; }
 
     .instagram-track {
       display: flex;
-      gap: 10px;
-      padding: 0 24px 40px;
-      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      will-change: transform;
+      flex-wrap: nowrap;
+      gap: 8px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding-left: max(24px, calc((100vw - var(--max-width)) / 2 + 24px));
+      padding-right: 24px;
+      padding-bottom: 40px;
+      scrollbar-width: none;
     }
 
+    .instagram-track::-webkit-scrollbar { display: none; }
+
     .instagram-tile {
-      position: relative;
-      width: 304px;
-      height: 450px;
-      flex-shrink: 0;
+      flex: 0 0 220px;
+      width: 220px;
+      aspect-ratio: 3 / 4;
+      scroll-snap-align: start;
       overflow: hidden;
       border-radius: 10px;
       display: block;
@@ -1752,12 +1765,12 @@
     .instagram-cta-link:hover { color: var(--color-accent); }
 
     @media (max-width: 768px) {
-      .instagram-tile { width: 240px; height: 355px; }
       .instagram-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .instagram-tile { flex: 0 0 180px; width: 180px; }
     }
 
     @media (max-width: 480px) {
-      .instagram-tile { width: 200px; height: 296px; }
+      .instagram-tile { flex: 0 0 150px; width: 150px; }
     }
 
     /* ===========================
@@ -2480,16 +2493,10 @@
         </div>
 
         <div class="instagram-nav">
-          <button class="instagram-arrow" id="ig-prev" aria-label="Předchozí fotky">
-            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
           <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" class="instagram-cta-link">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
             Sledovat na Instagramu
           </a>
-          <button class="instagram-arrow" id="ig-next" aria-label="Další fotky">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
         </div>
       </div>
 
@@ -2795,76 +2802,25 @@
 
       function renderFallback() {
         const fallback = [
-          { src: 'DSC_9524.jpg', alt: 'Jana Szymiková — kosmetička JANESKIN' },
-          { src: 'DSC_9511.jpg', alt: 'JANESKIN — microneedling ošetření', pos: 'center 20%' },
-          { src: 'hero-hp.webp', alt: 'JANESKIN salon — ošetření pleti' },
-          { src: 'foto-hero.webp', alt: 'JANESKIN — kosmetické ošetření', pos: 'center 30%' },
+          { src: 'DSC_9524.jpg',     alt: 'Jana Szymiková — kosmetička JANESKIN', pos: 'center top' },
+          { src: '16987660-86e363.webp', alt: 'Kosmetická masáž obličeje' },
+          { src: 'DSC_9511.jpg',     alt: 'JANESKIN — ošetření pleti', pos: 'center 20%' },
+          { src: 'peell-1080x675.jpg', alt: 'Chemický peeling — JANESKIN', pos: 'center center' },
+          { src: 'foto-hero.webp',   alt: 'JANESKIN — kosmetické ošetření', pos: 'center 30%' },
+          { src: 'hero-hp.webp',     alt: 'JANESKIN salon — péče o pleť', pos: 'center center' },
+          { src: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80', alt: 'Kosmetická péče' },
+          { src: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=600&q=80', alt: 'Microneedling ošetření' },
+          { src: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80', alt: 'Laminace řas' },
+          { src: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=600&q=80', alt: 'Make-up a vizáž' },
+          { src: 'https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=600&q=80', alt: 'Péče o pleť' },
+          { src: 'https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=600&q=80', alt: 'Kosmetický salon' },
         ];
         track.innerHTML = fallback.map(f =>
           `<a href="${IG_PROFILE}" target="_blank" rel="noopener" class="instagram-tile">
-            <img src="${f.src}" alt="${f.alt}"${f.pos ? ` style="object-position: ${f.pos}"` : ''}>
+            <img src="${f.src}" alt="${f.alt}" loading="lazy"${f.pos ? ` style="object-position:${f.pos}"` : ''}>
             <div class="instagram-tile-overlay" aria-hidden="true">${igIcon}</div>
           </a>`
         ).join('');
-      }
-
-      function initCarousel() {
-        const TILE_W = 304 + 10;
-        let currentOffset = 0;
-
-        function getMaxOffset() {
-          return Math.max(0, track.scrollWidth - viewport.offsetWidth);
-        }
-
-        function scrollBy(delta) {
-          currentOffset = Math.max(0, Math.min(currentOffset + delta, getMaxOffset()));
-          track.style.transform = `translateX(-${currentOffset}px)`;
-          btnPrev.disabled = currentOffset <= 0;
-          btnNext.disabled = currentOffset >= getMaxOffset();
-        }
-
-        btnPrev.addEventListener('click', () => scrollBy(-TILE_W * 2));
-        btnNext.addEventListener('click', () => scrollBy(TILE_W * 2));
-        btnPrev.disabled = true;
-        btnNext.disabled = getMaxOffset() <= 0;
-
-        let dragStart = null, dragOffset = 0;
-
-        viewport.addEventListener('mousedown', e => {
-          dragStart = e.clientX; dragOffset = currentOffset; track.style.transition = 'none';
-        });
-        window.addEventListener('mousemove', e => {
-          if (dragStart === null) return;
-          const raw = Math.max(0, Math.min(dragOffset + (dragStart - e.clientX), getMaxOffset()));
-          track.style.transform = `translateX(-${raw}px)`;
-        });
-        window.addEventListener('mouseup', e => {
-          if (dragStart === null) return;
-          currentOffset = Math.max(0, Math.min(dragOffset + (dragStart - e.clientX), getMaxOffset()));
-          track.style.transition = ''; track.style.transform = `translateX(-${currentOffset}px)`;
-          btnPrev.disabled = currentOffset <= 0; btnNext.disabled = currentOffset >= getMaxOffset();
-          dragStart = null;
-        });
-
-        let touchStartX = 0;
-        viewport.addEventListener('touchstart', e => {
-          touchStartX = e.touches[0].clientX; dragOffset = currentOffset; track.style.transition = 'none';
-        }, { passive: true });
-        viewport.addEventListener('touchmove', e => {
-          const raw = Math.max(0, Math.min(dragOffset + (touchStartX - e.touches[0].clientX), getMaxOffset()));
-          track.style.transform = `translateX(-${raw}px)`;
-        }, { passive: true });
-        viewport.addEventListener('touchend', e => {
-          currentOffset = Math.max(0, Math.min(dragOffset + (touchStartX - e.changedTouches[0].clientX), getMaxOffset()));
-          track.style.transition = ''; track.style.transform = `translateX(-${currentOffset}px)`;
-          btnPrev.disabled = currentOffset <= 0; btnNext.disabled = currentOffset >= getMaxOffset();
-        }, { passive: true });
-
-        window.addEventListener('resize', () => {
-          currentOffset = Math.min(currentOffset, getMaxOffset());
-          track.style.transform = `translateX(-${currentOffset}px)`;
-          btnNext.disabled = currentOffset >= getMaxOffset();
-        }, { passive: true });
       }
 
       // Fetch z Instagram Graph API
@@ -2875,12 +2831,10 @@
             if (!data.data) throw new Error('No data');
             const posts = data.data.filter(p => p.media_type === 'IMAGE' || p.media_type === 'CAROUSEL_ALBUM');
             track.innerHTML = posts.map(renderTile).join('');
-            initCarousel();
           })
-          .catch(() => { renderFallback(); initCarousel(); });
+          .catch(() => renderFallback());
       } else {
         renderFallback();
-        initCarousel();
       }
     })();
 
