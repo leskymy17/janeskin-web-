@@ -590,8 +590,9 @@
 
     .about-photo {
       width: 100%;
-      aspect-ratio: 1;
+      aspect-ratio: 15 / 16;
       border-radius: 16px;
+      overflow: hidden;
     }
 
     .about-photo-inner {
@@ -628,6 +629,7 @@
     =========================== */
     #services {
       background-color: var(--color-bg-alt);
+      display: none;
     }
 
     .services-grid {
@@ -735,6 +737,179 @@
       font-size: 0.9rem;
       font-weight: 700;
       color: var(--color-text-soft);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ===========================
+       4b. SLUŽBY V2 — nový design
+    =========================== */
+    #services-v2 {
+      background-color: var(--color-bg-alt);
+    }
+
+    .services-v2-wrap {
+      position: relative;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+    }
+
+    .services-v2-grid {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      padding-left: max(24px, calc((100vw - var(--max-width)) / 2 + 24px));
+      padding-right: 24px;
+      padding-bottom: 16px;
+    }
+
+    .services-v2-grid::-webkit-scrollbar { display: none; }
+    .services-v2-grid { scrollbar-width: none; }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      background: var(--color-white);
+      box-shadow: 0 4px 16px rgba(44,36,32,0.14);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text);
+      transition: background var(--transition), transform 0.2s ease, box-shadow var(--transition);
+    }
+
+    .carousel-arrow:hover {
+      background: var(--color-accent);
+      color: var(--color-white);
+      box-shadow: 0 6px 20px rgba(44,36,32,0.22);
+    }
+
+    .carousel-arrow:active {
+      transform: translateY(-50%) scale(0.93);
+    }
+
+    .carousel-prev { left: 12px; }
+    .carousel-next { right: 12px; }
+
+    .svc-card {
+      position: relative;
+      display: block;
+      border-radius: 16px;
+      overflow: hidden;
+      flex: 0 0 360px;
+      width: 360px;
+      height: 481px;
+      text-decoration: none;
+      cursor: pointer;
+      scroll-snap-align: start;
+    }
+
+    .svc-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.5s ease;
+    }
+
+    .svc-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .svc-tag-v2 {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 3;
+      background: rgba(20, 14, 12, 0.82);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 8px;
+    }
+
+    .svc-overlay-v2 {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(20,14,12,0.88) 0%, rgba(20,14,12,0.35) 55%, rgba(20,14,12,0.08) 100%);
+      transition: background 0.35s ease;
+      z-index: 1;
+    }
+
+    .svc-card:hover .svc-overlay-v2 {
+      background: linear-gradient(to top, rgba(20,14,12,0.95) 0%, rgba(20,14,12,0.78) 55%, rgba(20,14,12,0.5) 100%);
+    }
+
+    .svc-content-v2 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px;
+      z-index: 2;
+    }
+
+    .svc-desc-v2 {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin-bottom: 12px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .svc-card:hover .svc-desc-v2 {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .svc-content-v2 h3 {
+      color: var(--color-white);
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 8px;
+      line-height: 1.25;
+    }
+
+    .svc-meta-v2 {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .svc-price-v2 {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--color-accent);
+    }
+
+    .svc-duration-v2 {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
       display: flex;
       align-items: center;
       gap: 4px;
@@ -1714,7 +1889,7 @@
       <div class="container">
         <div class="about-grid">
           <div class="about-photo fade-in">
-            <img src="DSC_9524.jpg" alt="Jana Szymiková — majitelka salonu JANESKIN" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:16px;display:block;">
+            <img src="DSC_9524.jpg" alt="Jana Szymiková — majitelka salonu JANESKIN" style="width:100%;height:100%;object-fit:cover;object-position:center 15%;transform:scale(1.45);transform-origin:center 20%;display:block;">
           </div>
           <div class="about-text fade-in delay-2">
             <span class="label">O mně</span>
@@ -1905,6 +2080,179 @@
           </article>
 
         </div>
+        <div style="text-align:center; margin-top: 48px;" class="fade-in">
+          <a href="https://noona.app/cs/janeskinsalonjanaszymikova" target="_blank" rel="noopener" class="btn btn-primary">Objednat první návštěvu →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================
+         4b. SLUŽBY V2 — nový design
+    =========================== -->
+    <section id="services-v2" aria-labelledby="services-v2-heading">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="label">Naše služby</span>
+          <h2 id="services-v2-heading">Co pro Vás mohu udělat</h2>
+          <p>Vyberte si z široké nabídky služeb přizpůsobených právě Vaší pleti a potřebám</p>
+        </div>
+
+        <div class="services-v2-wrap">
+          <button class="carousel-arrow carousel-prev" id="svc-prev" aria-label="Předchozí služba">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="carousel-arrow carousel-next" id="svc-next" aria-label="Další služba">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+
+        <div class="services-v2-grid" id="svc-carousel">
+
+          <!-- Karta 1 -->
+          <a href="#contact" class="svc-card fade-in delay-1" aria-label="Kosmetická péče">
+            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80" alt="Kosmetická péče — ošetření pleti">
+            <span class="svc-tag-v2">Pleť</span>
+            <div class="svc-overlay-v2"></div>
+            <div class="svc-content-v2">
+              <p class="svc-desc-v2">Specializovaná ošetření s kosmeceutikou Larens — od hluboké hydratace přes lifting až po řešení akné, pigmentací či citlivé pleti.</p>
+              <h3>Kosmetická péče</h3>
+              <div class="svc-meta-v2">
+                <span class="svc-price-v2">od 1 100 Kč</span>
+                <span class="svc-duration-v2">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  60–120 min
+                </span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Karta 2 -->
+          <a href="#contact" class="svc-card fade-in delay-2" aria-label="Chemické peelingy">
+            <img src="peell-1080x675.jpg" alt="Chemické peelingy — péče o pleť">
+            <span class="svc-tag-v2">Akné & Peeling</span>
+            <div class="svc-overlay-v2"></div>
+            <div class="svc-content-v2">
+              <p class="svc-desc-v2">Povrchové chemické peelingy s přírodními peptidy rybího kolagenu. Pleť se zjemní, vyhladí a projasní bez olupování.</p>
+              <h3>Chemické peelingy</h3>
+              <div class="svc-meta-v2">
+                <span class="svc-price-v2">od 1 100 Kč</span>
+                <span class="svc-duration-v2">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  60 min
+                </span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Karta 3 -->
+          <a href="#contact" class="svc-card fade-in delay-1" aria-label="Microneedling s Exosomy">
+            <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=600&q=80" alt="Microneedling s Exosomy — ošetření">
+            <span class="svc-tag-v2">Omlazení</span>
+            <div class="svc-overlay-v2"></div>
+            <div class="svc-content-v2">
+              <p class="svc-desc-v2">Moderní estetická procedura spojující exosomy, kyselinu hyaluronovou a růstové faktory pro omlazení a zpevnění pleti.</p>
+              <h3>Microneedling s Exosomy</h3>
+              <div class="svc-meta-v2">
+                <span class="svc-price-v2">2 300 Kč</span>
+                <span class="svc-duration-v2">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  90 min
+                </span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Karta 4 -->
+          <a href="#contact" class="svc-card fade-in delay-2" aria-label="Anti Spot Therapy">
+            <img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=600&q=80" alt="Anti Spot Therapy — rozjasnění pleti">
+            <span class="svc-tag-v2">Pigmentace</span>
+            <div class="svc-overlay-v2"></div>
+            <div class="svc-content-v2">
+              <p class="svc-desc-v2">Rozjasňující procedura zaměřená na pigmentové skvrny — po slunci, hormonální, po akné. Sjednocení tónu pleti.</p>
+              <h3>Anti Spot Therapy</h3>
+              <div class="svc-meta-v2">
+                <span class="svc-price-v2">1 100 Kč</span>
+                <span class="svc-duration-v2">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  60 min
+                </span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Karta 5 -->
+          <a href="#contact" class="svc-card fade-in delay-1" aria-label="Kosmetické masáže">
+            <img src="16987660-86e363.webp" alt="Kosmetické masáže — masáž obličeje">
+            <span class="svc-tag-v2">Relaxace & Obličej</span>
+            <div class="svc-overlay-v2"></div>
+            <div class="svc-content-v2">
+              <p class="svc-desc-v2">Tři typy masáží obličeje, krku a dekoltu — klasická, liftingová a mikromasáž očního okolí. Relaxace i omlazení.</p>
+              <h3>Kosmetické masáže</h3>
+              <div class="svc-meta-v2">
+                <span class="svc-price-v2">od 600 Kč</span>
+                <span class="svc-duration-v2">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  45–90 min
+                </span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Karta 6 -->
+          <a href="#contact" class="svc-card fade-in delay-2" aria-label="Laminace řas a obočí">
+            <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Laminace řas a obočí">
+            <span class="svc-tag-v2">Řasy & Obočí</span>
+            <div class="svc-overlay-v2"></div>
+            <div class="svc-content-v2">
+              <p class="svc-desc-v2">Pokročilá laminace od InLei® — natočení, barvení a výživa řas i obočí. Zahušťuje řasy až o 25 %.</p>
+              <h3>Laminace řas a obočí</h3>
+              <div class="svc-meta-v2">
+                <span class="svc-price-v2">od 450 Kč</span>
+                <span class="svc-duration-v2">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  45–120 min
+                </span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Karta 7 -->
+          <a href="#contact" class="svc-card fade-in delay-1" aria-label="Make-up a vizážistika">
+            <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=600&q=80" alt="Make-up a vizážistika">
+            <span class="svc-tag-v2">Vizáž</span>
+            <div class="svc-overlay-v2"></div>
+            <div class="svc-content-v2">
+              <p class="svc-desc-v2">Svatební líčení, foto vizáž, kurzy líčení s Larens Colour i kompletní make-up proměny včetně účesů.</p>
+              <h3>Make-up a vizážistika</h3>
+              <div class="svc-meta-v2">
+                <span class="svc-price-v2">od 800 Kč</span>
+                <span class="svc-duration-v2">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  60–210 min
+                </span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Karta 8 -->
+          <a href="#contact" class="svc-card fade-in delay-2" aria-label="Doplňkové služby">
+            <img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=600&q=80" alt="Doplňkové kosmetické služby">
+            <span class="svc-tag-v2">Doplňkové</span>
+            <div class="svc-overlay-v2"></div>
+            <div class="svc-content-v2">
+              <p class="svc-desc-v2">Barvení a úprava obočí a řas, epilace, nadstandardní masky a ampule, lehké denní líčení po ošetření.</p>
+              <h3>Doplňkové služby</h3>
+              <div class="svc-meta-v2">
+                <span class="svc-price-v2">od 80 Kč</span>
+                <span class="svc-duration-v2">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  15–30 min
+                </span>
+              </div>
+            </div>
+          </a>
+
+        </div>
+        </div><!-- /.services-v2-wrap -->
         <div style="text-align:center; margin-top: 48px;" class="fade-in">
           <a href="https://noona.app/cs/janeskinsalonjanaszymikova" target="_blank" rel="noopener" class="btn btn-primary">Objednat první návštěvu →</a>
         </div>
@@ -2402,6 +2750,19 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // ===== SERVICES V2 CAROUSEL =====
+    (function() {
+      const carousel = document.getElementById('svc-carousel');
+      const btnPrev  = document.getElementById('svc-prev');
+      const btnNext  = document.getElementById('svc-next');
+      if (!carousel || !btnPrev || !btnNext) return;
+      const step = 360 + 16; // card width + gap
+      btnPrev.addEventListener('click', () => { carousel.scrollBy({ left: -step, behavior: 'smooth' }); });
+      btnNext.addEventListener('click', () => { carousel.scrollBy({ left:  step, behavior: 'smooth' }); });
+    })();
+  </script>
 
   <script>
     // ===== NAVIGATION: Sticky + blur =====
