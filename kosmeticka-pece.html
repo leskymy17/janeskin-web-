@@ -311,6 +311,85 @@
       .mobile-overlay { display: block; }
     }
 
+    /* ===== DROPDOWN ===== */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: inline-flex; align-items: center; gap: 5px; }
+    .nav-dropdown > a .chevron-down { width: 10px; height: 10px; transition: transform var(--transition); }
+    .nav-dropdown:hover > a .chevron-down { transform: rotate(180deg); }
+    .dropdown-menu {
+      display: none;
+      position: fixed; top: 72px; left: 0; right: 0;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      opacity: 0; visibility: hidden; transform: translateY(-4px);
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+      z-index: 99;
+    }
+    .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown-inner {
+      max-width: var(--max-width); margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; height: 52px; gap: 0;
+    }
+    .dropdown-menu a {
+      font-family: var(--font-sans); font-size: 0.82rem; font-weight: 500;
+      color: var(--color-text-soft) !important; padding: 14px 20px;
+      white-space: nowrap; transition: color var(--transition);
+      border-right: 1px solid var(--color-border);
+    }
+    .dropdown-menu a:first-child { padding-left: 0; }
+    .dropdown-menu a:last-of-type { border-right: none; }
+    .dropdown-menu a::after { display: none !important; }
+    .dropdown-menu a:hover { color: var(--color-accent) !important; }
+    .dropdown-cta { margin-left: auto; flex-shrink: 0; }
+    .dropdown-cta a {
+      display: inline-flex; align-items: center;
+      padding: 10px 24px !important; background: var(--color-text);
+      color: var(--color-white) !important; font-size: 0.75rem !important;
+      font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em;
+      border-radius: 0; border-right: none !important;
+      transition: background var(--transition);
+    }
+    .dropdown-cta a:hover { background: var(--color-accent-hover); color: var(--color-white) !important; }
+
+    /* ===== FOOTER ===== */
+    footer { background: #000; color: rgba(255,255,255,0.65); padding: 64px 0 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand .footer-logo {
+      font-family: var(--font-serif); font-size: 1.5rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-white);
+      display: block; margin-bottom: 12px;
+    }
+    .footer-brand p { font-size: 0.875rem; line-height: 1.7; max-width: 280px; }
+    .footer-brand .footer-social { display: flex; gap: 12px; margin-top: 20px; }
+    .footer-social a {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition);
+    }
+    .footer-social a:hover { background: var(--color-accent); }
+    .footer-nav h4 {
+      font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase;
+      letter-spacing: 0.1em; font-weight: 500; color: var(--color-white); margin-bottom: 16px;
+    }
+    .footer-nav ul { list-style: none; }
+    .footer-nav ul li { margin-bottom: 8px; }
+    .footer-nav ul a { font-size: 0.875rem; color: rgba(255,255,255,0.6); transition: color var(--transition); }
+    .footer-nav ul a:hover { color: var(--color-accent); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 0.8rem; }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 0.8rem; color: rgba(255,255,255,0.5); transition: color var(--transition); }
+    .footer-legal a:hover { color: var(--color-accent); }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
     /* ===========================
        HERO
     =========================== */
@@ -1048,33 +1127,56 @@
 
   <!-- NAVIGACE -->
   <header id="nav" role="banner">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo" aria-label="JANESKIN — zpět na homepage"><img src="logo-janeskin.svg" alt="JANESKIN" width="180"></a>
-      <nav aria-label="Hlavní navigace">
-        <ul class="nav-links">
-          <li><a href="index.html#services">Služby</a></li>
-          <li><a href="index.html#about">O mně</a></li>
-          <li><a href="#pricing">Ceník</a></li>
-          <li><a href="index.html#brides">Pro nevěsty</a></li>
-          <li><a href="index.html#contact">Kontakt</a></li>
-        </ul>
-      </nav>
-      <a href="https://noona.app/cs/janeskinsalonjanaszymikova" target="_blank" rel="noopener" class="btn btn-primary nav-cta">Objednat se</a>
-      <button class="hamburger" id="hamburger" aria-label="Otevřít menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="JANESKIN — přejít na úvod"><img src="logo-janeskin.svg" alt="JANESKIN" width="180"></a>
 
-  <div class="mobile-overlay" id="mobile-overlay"></div>
-  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobilní navigace">
-    <a href="index.html#services">Služby</a>
-    <a href="index.html#about">O mně</a>
-    <a href="#pricing">Ceník</a>
-    <a href="index.html#brides">Pro nevěsty</a>
-    <a href="index.html#contact">Kontakt</a>
-    <a href="https://noona.app/cs/janeskinsalonjanaszymikova" target="_blank" rel="noopener" class="mobile-cta">Objednat se</a>
-  </nav>
+    <nav aria-label="Hlavní navigace">
+      <ul class="nav-links">
+        <li class="nav-dropdown">
+          <a href="index.html#services-v2">Služby <svg class="chevron-down" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
+          <div class="dropdown-menu">
+            <div class="dropdown-inner">
+              <a href="kosmeticka-pece.html">Kosmetická péče</a>
+              <a href="index.html#svc2-title">Chemické peelingy</a>
+              <a href="index.html#svc3-title">Microneedling</a>
+              <a href="index.html#svc4-title">Anti Spot Therapy</a>
+              <a href="index.html#svc5-title">Masáže</a>
+              <a href="index.html#svc6-title">Laminace řas a obočí</a>
+              <a href="index.html#svc7-title">Make-up</a>
+              <a href="index.html#svc8-title">Doplňkové služby</a>
+              <div class="dropdown-cta">
+                <a href="https://noona.app/cs/janeskinsalonjanaszymikova" target="_blank" rel="noopener">OBJEDNAT SE</a>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="index.html#about">O mně</a></li>
+        <li><a href="index.html#contact">Ceník</a></li>
+        <li><a href="index.html#brides">Pro nevěsty</a></li>
+        <li><a href="index.html#contact">Kontakt</a></li>
+      </ul>
+    </nav>
+
+    <a href="https://noona.app/cs/janeskinsalonjanaszymikova" target="_blank" rel="noopener" class="btn btn-primary nav-cta">Objednat se</a>
+
+    <button class="hamburger" id="hamburger" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
+
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobilní navigace">
+  <a href="index.html#services-v2" class="mobile-nav-link">Služby</a>
+  <a href="index.html#about" class="mobile-nav-link">O mně</a>
+  <a href="index.html#contact" class="mobile-nav-link">Ceník</a>
+  <a href="index.html#brides" class="mobile-nav-link">Pro nevěsty</a>
+  <a href="index.html#contact" class="mobile-nav-link">Kontakt</a>
+  <a href="https://noona.app/cs/janeskinsalonjanaszymikova" target="_blank" rel="noopener" class="mobile-cta">Objednat se</a>
+</nav>
 
   <main>
 
@@ -1752,77 +1854,63 @@
   </main>
 
   <footer role="contentinfo">
-    <div class="container">
-      <div class="footer-simple">
-        <a href="index.html" class="footer-logo-link">JANESKIN</a>
-        <nav class="footer-nav-simple" aria-label="Navigace footeru">
-          <a href="index.html#services">Všechny služby</a>
-          <a href="index.html#about">O mně</a>
-          <a href="index.html#brides">Pro nevěsty</a>
-          <a href="index.html#vouchers">Dárkové poukazy</a>
-          <a href="index.html#contact">Kontakt</a>
-        </nav>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo" aria-label="JANESKIN — zpět na začátek">JANESKIN</a>
+        <p>Kosmetický salon Jana Szymiková<br>Dolní Lutyně — Specializovaná péče o pleť</p>
+        <div class="footer-social" role="list" aria-label="Sociální sítě">
+          <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" role="listitem" aria-label="Instagram JANESKIN">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="#" role="listitem" aria-label="Facebook JANESKIN">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+        </div>
       </div>
-      <div class="footer-bottom">
-        <p>© 2026 JANESKIN — Salon Jana Szymiková. Všechna práva vyhrazena.</p>
-        <nav class="footer-legal" aria-label="Právní dokumenty">
-          <a href="#">Obchodní podmínky</a>
-          <a href="#">GDPR</a>
-        </nav>
+
+      <nav class="footer-nav" aria-label="Navigace footeru">
+        <h4>Navigace</h4>
+        <ul>
+          <li><a href="index.html#services-v2">Služby</a></li>
+          <li><a href="index.html#about">O mně</a></li>
+          <li><a href="index.html#contact">Ceník</a></li>
+          <li><a href="index.html#brides">Pro nevěsty</a></li>
+          <li><a href="index.html#vouchers">Dárkové poukazy</a></li>
+          <li><a href="index.html#contact">Kontakt</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-nav">
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="tel:+420000000000">+420 000 000 000</a></li>
+          <li><a href="mailto:info@janeskin.cz">info@janeskin.cz</a></li>
+          <li style="color: rgba(255,255,255,0.6); font-size: 0.875rem; padding: 4px 0;">Dolní Lutyně</li>
+        </ul>
       </div>
     </div>
-  </footer>
+
+    <div class="footer-bottom">
+      <p>© 2026 JANESKIN — Salon Jana Szymiková. Všechna práva vyhrazena.</p>
+      <nav class="footer-legal" aria-label="Právní dokumenty">
+        <a href="#">Obchodní podmínky</a>
+        <a href="#">Reklamační řád</a>
+        <a href="#">Ochrana osobních údajů (GDPR)</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+  <script src="_shared.js"></script>
 
   <script>
-    // NAVIGATION
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-
-    // HAMBURGER
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const overlay = document.getElementById('mobile-overlay');
-
-    function closeMenu() {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-      overlay.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
-
-    hamburger.addEventListener('click', () => {
-      const isOpen = hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open', isOpen);
-      overlay.classList.toggle('open', isOpen);
-      hamburger.setAttribute('aria-expanded', String(isOpen));
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
-
-    overlay.addEventListener('click', closeMenu);
-    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
-
-    // SMOOTH SCROLL
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - nav.offsetHeight - 16, behavior: 'smooth' });
-        }
-      });
-    });
-
-    // FADE IN
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
     // FAQ ACCORDION
     document.querySelectorAll('.faq-question').forEach(btn => {
       btn.addEventListener('click', () => {
