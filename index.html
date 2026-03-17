@@ -8,7 +8,7 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <style>
     /* ===== CSS VARIABLES ===== */
     :root {
@@ -22,7 +22,7 @@
       --color-border: #E5DDD3;
       --font-serif: 'Playfair Display', Georgia, serif;
       --font-sans: 'DM Sans', system-ui, sans-serif;
-      --max-width: 1100px;
+      --max-width: 1200px;
       --radius: 12px;
       --transition: 0.3s ease;
     }
@@ -1681,43 +1681,41 @@
     .instagram-tile-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(44, 36, 32, 0);
+      background: rgba(0, 0, 0, 0);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: background var(--transition);
+      transition: background 0.3s ease;
     }
 
-    .instagram-tile-overlay svg {
+    .ig-hover-stats {
+      display: flex;
+      gap: 20px;
       opacity: 0;
-      transform: scale(0.8);
-      transition: opacity var(--transition), transform var(--transition);
+      transform: scale(0.85);
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
-    .instagram-tile-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 16px;
-      background: linear-gradient(transparent, rgba(44, 36, 32, 0.85));
+    .ig-stat {
+      display: flex;
+      align-items: center;
+      gap: 6px;
       color: white;
-      font-size: 0.8rem;
-      line-height: 1.5;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity var(--transition), transform var(--transition);
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .ig-stat svg {
+      width: 22px;
+      height: 22px;
+      fill: white;
+      flex-shrink: 0;
     }
 
     .instagram-tile:hover img { transform: scale(1.06); }
-    .instagram-tile:hover .instagram-tile-overlay { background: rgba(44, 36, 32, 0.35); }
-    .instagram-tile:hover .instagram-tile-overlay svg { opacity: 1; transform: scale(1); }
-    .instagram-tile:hover .instagram-tile-caption { opacity: 1; transform: translateY(0); }
+    .instagram-tile:hover .instagram-tile-overlay { background: rgba(0, 0, 0, 0.45); }
+    .instagram-tile:hover .ig-hover-stats { opacity: 1; transform: scale(1); }
 
     /* Nav arrows */
     .instagram-nav {
@@ -1771,6 +1769,272 @@
 
     @media (max-width: 480px) {
       .instagram-tile { flex: 0 0 216px; width: 216px; }
+    }
+
+    /* ===========================
+       EXTERNAL SYSTEMS SECTION
+    =========================== */
+    #ext-sys {
+      background: #F9F5FF;
+      padding: 72px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* decorative dot grids (left + right) */
+    #ext-sys::before,
+    #ext-sys::after {
+      content: '';
+      position: absolute;
+      width: 270px;
+      height: 250px;
+      background-image: radial-gradient(circle, #A78BFA 1.5px, transparent 1.5px);
+      background-size: 22px 22px;
+      opacity: 0.45;
+      pointer-events: none;
+    }
+    #ext-sys::before { top: 48px; left: 0; }
+    #ext-sys::after  { bottom: 48px; right: 0; }
+
+    .ext-sys-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 48px;
+      padding: 0 24px;
+      position: relative;
+    }
+
+    .ext-sys-header h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 700;
+      color: #0F0F0F;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .ext-sys-header p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      color: #362173;
+      line-height: 1.65;
+    }
+
+    .ext-sys-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+    }
+
+    @media (max-width: 900px) {
+      .ext-sys-grid { grid-template-columns: 1fr; max-width: 460px; }
+    }
+
+    .ext-sys-card {
+      background: #fff;
+      border: 1px solid #E9E3FF;
+      border-radius: 16px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* icon box: 73×73px with gradient, 16px radius */
+    .ext-sys-icon {
+      width: 73px;
+      height: 73px;
+      border-radius: 16px;
+      background: linear-gradient(43.53deg, #F9F5FF 54.794%, #E9DAFF 95.398%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 40px;
+      flex-shrink: 0;
+    }
+
+    /* inner 46×46 clipping container */
+    .ext-sys-icon-inner {
+      position: relative;
+      width: 46px;
+      height: 46px;
+      overflow: hidden;
+    }
+
+    .ext-sys-icon-inner img {
+      position: absolute;
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+    }
+
+    .ext-sys-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0F0F0F;
+      margin-bottom: 16px;
+      line-height: 1.65;
+      letter-spacing: -0.03em;
+    }
+
+    .ext-sys-list {
+      list-style: disc;
+      padding-left: 24px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ext-sys-list li {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #362173;
+      line-height: 1.65;
+      letter-spacing: 0.013em;
+    }
+
+    .ext-sys-list li .normal {
+      font-weight: 400;
+    }
+
+    /* ===========================
+       CONTACT FORM
+    =========================== */
+    #contact-form-section {
+      background: var(--color-bg-alt);
+      padding: 80px 0;
+    }
+
+    .contact-form-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .contact-form-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .contact-form-header h2 {
+      margin-bottom: 10px;
+    }
+
+    .contact-form-header p {
+      color: var(--color-text-soft);
+      font-size: 0.95rem;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 560px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-field label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--color-text-soft);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--color-text);
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .form-field input::placeholder,
+    .form-field textarea::placeholder {
+      color: #BFB5AB;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.15);
+    }
+
+    .form-field textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    .contact-form .btn {
+      align-self: flex-start;
+      margin-top: 8px;
+    }
+
+    .form-field input.invalid,
+    .form-field textarea.invalid {
+      border-color: #D94F4F;
+      box-shadow: 0 0 0 3px rgba(217, 79, 79, 0.12);
+    }
+
+    .form-error {
+      font-size: 0.78rem;
+      color: #D94F4F;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .form-field input.invalid ~ .form-error,
+    .form-field textarea.invalid ~ .form-error {
+      display: block;
+    }
+
+    .form-status {
+      padding: 14px 18px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      display: none;
+      margin-top: 8px;
+    }
+
+    .form-status.success {
+      background: #F0FDF4;
+      border: 1px solid #86EFAC;
+      color: #166534;
+      display: block;
+    }
+
+    .form-status.error {
+      background: #FFF1F1;
+      border: 1px solid #FCA5A5;
+      color: #991B1B;
+      display: block;
     }
 
     /* ===========================
@@ -2503,6 +2767,92 @@
     </section>
 
     <!-- ===========================
+         EXTERNAL SYSTEMS
+    =========================== -->
+    <section id="ext-sys">
+      <div class="ext-sys-header fade-in">
+        <h2>External Systems</h2>
+        <p>aReception integrates with enterprise and facility infrastructure to support security, operations, and communication workflows.</p>
+      </div>
+
+      <div class="ext-sys-grid">
+
+        <!-- Card 1: Enterprise System Integrations -->
+        <div class="ext-sys-card fade-in delay-1">
+          <div class="ext-sys-icon">
+            <div class="ext-sys-icon-inner">
+              <!-- left bracket < -->
+              <div style="position:absolute;inset:27.57% 67.96% 27.66% 2.5%;">
+                <img src="https://www.figma.com/api/mcp/asset/dd320ef3-97b2-48bc-a0bc-6a41b94e4412" alt="">
+              </div>
+              <!-- slash / -->
+              <div style="position:absolute;inset:11.67% 37.9%;">
+                <img src="https://www.figma.com/api/mcp/asset/f76bc446-db43-4eb4-9a9f-b6a07185d421" alt="">
+              </div>
+              <!-- right bracket > -->
+              <div style="position:absolute;inset:27.57% 2.5% 27.66% 67.97%;">
+                <img src="https://www.figma.com/api/mcp/asset/a85c7850-21a0-47bd-99df-510b0b30e179" alt="">
+              </div>
+            </div>
+          </div>
+          <h3>Enterprise System Integrations</h3>
+          <ul class="ext-sys-list">
+            <li>Access control systems</li>
+            <li>Building management systems (BMS)</li>
+            <li>Safety &amp; evacuation systems</li>
+            <li>Document &amp; workflow management systems</li>
+          </ul>
+        </div>
+
+        <!-- Card 2: Real-time communication -->
+        <div class="ext-sys-card fade-in delay-2">
+          <div class="ext-sys-icon">
+            <!-- inner has its own gradient + glow bg -->
+            <div style="position:relative;width:46px;height:46px;overflow:hidden;border-radius:16px;background:linear-gradient(43.53deg,rgba(249,245,255,.5) 54.794%,rgba(233,218,255,.5) 95.398%);">
+              <!-- background glow -->
+              <div style="position:absolute;inset:-11.43%;">
+                <img src="https://www.figma.com/api/mcp/asset/3e943dad-267d-43d5-9f91-3bdce5c5b948" alt="" style="position:absolute;display:block;width:100%;height:100%;max-width:none;">
+              </div>
+              <!-- bell icon, centered 32×32 -->
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;overflow:hidden;">
+                <div style="position:absolute;inset:87.5% 38.92% 0% 30.46%;">
+                  <img src="https://www.figma.com/api/mcp/asset/4969e9e1-9e2b-4b3b-9b88-7a73ead0a1ff" alt="" style="position:absolute;display:block;width:100%;height:100%;max-width:none;">
+                </div>
+                <div style="position:absolute;inset:8.33% 12.56% 16.67% 4.1%;">
+                  <img src="https://www.figma.com/api/mcp/asset/f679a32a-ba9b-429a-9df3-5bdb39caac85" alt="" style="position:absolute;display:block;width:100%;height:100%;max-width:none;">
+                </div>
+                <div style="position:absolute;inset:0% 4.23% 58.33% 54.1%;">
+                  <img src="https://www.figma.com/api/mcp/asset/6778319a-f038-4a74-967d-6cec921a3a9f" alt="" style="position:absolute;display:block;width:100%;height:100%;max-width:none;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3>Real-time communication &amp; alerts</h3>
+          <ul class="ext-sys-list">
+            <li>SMS, phone calls, and email notifications</li>
+          </ul>
+        </div>
+
+        <!-- Card 3: API-ready architecture -->
+        <div class="ext-sys-card fade-in delay-3">
+          <div class="ext-sys-icon">
+            <div class="ext-sys-icon-inner">
+              <div style="position:absolute;inset:4.17%;">
+                <img src="https://www.figma.com/api/mcp/asset/b18b7a49-0ccd-4982-a425-bdaad8b33e85" alt="">
+              </div>
+            </div>
+          </div>
+          <h3>API-ready architecture</h3>
+          <ul class="ext-sys-list">
+            <li><span class="normal">REST API </span>for third-party integrations</li>
+            <li><span class="normal">Designed for custom and low-code workflows</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===========================
          9. DÁRKOVÉ POUKAZY
     =========================== -->
     <section id="vouchers" aria-labelledby="vouchers-heading">
@@ -2698,6 +3048,56 @@
       </div>
     </section>
 
+  <!-- ===========================
+       KONTAKTNÍ FORMULÁŘ
+  =========================== -->
+  <section id="contact-form-section" aria-labelledby="contact-form-heading">
+    <div class="contact-form-inner">
+      <div class="contact-form-header fade-in">
+        <span class="label">Napište nám</span>
+        <h2 id="contact-form-heading">Kontaktní formulář</h2>
+        <p>Zašleme vám odpověď co nejdříve.</p>
+      </div>
+
+      <form class="contact-form fade-in delay-1" action="https://formspree.io/travis@seznam.cz" method="post" novalidate>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="cf-jmeno">Jméno</label>
+            <input type="text" id="cf-jmeno" name="jmeno" placeholder="Jana" autocomplete="given-name">
+            <span class="form-error">Zadejte prosím jméno.</span>
+          </div>
+          <div class="form-field">
+            <label for="cf-prijmeni">Příjmení</label>
+            <input type="text" id="cf-prijmeni" name="prijmeni" placeholder="Nováková" autocomplete="family-name">
+            <span class="form-error">Zadejte prosím příjmení.</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="cf-email">E-mailová adresa</label>
+            <input type="email" id="cf-email" name="email" placeholder="jana@email.cz" autocomplete="email">
+            <span class="form-error" id="cf-email-error">Zadejte platnou e-mailovou adresu.</span>
+          </div>
+          <div class="form-field">
+            <label for="cf-telefon">Telefonní číslo</label>
+            <input type="tel" id="cf-telefon" name="telefon" placeholder="+420 777 000 000" autocomplete="tel">
+            <span class="form-error">Zadejte platné telefonní číslo.</span>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="cf-zprava">Zpráva</label>
+          <textarea id="cf-zprava" name="zprava" placeholder="Napište nám, s čím vám můžeme pomoci…"></textarea>
+          <span class="form-error">Napište prosím zprávu.</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="cf-submit">Odeslat zprávu →</button>
+        <div class="form-status" id="cf-status" role="alert" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
   </main>
 
   <!-- ===========================
@@ -2775,6 +3175,81 @@
 
   <script>
 
+    // ===== CONTACT FORM VALIDATION =====
+    (function () {
+      const form = document.querySelector('.contact-form');
+      if (!form) return;
+
+      const fields = {
+        'cf-jmeno':    { validate: v => v.trim().length > 0 },
+        'cf-prijmeni': { validate: v => v.trim().length > 0 },
+        'cf-email':    { validate: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
+        'cf-telefon':  { validate: v => v.trim() === '' || /^[+\d\s\-()]{7,}$/.test(v.trim()) },
+        'cf-zprava':   { validate: v => v.trim().length > 0 },
+      };
+
+      function validateField(id) {
+        const el = document.getElementById(id);
+        if (!el) return true;
+        const ok = fields[id].validate(el.value);
+        el.classList.toggle('invalid', !ok);
+        return ok;
+      }
+
+      // Validate on blur (after user leaves field)
+      Object.keys(fields).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('blur', () => validateField(id));
+        // Clear error while typing
+        if (el) el.addEventListener('input', () => {
+          if (el.classList.contains('invalid')) validateField(id);
+        });
+      });
+
+      const submitBtn = document.getElementById('cf-submit');
+      const statusEl = document.getElementById('cf-status');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const allValid = Object.keys(fields).map(validateField).every(Boolean);
+        if (!allValid) {
+          const firstInvalid = form.querySelector('.invalid');
+          if (firstInvalid) firstInvalid.focus();
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Odesílám…';
+        statusEl.className = 'form-status';
+        statusEl.textContent = '';
+
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        })
+        .then(function (res) {
+          if (res.ok) {
+            statusEl.className = 'form-status success';
+            statusEl.textContent = 'Zpráva byla odeslána. Ozveme se vám co nejdříve!';
+            form.reset();
+          } else {
+            return res.json().then(function (data) {
+              throw new Error(data.error || 'Chyba při odesílání.');
+            });
+          }
+        })
+        .catch(function (err) {
+          statusEl.className = 'form-status error';
+          statusEl.textContent = 'Zprávu se nepodařilo odeslat. Zkuste to prosím znovu nebo nás kontaktujte telefonicky.';
+        })
+        .finally(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Odeslat zprávu →';
+        });
+      });
+    })();
+
     // ===== INSTAGRAM FEED + CAROUSEL =====
     (function() {
       // ▼▼▼ VLOŽ SVŮJ INSTAGRAM ACCESS TOKEN ▼▼▼
@@ -2788,15 +3263,24 @@
       const btnNext = document.getElementById('ig-next');
       if (!track) return;
 
-      const igIcon = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>';
+      const igOverlay = `<div class="ig-hover-stats">
+        <span class="ig-stat"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+        <span class="ig-stat"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+      </div>`;
 
       function renderTile(post) {
-        const caption = post.caption ? post.caption.split('\n')[0].substring(0, 120) : '';
         const link = post.permalink || IG_PROFILE;
         const img = post.media_url || '';
+        const alt = post.caption ? post.caption.substring(0, 60) : 'Instagram foto';
+        const likes = post.like_count != null ? post.like_count.toLocaleString('cs-CZ') : '';
+        const comments = post.comments_count != null ? post.comments_count.toLocaleString('cs-CZ') : '';
+        const statsOverlay = `<div class="ig-hover-stats">
+          <span class="ig-stat"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>${likes}</span>
+          <span class="ig-stat"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>${comments}</span>
+        </div>`;
         return `<a href="${link}" target="_blank" rel="noopener" class="instagram-tile">
-          <img src="${img}" alt="${caption ? caption.substring(0, 60) : 'Instagram foto'}" loading="lazy">
-          <div class="instagram-tile-overlay" aria-hidden="true">${igIcon}${caption ? `<span class="instagram-tile-caption">${caption}</span>` : ''}</div>
+          <img src="${img}" alt="${alt}" loading="lazy">
+          <div class="instagram-tile-overlay" aria-hidden="true">${statsOverlay}</div>
         </a>`;
       }
 
@@ -2818,14 +3302,14 @@
         track.innerHTML = fallback.map(f =>
           `<a href="${IG_PROFILE}" target="_blank" rel="noopener" class="instagram-tile">
             <img src="${f.src}" alt="${f.alt}" loading="lazy"${f.pos ? ` style="object-position:${f.pos}"` : ''}>
-            <div class="instagram-tile-overlay" aria-hidden="true">${igIcon}</div>
+            <div class="instagram-tile-overlay" aria-hidden="true">${igOverlay}</div>
           </a>`
         ).join('');
       }
 
       // Fetch z Instagram Graph API
       if (IG_TOKEN) {
-        fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink,media_type&limit=${IG_COUNT}&access_token=${IG_TOKEN}`)
+        fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink,media_type,like_count,comments_count&limit=${IG_COUNT}&access_token=${IG_TOKEN}`)
           .then(r => r.json())
           .then(data => {
             if (!data.data) throw new Error('No data');
