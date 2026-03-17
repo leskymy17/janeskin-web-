@@ -1,0 +1,50 @@
+/*
+  JANESKIN - Design Tokens (jediny zdroj pravdy)
+  Tento soubor je nacitan ze VSECH stranek webu.
+  Zmena zde = zmena vsude.
+*/
+
+:root {
+
+  /* Barvy */
+  --color-bg:           #FFFFFE;
+  --color-bg-alt:       #F3EDE5;
+  --color-text:         #2C2420;
+  --color-text-soft:    #6B5D4F;
+  --color-accent:       #DBB061;
+  --color-accent-hover: #EAB65D;
+  --color-white:        #FFFFFF;
+  --color-border:       #E5DDD3;
+
+  /* Typografie - rodiny */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans:  'DM Sans', system-ui, sans-serif;
+
+  /* Typografie - velikosti */
+  --size-h1:    clamp(2.4rem, 6vw, 4rem);
+  --size-h2:    clamp(2rem, 4vw, 3rem);
+  --size-h3:    clamp(1.3rem, 2.5vw, 1.8rem);
+  --size-h4:          1.5rem;
+  --size-h5:          1.35rem;
+  --size-meta:        0.9rem;
+  --size-body:  1rem;
+  --size-label: 0.75rem;
+  --size-small: 0.875rem;
+
+  /* Typografie - radkovani */
+  --leading-heading: 1.2;
+  --leading-body:    1.7;
+
+  /* Typografie - mezery mezi pismeny */
+  --tracking-heading: 0em;
+  --tracking-label:   0.12em;
+  --tracking-body:    0em;
+
+  /* Layout */
+  --max-width: 1200px;
+  --radius:    12px;
+
+  /* Animace */
+  --transition: 0.5s ease;
+
+}

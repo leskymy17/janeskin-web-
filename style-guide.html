@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JANESKIN — Style Guide</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_variables.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      font-family: var(--font-sans);
+      background: #f0ece8;
+      color: var(--color-text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── LAYOUT ── */
+    .sg-wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 24px 96px;
+    }
+
+    /* ── HEADER ── */
+    .sg-header {
+      margin-bottom: 64px;
+      padding-bottom: 32px;
+      border-bottom: 2px solid var(--color-border);
+    }
+    .sg-header-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-accent);
+      margin-bottom: 8px;
+    }
+    .sg-header h1 {
+      font-family: var(--font-serif);
+      font-size: 2.4rem;
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .sg-header p {
+      font-size: 0.95rem;
+      color: var(--color-text-soft);
+      max-width: 560px;
+    }
+    .sg-header-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .sg-header-links a {
+      font-size: 0.82rem;
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--color-border);
+      background: white;
+      color: var(--color-text-soft);
+      transition: all 0.2s;
+    }
+    .sg-header-links a:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    /* ── SECTION ── */
+    .sg-section {
+      margin-bottom: 64px;
+    }
+    .sg-section-title {
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-text-soft);
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    /* ── BARVY ── */
+    .sg-colors {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+    }
+    .sg-color-card {
+      border-radius: 10px;
+      overflow: hidden;
+      background: white;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .sg-color-swatch {
+      height: 72px;
+      width: 100%;
+      position: relative;
+    }
+    .sg-color-swatch input[type="color"] {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+      border: none;
+    }
+    .sg-color-swatch::after {
+      content: '✎';
+      position: absolute;
+      bottom: 6px;
+      right: 8px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      pointer-events: none;
+    }
+    .sg-color-swatch.dark::after {
+      color: rgba(0,0,0,0.25);
+    }
+    .sg-color-info {
+      padding: 10px 12px;
+    }
+    .sg-color-name {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: 2px;
+    }
+    .sg-color-var {
+      font-size: 0.68rem;
+      color: var(--color-text-soft);
+      font-family: monospace;
+    }
+    .sg-color-hex {
+      font-size: 0.72rem;
+      color: var(--color-text-soft);
+      font-family: monospace;
+    }
+
+    /* ── TYPOGRAFIE ── */
+    .sg-type-row {
+      padding: 20px 24px;
+      background: white;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .sg-type-meta {
+      font-size: 0.72rem;
+      color: var(--color-text-soft);
+      font-family: monospace;
+      min-width: 120px;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .sg-type-meta strong { display: block; color: var(--color-text); font-family: var(--font-sans); font-weight: 500; font-size: 0.75rem; }
+    .sg-type-preview { flex: 1; }
+    .sg-type-h1          { font-family: var(--font-serif); font-size: var(--size-h1); font-weight: 500; line-height: 1.2; color: var(--color-text); }
+    .sg-type-h2          { font-family: var(--font-serif); font-size: var(--size-h2); font-weight: 500; line-height: 1.2; color: var(--color-text); }
+    .sg-type-h3          { font-family: var(--font-serif); font-size: var(--size-h3); font-weight: 500; line-height: 1.2; color: var(--color-text); }
+    .sg-type-h4  { font-family: var(--font-serif); font-size: var(--size-h4); font-weight: 500; line-height: 1.2; color: var(--color-text); }
+    .sg-type-h5  { font-family: var(--font-serif); font-size: var(--size-h5); font-weight: 500; line-height: 1.2; color: var(--color-text); }
+    .sg-type-body        { font-family: var(--font-sans); font-size: var(--size-body); line-height: 1.7; color: var(--color-text); }
+    .sg-type-meta        { font-family: var(--font-sans); font-size: var(--size-meta); line-height: 1.6; color: var(--color-text-soft); }
+    .sg-type-soft        { font-family: var(--font-sans); font-size: var(--size-body); line-height: 1.7; color: var(--color-text-soft); }
+    .sg-type-label {
+      font-family: var(--font-sans); font-size: var(--size-label); font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-accent);
+    }
+    .sg-type-small { font-family: var(--font-sans); font-size: var(--size-small); color: var(--color-text-soft); }
+
+    /* ── BUTTONS ── */
+    .sg-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 28px;
+      background: white;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .sg-buttons.dark-bg {
+      background: var(--color-text);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all var(--transition);
+      border: 2px solid transparent;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--color-accent);
+      color: var(--color-text);
+      border-color: var(--color-accent);
+    }
+    .btn-primary:hover {
+      background: var(--color-accent-hover);
+      border-color: var(--color-accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(201, 169, 110, 0.35);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--color-white);
+      border-color: rgba(255,255,255,0.7);
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--color-white);
+    }
+    .btn-outline-dark {
+      background: transparent;
+      color: var(--color-text);
+      border-color: var(--color-border);
+    }
+    .btn-outline-dark:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+    .link-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--color-accent);
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: gap var(--transition), color var(--transition);
+    }
+    .link-arrow:hover { gap: 10px; color: var(--color-accent-hover); }
+
+    /* ── SPACING ── */
+    .sg-spacing-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .sg-space-item {
+      background: white;
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+      min-width: 80px;
+    }
+    .sg-space-bar {
+      background: var(--color-accent);
+      opacity: 0.6;
+      border-radius: 4px;
+      margin: 0 auto 8px;
+      height: 8px;
+    }
+    .sg-space-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--color-text);
+      display: block;
+    }
+    .sg-space-px {
+      font-size: 0.68rem;
+      color: var(--color-text-soft);
+      font-family: monospace;
+    }
+
+    /* ── RADIUS ── */
+    .sg-radius-grid {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .sg-radius-item {
+      background: white;
+      padding: 20px 24px;
+      text-align: center;
+    }
+    .sg-radius-box {
+      width: 72px;
+      height: 72px;
+      background: var(--color-bg-alt);
+      border: 2px solid var(--color-border);
+      margin: 0 auto 10px;
+    }
+    .sg-radius-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--color-text);
+      display: block;
+    }
+    .sg-radius-val {
+      font-size: 0.68rem;
+      color: var(--color-text-soft);
+      font-family: monospace;
+    }
+
+    .sg-token-var {
+      font-family: monospace;
+      font-size: 0.78rem;
+      color: var(--color-text);
+    }
+    .sg-token-input {
+      padding: 5px 10px;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-family: monospace;
+      background: #fafafa;
+      color: var(--color-text);
+      width: 200px;
+    }
+    .sg-token-input:focus {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 1px;
+    }
+
+    /* ── EDITOR SKUPINY ── */
+    .sg-token-group {
+      margin-bottom: 8px;
+    }
+    .sg-token-group-label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-soft);
+      padding: 16px 0 6px;
+      display: block;
+    }
+    .sg-token-row {
+      display: grid;
+      grid-template-columns: 200px 1fr auto;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 16px;
+      background: white;
+      border-radius: 8px;
+      margin-bottom: 5px;
+    }
+    .sg-token-desc {
+      font-size: 0.78rem;
+      color: var(--color-text-soft);
+    }
+
+    /* ── SLIDERY ── */
+    .sg-slider-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sg-slider {
+      -webkit-appearance: none;
+      width: 160px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--color-border);
+      outline: none;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .sg-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .sg-slider::-webkit-slider-thumb:hover {
+      background: var(--color-accent-hover);
+    }
+    .sg-slider-val {
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: var(--color-text);
+      min-width: 52px;
+      text-align: right;
+    }
+
+    /* ── TYPOGRAFIE PREVIEW ── */
+    .sg-type-live {
+      background: white;
+      border-radius: 10px;
+      padding: 32px 36px;
+      margin-bottom: 10px;
+    }
+    .sg-type-live + .sg-type-live { margin-top: -5px; }
+
+    /* ── SAVE BUTTON ── */
+    .sg-save-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .sg-save-btn {
+      padding: 13px 32px;
+      background: var(--color-text);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sg-save-btn:hover { background: #1a1210; transform: translateY(-1px); }
+    .sg-save-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .sg-save-btn.saved { background: #2e7d32; }
+    .sg-save-btn.error { background: #c62828; }
+    .sg-status {
+      font-size: 0.82rem;
+      color: var(--color-text-soft);
+      display: none;
+    }
+    .sg-status.visible { display: block; }
+
+    .sg-note {
+      font-size: 0.82rem;
+      color: var(--color-text-soft);
+      background: #fffbf0;
+      border: 1px solid #f0e0a0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-top: 16px;
+      line-height: 1.6;
+    }
+    .sg-note strong { color: var(--color-text); }
+  </style>
+</head>
+<body>
+
+<div class="sg-wrap">
+
+  <!-- HEADER -->
+  <header class="sg-header">
+    <p class="sg-header-label">Interní dokument</p>
+    <h1>JANESKIN — Style Guide</h1>
+    <p>Přehled všech designových prvků webu. Barvy a proměnné edituj v sekci níže — vygeneruj upravené CSS a vlož do souboru <code>_variables.css</code>, změna se promítne na celý web.</p>
+    <div class="sg-header-links">
+      <a href="index.html">← Zpět na web</a>
+      <a href="kosmeticka-pece.html">Kosmetická péče</a>
+      <a href="_variables.css" target="_blank">_variables.css</a>
+      <a href="_shared.css" target="_blank">_shared.css</a>
+    </div>
+  </header>
+
+
+  <!-- 1. BARVY -->
+  <section class="sg-section" id="colors">
+    <h2 class="sg-section-title">Barevná paleta</h2>
+    <div class="sg-colors" id="color-swatches">
+
+      <div class="sg-color-card">
+        <div class="sg-color-swatch dark" style="background: var(--color-bg);" data-var="--color-bg">
+          <input type="color" value="#FBF8F4" data-target="--color-bg" title="Změnit barvu">
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Pozadí</div>
+          <div class="sg-color-var">--color-bg</div>
+          <div class="sg-color-hex">#FBF8F4</div>
+        </div>
+      </div>
+
+      <div class="sg-color-card">
+        <div class="sg-color-swatch dark" style="background: var(--color-bg-alt);" data-var="--color-bg-alt">
+          <input type="color" value="#F3EDE5" data-target="--color-bg-alt" title="Změnit barvu">
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Alt. pozadí</div>
+          <div class="sg-color-var">--color-bg-alt</div>
+          <div class="sg-color-hex">#F3EDE5</div>
+        </div>
+      </div>
+
+      <div class="sg-color-card">
+        <div class="sg-color-swatch" style="background: var(--color-text);" data-var="--color-text">
+          <input type="color" value="#2C2420" data-target="--color-text" title="Změnit barvu">
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Text</div>
+          <div class="sg-color-var">--color-text</div>
+          <div class="sg-color-hex">#2C2420</div>
+        </div>
+      </div>
+
+      <div class="sg-color-card">
+        <div class="sg-color-swatch" style="background: var(--color-text-soft);" data-var="--color-text-soft">
+          <input type="color" value="#6B5D4F" data-target="--color-text-soft" title="Změnit barvu">
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Text — soft</div>
+          <div class="sg-color-var">--color-text-soft</div>
+          <div class="sg-color-hex">#6B5D4F</div>
+        </div>
+      </div>
+
+      <div class="sg-color-card">
+        <div class="sg-color-swatch" style="background: var(--color-accent);" data-var="--color-accent">
+          <input type="color" value="#C9A96E" data-target="--color-accent" title="Změnit barvu">
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Akcent — zlatá</div>
+          <div class="sg-color-var">--color-accent</div>
+          <div class="sg-color-hex">#C9A96E</div>
+        </div>
+      </div>
+
+      <div class="sg-color-card">
+        <div class="sg-color-swatch" style="background: var(--color-accent-hover);" data-var="--color-accent-hover">
+          <input type="color" value="#B8963E" data-target="--color-accent-hover" title="Změnit barvu">
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Akcent — hover</div>
+          <div class="sg-color-var">--color-accent-hover</div>
+          <div class="sg-color-hex">#B8963E</div>
+        </div>
+      </div>
+
+      <div class="sg-color-card">
+        <div class="sg-color-swatch dark" style="background: var(--color-white); border: 1px solid #eee;" data-var="--color-white">
+          <input type="color" value="#FFFFFF" data-target="--color-white" title="Změnit barvu">
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Bílá</div>
+          <div class="sg-color-var">--color-white</div>
+          <div class="sg-color-hex">#FFFFFF</div>
+        </div>
+      </div>
+
+      <div class="sg-color-card">
+        <div class="sg-color-swatch dark" style="background: var(--color-border);" data-var="--color-border">
+          <input type="color" value="#E5DDD3" data-target="--color-border" title="Změnit barvu">
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Rámeček</div>
+          <div class="sg-color-var">--color-border</div>
+          <div class="sg-color-hex">#E5DDD3</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- 2. TYPOGRAFIE -->
+  <section class="sg-section" id="typography">
+    <h2 class="sg-section-title">Typografie</h2>
+
+    <div class="sg-type-row">
+      <div class="sg-type-meta">
+        <strong>H1 — Nadpis 1</strong>
+        --size-h1<br>Playfair Display · 500<br>Hero, hlavní sekce
+      </div>
+      <div class="sg-type-preview">
+        <span class="sg-type-h1">Krásná pleť</span>
+      </div>
+    </div>
+
+    <div class="sg-type-row">
+      <div class="sg-type-meta">
+        <strong>H2 — Nadpis 2</strong>
+        --size-h2<br>Playfair Display · 500<br>Název sekce
+      </div>
+      <div class="sg-type-preview">
+        <span class="sg-type-h2">Péče o pleť</span>
+      </div>
+    </div>
+
+    <div class="sg-type-row">
+      <div class="sg-type-meta">
+        <strong>H3 — Nadpis 3</strong>
+        --size-h3<br>Playfair Display · 500<br>Podnadpis, intro
+      </div>
+      <div class="sg-type-preview">
+        <span class="sg-type-h3">Kosmetická péče</span>
+      </div>
+    </div>
+
+    <div class="sg-type-row">
+      <div class="sg-type-meta">
+        <strong>H4 — Nadpis karty</strong>
+        --size-h4<br>Playfair Display · 500<br>Karty na HP i podstránce
+      </div>
+      <div class="sg-type-preview">
+        <span class="sg-type-h4">Collagen Intensive Hydroboost</span>
+      </div>
+    </div>
+
+    <div class="sg-type-row">
+      <div class="sg-type-meta">
+        <strong>H5 — Krok průběhu</strong>
+        --size-h5<br>Playfair Display · 500<br>Kroky průběhu ošetření
+      </div>
+      <div class="sg-type-preview">
+        <span class="sg-type-h5">Uvítání a konzultace</span>
+      </div>
+    </div>
+
+    <div class="sg-type-row">
+      <div class="sg-type-meta">
+        <strong>Label / Badge</strong>
+        --size-label<br>DM Sans · 500 · uppercase<br>Štítky, kategorie
+      </div>
+      <div class="sg-type-preview">
+        <span class="sg-type-label">Speciální nabídka</span>
+      </div>
+    </div>
+
+    <div class="sg-type-row">
+      <div class="sg-type-meta">
+        <strong>Tělo textu</strong>
+        --size-body<br>DM Sans · line-height 1.7<br>Hlavní obsah stránek
+      </div>
+      <div class="sg-type-preview">
+        <span class="sg-type-body">Kosmetický salon Jana Szymiková — osobní přístup ke každému klientovi s kosmeceutikou Larens.</span>
+      </div>
+    </div>
+
+    <div class="sg-type-row">
+      <div class="sg-type-meta">
+        <strong>Meta text</strong>
+        --size-meta<br>DM Sans · color-text-soft<br>Trvání, kategorie, popisy karet
+      </div>
+      <div class="sg-type-preview">
+        <span class="sg-type-meta">Hydratace · Rozjasnění · 60 min · 1 100 Kč</span>
+      </div>
+    </div>
+
+    <div class="sg-type-row">
+      <div class="sg-type-meta">
+        <strong>Sekundární text</strong>
+        --size-body<br>DM Sans · color-text-soft<br>Popisy, doplňkový obsah
+      </div>
+      <div class="sg-type-preview">
+        <span class="sg-type-soft">Popis, doplňkový text, podnadpisy sekcí, popisy fotografií.</span>
+      </div>
+    </div>
+
+    <div class="sg-type-row">
+      <div class="sg-type-meta">
+        <strong>Malý text</strong>
+        --size-small<br>DM Sans · color-text-soft<br>Patička, právní texty
+      </div>
+      <div class="sg-type-preview">
+        <span class="sg-type-small">Patička, právní texty, metadata, copyright © 2026.</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 3. TLAČÍTKA -->
+  <section class="sg-section" id="buttons">
+    <h2 class="sg-section-title">Tlačítka</h2>
+
+    <div class="sg-buttons">
+      <a href="#" class="btn btn-primary">
+        Objednat se online
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#" class="btn btn-outline-dark">Prohlédnout služby →</a>
+    </div>
+
+    <div class="sg-buttons dark-bg">
+      <a href="#" class="btn btn-primary">Objednat se online</a>
+      <a href="#" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.4);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.33 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.98-.98a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Zavolat
+      </a>
+    </div>
+
+    <div class="sg-buttons" style="gap: 24px;">
+      <a href="#" class="link-arrow">
+        Více informací
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- 4. MEZERY -->
+  <section class="sg-section" id="spacing">
+    <h2 class="sg-section-title">Mezery (spacing scale)</h2>
+    <div class="sg-spacing-grid">
+      <div class="sg-space-item">
+        <div class="sg-space-bar" style="width: 4px;"></div>
+        <span class="sg-space-label">4</span>
+        <span class="sg-space-px">0.25rem</span>
+      </div>
+      <div class="sg-space-item">
+        <div class="sg-space-bar" style="width: 8px;"></div>
+        <span class="sg-space-label">8</span>
+        <span class="sg-space-px">0.5rem</span>
+      </div>
+      <div class="sg-space-item">
+        <div class="sg-space-bar" style="width: 12px;"></div>
+        <span class="sg-space-label">12</span>
+        <span class="sg-space-px">0.75rem</span>
+      </div>
+      <div class="sg-space-item">
+        <div class="sg-space-bar" style="width: 16px;"></div>
+        <span class="sg-space-label">16</span>
+        <span class="sg-space-px">1rem</span>
+      </div>
+      <div class="sg-space-item">
+        <div class="sg-space-bar" style="width: 24px;"></div>
+        <span class="sg-space-label">24</span>
+        <span class="sg-space-px">1.5rem</span>
+      </div>
+      <div class="sg-space-item">
+        <div class="sg-space-bar" style="width: 32px;"></div>
+        <span class="sg-space-label">32</span>
+        <span class="sg-space-px">2rem</span>
+      </div>
+      <div class="sg-space-item">
+        <div class="sg-space-bar" style="width: 48px;"></div>
+        <span class="sg-space-label">48</span>
+        <span class="sg-space-px">3rem</span>
+      </div>
+      <div class="sg-space-item">
+        <div class="sg-space-bar" style="width: 64px;"></div>
+        <span class="sg-space-label">64</span>
+        <span class="sg-space-px">4rem</span>
+      </div>
+      <div class="sg-space-item">
+        <div class="sg-space-bar" style="width: 80px;"></div>
+        <span class="sg-space-label">80</span>
+        <span class="sg-space-px">5rem — sekce</span>
+      </div>
+      <div class="sg-space-item">
+        <div class="sg-space-bar" style="width: 96px;"></div>
+        <span class="sg-space-label">96</span>
+        <span class="sg-space-px">6rem</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 5. RADIUS -->
+  <section class="sg-section" id="radius">
+    <h2 class="sg-section-title">Zaoblení rohů (border-radius)</h2>
+    <div class="sg-radius-grid">
+      <div class="sg-radius-item" style="border-radius: 8px;">
+        <div class="sg-radius-box" style="border-radius: 6px;"></div>
+        <span class="sg-radius-label">Tlačítka</span>
+        <span class="sg-radius-val">6–8px</span>
+      </div>
+      <div class="sg-radius-item" style="border-radius: 8px;">
+        <div class="sg-radius-box" style="border-radius: var(--radius);"></div>
+        <span class="sg-radius-label">Karty</span>
+        <span class="sg-radius-val">--radius = 12px</span>
+      </div>
+      <div class="sg-radius-item" style="border-radius: 8px;">
+        <div class="sg-radius-box" style="border-radius: 16px;"></div>
+        <span class="sg-radius-label">Velké karty</span>
+        <span class="sg-radius-val">16px</span>
+      </div>
+      <div class="sg-radius-item" style="border-radius: 8px;">
+        <div class="sg-radius-box" style="border-radius: 50%;"></div>
+        <span class="sg-radius-label">Ikonky / avatary</span>
+        <span class="sg-radius-val">50%</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 6. LIVE EDITOR -->
+  <section class="sg-section" id="editor">
+    <h2 class="sg-section-title">Live editor — design tokens</h2>
+
+    <div id="token-editor">
+
+      <!-- ── BARVY ── -->
+      <span class="sg-token-group-label">Barvy</span>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--color-bg</span>
+        <span class="sg-token-desc">Pozadí stránky</span>
+        <input class="sg-token-input" type="text" data-prop="--color-bg" value="#FBF8F4">
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--color-bg-alt</span>
+        <span class="sg-token-desc">Alt. pozadí sekcí</span>
+        <input class="sg-token-input" type="text" data-prop="--color-bg-alt" value="#F3EDE5">
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--color-text</span>
+        <span class="sg-token-desc">Hlavní text</span>
+        <input class="sg-token-input" type="text" data-prop="--color-text" value="#2C2420">
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--color-text-soft</span>
+        <span class="sg-token-desc">Sekundární text</span>
+        <input class="sg-token-input" type="text" data-prop="--color-text-soft" value="#6B5D4F">
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--color-accent</span>
+        <span class="sg-token-desc">Zlatá — primární akcent</span>
+        <input class="sg-token-input" type="text" data-prop="--color-accent" value="#C9A96E">
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--color-accent-hover</span>
+        <span class="sg-token-desc">Zlatá tmavší — hover</span>
+        <input class="sg-token-input" type="text" data-prop="--color-accent-hover" value="#B8963E">
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--color-white</span>
+        <span class="sg-token-desc">Bílá — texty na tmavém pozadí</span>
+        <input class="sg-token-input" type="text" data-prop="--color-white" value="#FFFFFF">
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--color-border</span>
+        <span class="sg-token-desc">Linky, rámečky</span>
+        <input class="sg-token-input" type="text" data-prop="--color-border" value="#E5DDD3">
+      </div>
+
+      <!-- ── VELIKOSTI PÍSMA ── -->
+      <span class="sg-token-group-label">Velikosti písma</span>
+
+      <!-- Live preview -->
+      <div class="sg-type-live">
+        <div id="prev-h1" style="font-family:var(--font-serif);font-size:var(--size-h1);font-weight:500;line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--color-text);margin-bottom:8px;">Nadpis první úrovně</div>
+        <div id="prev-h2" style="font-family:var(--font-serif);font-size:var(--size-h2);font-weight:500;line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--color-text);margin-bottom:8px;">Nadpis druhé úrovně</div>
+        <div id="prev-h3" style="font-family:var(--font-serif);font-size:var(--size-h3);font-weight:500;line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);color:var(--color-text);margin-bottom:8px;">Nadpis třetí úrovně</div>
+        <div id="prev-h4" style="font-family:var(--font-serif);font-size:var(--size-h4);font-weight:500;line-height:var(--leading-heading);color:var(--color-text);margin-bottom:8px;">H4 — Nadpis karty — Collagen Intensive Hydroboost</div>
+        <div id="prev-h5" style="font-family:var(--font-serif);font-size:var(--size-h5);font-weight:500;line-height:var(--leading-heading);color:var(--color-text);margin-bottom:8px;">H5 — Krok — Uvítání a konzultace</div>
+        <div id="prev-meta" style="font-family:var(--font-sans);font-size:var(--size-meta);line-height:var(--leading-body);color:var(--color-text-soft);margin-bottom:12px;">Meta text — trvání, kategorie, sekundární popis karty</div>
+        <div id="prev-label" style="font-family:var(--font-sans);font-size:var(--size-label);font-weight:500;text-transform:uppercase;letter-spacing:var(--tracking-label);color:var(--color-accent);margin-bottom:8px;">Label / badge</div>
+        <div id="prev-body" style="font-family:var(--font-sans);font-size:var(--size-body);line-height:var(--leading-body);letter-spacing:var(--tracking-body);color:var(--color-text);margin-bottom:6px;">Tělo textu — Jana Szymiková, kosmetický salon Dolní Lutyně. Každého klienta vnímám jako celek.</div>
+        <div id="prev-small" style="font-family:var(--font-sans);font-size:var(--size-small);line-height:var(--leading-body);letter-spacing:var(--tracking-body);color:var(--color-text-soft);">Malý text — patička, copyright, právní texty © 2026 JANESKIN</div>
+      </div>
+
+      <div class="sg-token-row">
+        <span class="sg-token-var">--size-h1</span>
+        <span class="sg-token-desc">Nadpis 1 — hero, sekce</span>
+        <input class="sg-token-input" type="text" data-prop="--size-h1" value="clamp(2.4rem, 6vw, 4rem)">
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--size-h2</span>
+        <span class="sg-token-desc">Nadpis 2 — název sekce</span>
+        <input class="sg-token-input" type="text" data-prop="--size-h2" value="clamp(2rem, 4vw, 3rem)">
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--size-h3</span>
+        <span class="sg-token-desc">Nadpis 3 — podnadpis, karta</span>
+        <input class="sg-token-input" type="text" data-prop="--size-h3" value="clamp(1.3rem, 2.5vw, 1.8rem)">
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--size-h4</span>
+        <span class="sg-token-desc">H4 — Nadpis karty</span>
+        <input class="sg-token-input" type="text" data-prop="--size-h4" value="1.5rem">
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--size-h5</span>
+        <span class="sg-token-desc">H5 — Krok průběhu</span>
+        <input class="sg-token-input" type="text" data-prop="--size-h5" value="1.1rem">
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--size-meta</span>
+        <span class="sg-token-desc">Meta text — trvání, kategorie, popis</span>
+        <input class="sg-token-input" type="text" data-prop="--size-meta" value="0.9rem">
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--size-body</span>
+        <span class="sg-token-desc">Tělo textu</span>
+        <input class="sg-token-input" type="text" data-prop="--size-body" value="1rem">
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--size-label</span>
+        <span class="sg-token-desc">Label / badge</span>
+        <input class="sg-token-input" type="text" data-prop="--size-label" value="0.75rem">
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--size-small</span>
+        <span class="sg-token-desc">Malý text, patička</span>
+        <input class="sg-token-input" type="text" data-prop="--size-small" value="0.875rem">
+      </div>
+
+      <!-- ── ŘÁDKOVÁNÍ ── -->
+      <span class="sg-token-group-label">Řádkování (line-height)</span>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--leading-heading</span>
+        <span class="sg-token-desc">Nadpisy</span>
+        <div class="sg-slider-wrap">
+          <input class="sg-slider" type="range" min="1.0" max="2.0" step="0.05"
+            data-prop="--leading-heading" data-unit="" value="1.2">
+          <span class="sg-slider-val">1.2</span>
+        </div>
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--leading-body</span>
+        <span class="sg-token-desc">Tělo textu</span>
+        <div class="sg-slider-wrap">
+          <input class="sg-slider" type="range" min="1.2" max="2.5" step="0.05"
+            data-prop="--leading-body" data-unit="" value="1.7">
+          <span class="sg-slider-val">1.7</span>
+        </div>
+      </div>
+
+      <!-- ── MEZERY MEZI PÍSMENY ── -->
+      <span class="sg-token-group-label">Mezery mezi písmeny (letter-spacing)</span>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--tracking-heading</span>
+        <span class="sg-token-desc">Nadpisy</span>
+        <div class="sg-slider-wrap">
+          <input class="sg-slider" type="range" min="-0.05" max="0.2" step="0.005"
+            data-prop="--tracking-heading" data-unit="em" value="0">
+          <span class="sg-slider-val">0em</span>
+        </div>
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--tracking-label</span>
+        <span class="sg-token-desc">Label / badge</span>
+        <div class="sg-slider-wrap">
+          <input class="sg-slider" type="range" min="0" max="0.3" step="0.005"
+            data-prop="--tracking-label" data-unit="em" value="0.12">
+          <span class="sg-slider-val">0.12em</span>
+        </div>
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--tracking-body</span>
+        <span class="sg-token-desc">Tělo textu</span>
+        <div class="sg-slider-wrap">
+          <input class="sg-slider" type="range" min="-0.02" max="0.1" step="0.005"
+            data-prop="--tracking-body" data-unit="em" value="0">
+          <span class="sg-slider-val">0em</span>
+        </div>
+      </div>
+
+      <!-- ── OSTATNÍ ── -->
+      <span class="sg-token-group-label">Ostatní</span>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--radius</span>
+        <span class="sg-token-desc">Zaoblení rohů karet</span>
+        <input class="sg-token-input" type="text" data-prop="--radius" value="12px">
+      </div>
+      <div class="sg-token-row">
+        <span class="sg-token-var">--transition</span>
+        <span class="sg-token-desc">Přechody hover/focus</span>
+        <input class="sg-token-input" type="text" data-prop="--transition" value="0.3s ease">
+      </div>
+
+    </div>
+
+    <div class="sg-save-bar">
+      <button class="sg-save-btn" id="save-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        Uložit do _variables.css
+      </button>
+      <span class="sg-status" id="save-status"></span>
+    </div>
+
+    <div class="sg-note">
+      <strong>Jak to funguje:</strong> Klikni na barevný čtverec nebo uprav hodnotu v poli,
+      pak klikni <em>Uložit</em> — server automaticky přepíše <code>_variables.css</code>
+      a změna se projeví na <strong>celém webu</strong> po obnovení stránky.
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function () {
+
+  const root = document.documentElement;
+
+  // ── Nastav CSS proměnnou live ──
+  function setVar(prop, val) {
+    root.style.setProperty(prop, val);
+  }
+
+  // ── Přečti hodnotu z input editoru ──
+  function inputVal(prop) {
+    const el = document.querySelector('input.sg-token-input[data-prop="' + prop + '"]');
+    return el ? el.value.trim() : '';
+  }
+
+  // ── Přečti hodnotu ze slideru ──
+  function sliderVal(prop) {
+    const el = document.querySelector('.sg-slider[data-prop="' + prop + '"]');
+    if (!el) return '';
+    const unit    = el.dataset.unit || '';
+    const rounded = Math.round(parseFloat(el.value) * 1000) / 1000;
+    return rounded + unit;
+  }
+
+  // ═══════════════════════════════════════════════════
+  // INICIALIZACE — čte přímo ze souboru _variables.css
+  // ═══════════════════════════════════════════════════
+  async function initInputs() {
+    let vars = {};
+    try {
+      const res  = await fetch('_variables.css?v=' + Date.now());
+      const text = await res.text();
+      // Parsuj CSS proměnné: --name: value;
+      const re = /--([\w-]+)\s*:\s*([^;]+);/g;
+      let m;
+      while ((m = re.exec(text)) !== null) {
+        vars['--' + m[1]] = m[2].trim();
+      }
+    } catch (e) {
+      console.error('Nepodařilo se načíst _variables.css:', e);
+      return;
+    }
+
+    // Nastav CSS proměnné na root (živý náhled)
+    Object.entries(vars).forEach(function(kv) {
+      root.style.setProperty(kv[0], kv[1]);
+    });
+
+    // Text inputy
+    document.querySelectorAll('input.sg-token-input[data-prop]').forEach(function(el) {
+      var val = vars[el.dataset.prop];
+      if (val) el.value = val;
+    });
+
+    // Slidery
+    document.querySelectorAll('.sg-slider[data-prop]').forEach(function(slider) {
+      var val = vars[slider.dataset.prop];
+      if (val) {
+        var num = parseFloat(val);
+        if (!isNaN(num)) {
+          slider.value = num;
+          var unit = slider.dataset.unit || '';
+          slider.nextElementSibling.textContent = Math.round(num * 1000) / 1000 + unit;
+        }
+      }
+    });
+
+    // Color swatche
+    document.querySelectorAll('input[type="color"][data-target]').forEach(function(picker) {
+      var val = vars[picker.dataset.target];
+      if (val && /^#[0-9a-f]{6}$/i.test(val)) {
+        picker.value = val;
+        picker.closest('.sg-color-swatch').style.background = val;
+        var card = picker.closest('.sg-color-card');
+        if (card) card.querySelector('.sg-color-hex').textContent = val.toUpperCase();
+      }
+    });
+  }
+
+  initInputs();
+
+  // ═══════════════════════════════════════════════════
+  // LIVE UPDATE — color picker (swatch)
+  // ═══════════════════════════════════════════════════
+  document.querySelectorAll('input[type="color"][data-target]').forEach(picker => {
+    ['input', 'change'].forEach(evt => {
+      picker.addEventListener(evt, e => {
+        const prop = e.target.dataset.target;
+        const val  = e.target.value;
+        setVar(prop, val);
+        // Aktualizuj swatch pozadí
+        e.target.closest('.sg-color-swatch').style.background = val;
+        // Aktualizuj hex text
+        const card = e.target.closest('.sg-color-card');
+        if (card) card.querySelector('.sg-color-hex').textContent = val.toUpperCase();
+        // Sync s textovým inputem
+        const textInput = document.querySelector('input.sg-token-input[data-prop="' + prop + '"]');
+        if (textInput) textInput.value = val.toUpperCase();
+      });
+    });
+  });
+
+  // ═══════════════════════════════════════════════════
+  // LIVE UPDATE — textové inputy
+  // ═══════════════════════════════════════════════════
+  document.querySelectorAll('input.sg-token-input[data-prop]').forEach(input => {
+    input.addEventListener('input', e => {
+      const prop = e.target.dataset.prop;
+      const val  = e.target.value.trim();
+      if (!val) return;
+      setVar(prop, val);
+      // Sync color picker pokud je to barva
+      const picker = document.querySelector('input[type="color"][data-target="' + prop + '"]');
+      if (picker && /^#[0-9a-f]{6}$/i.test(val)) {
+        picker.value = val;
+        picker.closest('.sg-color-swatch').style.background = val;
+        const card = picker.closest('.sg-color-card');
+        if (card) card.querySelector('.sg-color-hex').textContent = val.toUpperCase();
+      }
+    });
+  });
+
+  // ═══════════════════════════════════════════════════
+  // LIVE UPDATE — slidery
+  // ═══════════════════════════════════════════════════
+  document.querySelectorAll('.sg-slider[data-prop]').forEach(slider => {
+    slider.addEventListener('input', e => {
+      const prop    = e.target.dataset.prop;
+      const unit    = e.target.dataset.unit || '';
+      const rounded = Math.round(parseFloat(e.target.value) * 1000) / 1000;
+      const cssVal  = rounded + unit;
+      setVar(prop, cssVal);
+      e.target.nextElementSibling.textContent = cssVal;
+    });
+  });
+
+  // ═══════════════════════════════════════════════════
+  // SESTAVENÍ CSS
+  // ═══════════════════════════════════════════════════
+  function buildCSS() {
+    const v = prop => inputVal(prop);
+    const s = prop => sliderVal(prop);
+    return (
+'/*\n' +
+'  JANESKIN - Design Tokens (jediny zdroj pravdy)\n' +
+'  Tento soubor je nacitan ze VSECH stranek webu.\n' +
+'  Zmena zde = zmena vsude.\n' +
+'*/\n\n' +
+':root {\n\n' +
+'  /* Barvy */\n' +
+'  --color-bg:           ' + v('--color-bg')           + ';\n' +
+'  --color-bg-alt:       ' + v('--color-bg-alt')       + ';\n' +
+'  --color-text:         ' + v('--color-text')         + ';\n' +
+'  --color-text-soft:    ' + v('--color-text-soft')    + ';\n' +
+'  --color-accent:       ' + v('--color-accent')       + ';\n' +
+'  --color-accent-hover: ' + v('--color-accent-hover') + ';\n' +
+'  --color-white:        ' + v('--color-white')        + ';\n' +
+'  --color-border:       ' + v('--color-border')       + ';\n\n' +
+'  /* Typografie - rodiny */\n' +
+"  --font-serif: 'Playfair Display', Georgia, serif;\n" +
+"  --font-sans:  'DM Sans', system-ui, sans-serif;\n\n" +
+'  /* Typografie - velikosti */\n' +
+'  --size-h1:    ' + v('--size-h1')    + ';\n' +
+'  --size-h2:    ' + v('--size-h2')    + ';\n' +
+'  --size-h3:    ' + v('--size-h3')    + ';\n' +
+'  --size-h4:          ' + v('--size-h4')           + ';\n' +
+'  --size-h5:          ' + v('--size-h5')           + ';\n' +
+'  --size-meta:        ' + v('--size-meta')         + ';\n' +
+'  --size-body:  ' + v('--size-body')  + ';\n' +
+'  --size-label: ' + v('--size-label') + ';\n' +
+'  --size-small: ' + v('--size-small') + ';\n\n' +
+'  /* Typografie - radkovani */\n' +
+'  --leading-heading: ' + s('--leading-heading') + ';\n' +
+'  --leading-body:    ' + s('--leading-body')    + ';\n\n' +
+'  /* Typografie - mezery mezi pismeny */\n' +
+'  --tracking-heading: ' + s('--tracking-heading') + ';\n' +
+'  --tracking-label:   ' + s('--tracking-label')   + ';\n' +
+'  --tracking-body:    ' + s('--tracking-body')    + ';\n\n' +
+'  /* Layout */\n' +
+'  --max-width: 1200px;\n' +
+'  --radius:    ' + v('--radius')    + ';\n\n' +
+'  /* Animace */\n' +
+'  --transition: ' + v('--transition') + ';\n\n' +
+'}\n'
+    );
+  }
+
+  // ═══════════════════════════════════════════════════
+  // ULOŽIT → POST na server
+  // ═══════════════════════════════════════════════════
+  const saveBtn    = document.getElementById('save-btn');
+  const saveStatus = document.getElementById('save-status');
+
+  saveBtn.addEventListener('click', async () => {
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Ukládám…';
+    saveStatus.className = 'sg-status';
+
+    try {
+      const res  = await fetch('/api/save-variables', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ css: buildCSS() }),
+      });
+      const data = await res.json();
+      if (!data.ok) throw new Error(data.error || 'Neznámá chyba');
+
+      saveBtn.textContent = '✓ Uloženo!';
+      saveBtn.classList.add('saved');
+      saveStatus.textContent = '_variables.css byl přepsán. Změny platí na celém webu.';
+      saveStatus.className = 'sg-status visible';
+
+      // Znovu načti hodnoty přímo ze souboru (bez reloadu stránky)
+      await initInputs();
+
+      setTimeout(function() {
+        saveBtn.textContent = 'Uložit do _variables.css';
+        saveBtn.classList.remove('saved');
+        saveBtn.disabled = false;
+      }, 2500);
+
+    } catch (err) {
+      saveBtn.textContent = '✗ Chyba';
+      saveBtn.classList.add('error');
+      saveStatus.textContent = 'Nepodařilo se uložit: ' + err.message;
+      saveStatus.className = 'sg-status visible';
+      setTimeout(() => {
+        saveBtn.textContent = 'Uložit do _variables.css';
+        saveBtn.classList.remove('error');
+        saveBtn.disabled = false;
+      }, 4000);
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>

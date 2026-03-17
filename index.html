@@ -9,23 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_variables.css">
+  <link rel="stylesheet" href="_shared.css">
   <style>
-    /* ===== CSS VARIABLES ===== */
-    :root {
-      --color-bg: #FBF8F4;
-      --color-bg-alt: #F3EDE5;
-      --color-text: #2C2420;
-      --color-text-soft: #6B5D4F;
-      --color-accent: #C9A96E;
-      --color-accent-hover: #B8963E;
-      --color-white: #FFFFFF;
-      --color-border: #E5DDD3;
-      --font-serif: 'Playfair Display', Georgia, serif;
-      --font-sans: 'DM Sans', system-ui, sans-serif;
-      --max-width: 1200px;
-      --radius: 12px;
-      --transition: 0.3s ease;
-    }
 
     /* ===== RESET & BASE ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -47,19 +33,22 @@
     h1, h2, h3, h4 {
       font-family: var(--font-serif);
       font-weight: 500;
-      line-height: 1.2;
+      line-height: var(--leading-heading);
+      letter-spacing: var(--tracking-heading);
     }
 
-    h1 { font-size: clamp(2.4rem, 6vw, 4rem); }
-    h2 { font-size: clamp(2rem, 4vw, 3rem); }
-    h3 { font-size: clamp(1.3rem, 2.5vw, 1.8rem); }
+    h1 { font-size: var(--size-h1); }
+    h2 { font-size: var(--size-h2); }
+    h3 { font-size: var(--size-h3); }
+
+    body { font-size: var(--size-body); letter-spacing: var(--tracking-body); }
 
     .label {
       font-family: var(--font-sans);
-      font-size: 0.75rem;
+      font-size: var(--size-label);
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: var(--tracking-label);
       color: var(--color-accent);
     }
 
@@ -179,291 +168,6 @@
     .fade-in.delay-4 { transition-delay: 0.4s; }
 
     /* ===========================
-       1. NAVIGATION
-    =========================== */
-    #nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 0;
-      transition: background var(--transition), box-shadow var(--transition);
-    }
-
-    #nav.scrolled {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 1px 0 var(--color-border);
-    }
-
-    .nav-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 24px;
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      flex-shrink: 0;
-    }
-
-    .nav-logo img {
-      display: block;
-      filter: brightness(0) invert(1);
-      transition: filter var(--transition);
-    }
-
-    #nav.scrolled .nav-logo img {
-      filter: brightness(0);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.85);
-      transition: color var(--transition);
-      position: relative;
-    }
-
-    #nav.scrolled .nav-links a {
-      color: var(--color-text-soft);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: var(--color-accent);
-      transform: scaleX(0);
-      transition: transform var(--transition);
-    }
-
-    .nav-links a:hover { color: var(--color-text); }
-    .nav-links a:hover::after { transform: scaleX(1); }
-
-    /* ===== DROPDOWN SLUŽBY ===== */
-    .nav-dropdown {
-      position: relative;
-    }
-
-    .nav-dropdown > a {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .nav-dropdown > a .chevron-down {
-      width: 10px;
-      height: 10px;
-      transition: transform var(--transition);
-    }
-
-    .nav-dropdown:hover > a .chevron-down {
-      transform: rotate(180deg);
-    }
-
-    .dropdown-menu {
-      display: none; /* zatím skryté */
-      position: fixed;
-      top: 72px;
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.97);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--color-border);
-      padding: 0;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-4px);
-      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
-      z-index: 99;
-    }
-
-    .nav-dropdown:hover .dropdown-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .dropdown-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      height: 52px;
-      gap: 0;
-    }
-
-    .dropdown-menu a {
-      font-family: var(--font-sans);
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: var(--color-text-soft) !important;
-      padding: 14px 20px;
-      white-space: nowrap;
-      transition: color var(--transition);
-      border-right: 1px solid var(--color-border);
-    }
-
-    .dropdown-menu a:first-child {
-      padding-left: 0;
-    }
-
-    .dropdown-menu a:last-of-type {
-      border-right: none;
-    }
-
-    .dropdown-menu a::after {
-      display: none !important;
-    }
-
-    .dropdown-menu a:hover {
-      color: var(--color-accent) !important;
-    }
-
-    .dropdown-cta {
-      margin-left: auto;
-      flex-shrink: 0;
-    }
-
-    .dropdown-cta a {
-      display: inline-flex;
-      align-items: center;
-      padding: 10px 24px !important;
-      background: var(--color-text);
-      color: var(--color-white) !important;
-      font-size: 0.75rem !important;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      border-radius: 0;
-      border-right: none !important;
-      transition: background var(--transition);
-    }
-
-    .dropdown-cta a:hover {
-      background: var(--color-accent-hover);
-      color: var(--color-white) !important;
-    }
-
-    .nav-cta { flex-shrink: 0; }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 8px;
-      background: none;
-      border: none;
-      z-index: 110;
-      position: relative;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--color-white);
-      transition: all var(--transition);
-      transform-origin: center;
-    }
-
-    #nav.scrolled .hamburger span {
-      background: var(--color-text);
-    }
-
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      width: 280px;
-      background: var(--color-bg);
-      z-index: 105;
-      padding: 100px 32px 48px;
-      flex-direction: column;
-      gap: 0;
-      transform: translateX(100%);
-      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: -8px 0 40px rgba(44, 36, 32, 0.12);
-    }
-
-    .mobile-menu.open { transform: translateX(0); }
-
-    .mobile-menu a {
-      display: block;
-      padding: 16px 0;
-      font-family: var(--font-serif);
-      font-size: 1.5rem;
-      font-weight: 500;
-      color: var(--color-text);
-      border-bottom: 1px solid var(--color-border);
-      transition: color var(--transition), padding-left var(--transition);
-    }
-
-    .mobile-menu a:hover { color: var(--color-accent); padding-left: 8px; }
-    .mobile-menu a:last-child { border-bottom: none; }
-
-    .mobile-menu .mobile-cta {
-      margin-top: 32px;
-      display: block;
-      text-align: center;
-      padding: 14px 28px;
-      background: var(--color-accent);
-      color: var(--color-text);
-      border-radius: 8px;
-      font-family: var(--font-sans);
-      font-size: 0.9rem;
-      font-weight: 500;
-      border-bottom: none;
-    }
-
-    .mobile-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(44, 36, 32, 0.4);
-      z-index: 104;
-      opacity: 0;
-      transition: opacity 0.35s ease;
-    }
-
-    .mobile-overlay.open { opacity: 1; }
-
-    @media (max-width: 900px) {
-      .nav-links, .nav-cta { display: none; }
-      .hamburger { display: flex; }
-      .mobile-menu { display: flex; }
-      .mobile-overlay { display: block; }
-    }
-
-    /* ===========================
        2. HERO
     =========================== */
     #hero {
@@ -566,7 +270,7 @@
       align-items: center;
       gap: 10px;
       color: rgba(255,255,255,0.7);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-weight: 500;
     }
 
@@ -707,8 +411,8 @@
       flex-direction: column;
     }
 
-    .service-card-body h3 {
-      font-size: 1.55rem;
+    .service-card-body h4 {
+      font-size: var(--size-h4);
       margin-bottom: 10px;
     }
 
@@ -969,10 +673,9 @@
       background: var(--color-border);
       border-radius: 16px;
       aspect-ratio: 4/5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      overflow: hidden;
     }
+    .larens-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
 
     @media (max-width: 768px) {
       .larens-inner { grid-template-columns: 1fr; gap: 32px; }
@@ -1191,25 +894,22 @@
     .vouchers-text p { color: var(--color-text-soft); margin-bottom: 32px; }
 
     .vouchers-features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .voucher-feature {
-      background: var(--color-bg-alt);
-      border-radius: var(--radius);
-      padding: 16px;
       display: flex;
-      align-items: flex-start;
+      flex-direction: column;
       gap: 12px;
     }
 
+    .voucher-feature {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
     .voucher-feature-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: rgba(201, 169, 110, 0.15);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(201, 169, 110, 0.12);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1217,61 +917,29 @@
     }
 
     .voucher-feature span {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-weight: 500;
       color: var(--color-text);
       line-height: 1.4;
     }
 
     .vouchers-visual {
-      background: linear-gradient(135deg, var(--color-bg-alt), var(--color-border));
       border-radius: 16px;
-      aspect-ratio: 4/3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--color-border);
-      position: relative;
       overflow: hidden;
+      width: 520px;
+      height: 600px;
+      flex-shrink: 0;
     }
 
-    .voucher-card-mockup {
-      background: white;
-      border-radius: 12px;
-      padding: 28px;
-      width: 85%;
-      box-shadow: 0 8px 32px rgba(44, 36, 32, 0.12);
+    .vouchers-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
-    .voucher-card-mockup .vcm-label {
-      font-family: var(--font-sans);
-      font-size: 0.65rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--color-accent);
-      margin-bottom: 4px;
-    }
-
-    .voucher-card-mockup .vcm-name {
-      font-family: var(--font-serif);
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: 12px;
-    }
-
-    .voucher-card-mockup .vcm-line {
-      height: 1px;
-      background: var(--color-border);
-      margin-bottom: 12px;
-    }
-
-    .voucher-card-mockup .vcm-value {
-      font-family: var(--font-serif);
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--color-accent);
+    @media (max-width: 900px) {
+      .vouchers-visual { width: 100%; height: 400px; }
     }
 
     @media (max-width: 768px) {
@@ -1455,17 +1123,62 @@
     /* ===========================
        13. FINAL CTA + FOOTER
     =========================== */
-    #final-cta {
-      background: linear-gradient(135deg, var(--color-bg-alt) 0%, #E8D9C8 100%);
+    .footer-cta {
+      position: relative;
       text-align: center;
-      padding: 96px 0;
-      border-top: 1px solid var(--color-border);
+      padding: 96px 24px;
+      background-color: #000;
+      background-image: url('footer-bg.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
-    #final-cta .label { margin-bottom: 12px; display: block; }
-    #final-cta h2 { margin-bottom: 16px; }
-    #final-cta p {
-      color: var(--color-text-soft);
+    /* 30% černý overlay */
+    .footer-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* přechod dole: foto → černá */
+    .footer-cta::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, #000 0%, rgba(0,0,0,0) 45%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .footer-cta > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-cta-logo {
+      width: 180px;
+      display: block;
+      margin: 0 auto 32px;
+      filter: brightness(0) invert(1) sepia(0.35) saturate(0.8);
+    }
+
+    .footer-cta .label {
+      margin-bottom: 12px;
+      display: block;
+      color: var(--color-accent);
+    }
+
+    .footer-cta h2 {
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .footer-cta p {
+      color: rgba(255,255,255,0.6);
       max-width: 480px;
       margin: 0 auto 40px;
     }
@@ -1480,7 +1193,11 @@
     footer {
       background: #000000;
       color: rgba(255,255,255,0.65);
-      padding: 64px 0 32px;
+    }
+
+    footer > .container {
+      padding-top: 64px;
+      padding-bottom: 32px;
     }
 
     .footer-grid {
@@ -1714,7 +1431,6 @@
     }
 
     .instagram-tile:hover img { transform: scale(1.06); }
-    .instagram-tile:hover .instagram-tile-overlay { background: rgba(0, 0, 0, 0.45); }
     .instagram-tile:hover .ig-hover-stats { opacity: 1; transform: scale(1); }
 
     /* Nav arrows */
@@ -1771,137 +1487,6 @@
       .instagram-tile { flex: 0 0 216px; width: 216px; }
     }
 
-    /* ===========================
-       EXTERNAL SYSTEMS SECTION
-    =========================== */
-    #ext-sys {
-      background: #F9F5FF;
-      padding: 72px 0 80px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* decorative dot grids (left + right) */
-    #ext-sys::before,
-    #ext-sys::after {
-      content: '';
-      position: absolute;
-      width: 270px;
-      height: 250px;
-      background-image: radial-gradient(circle, #A78BFA 1.5px, transparent 1.5px);
-      background-size: 22px 22px;
-      opacity: 0.45;
-      pointer-events: none;
-    }
-    #ext-sys::before { top: 48px; left: 0; }
-    #ext-sys::after  { bottom: 48px; right: 0; }
-
-    .ext-sys-header {
-      text-align: center;
-      max-width: 680px;
-      margin: 0 auto 48px;
-      padding: 0 24px;
-      position: relative;
-    }
-
-    .ext-sys-header h2 {
-      font-family: 'Poppins', sans-serif;
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      font-weight: 700;
-      color: #0F0F0F;
-      margin-bottom: 16px;
-      line-height: 1.2;
-    }
-
-    .ext-sys-header p {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1rem;
-      color: #362173;
-      line-height: 1.65;
-    }
-
-    .ext-sys-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 24px;
-      position: relative;
-    }
-
-    @media (max-width: 900px) {
-      .ext-sys-grid { grid-template-columns: 1fr; max-width: 460px; }
-    }
-
-    .ext-sys-card {
-      background: #fff;
-      border: 1px solid #E9E3FF;
-      border-radius: 16px;
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* icon box: 73×73px with gradient, 16px radius */
-    .ext-sys-icon {
-      width: 73px;
-      height: 73px;
-      border-radius: 16px;
-      background: linear-gradient(43.53deg, #F9F5FF 54.794%, #E9DAFF 95.398%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 40px;
-      flex-shrink: 0;
-    }
-
-    /* inner 46×46 clipping container */
-    .ext-sys-icon-inner {
-      position: relative;
-      width: 46px;
-      height: 46px;
-      overflow: hidden;
-    }
-
-    .ext-sys-icon-inner img {
-      position: absolute;
-      display: block;
-      width: 100%;
-      height: 100%;
-      max-width: none;
-    }
-
-    .ext-sys-card h3 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #0F0F0F;
-      margin-bottom: 16px;
-      line-height: 1.65;
-      letter-spacing: -0.03em;
-    }
-
-    .ext-sys-list {
-      list-style: disc;
-      padding-left: 24px;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .ext-sys-list li {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: #362173;
-      line-height: 1.65;
-      letter-spacing: 0.013em;
-    }
-
-    .ext-sys-list li .normal {
-      font-weight: 400;
-    }
 
     /* ===========================
        CONTACT FORM
@@ -2071,60 +1656,8 @@
 </head>
 <body>
 
-  <!-- ===========================
-       1. NAVIGACE
-  =========================== -->
-  <header id="nav" role="banner">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo" aria-label="JANESKIN — přejít na úvod"><img src="logo-janeskin.svg" alt="JANESKIN" width="180"></a>
-
-    <nav aria-label="Hlavní navigace">
-      <ul class="nav-links">
-        <li class="nav-dropdown">
-          <a href="index.html#services-v2">Služby <svg class="chevron-down" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
-          <div class="dropdown-menu">
-            <div class="dropdown-inner">
-              <a href="kosmeticka-pece.html">Kosmetická péče</a>
-              <a href="index.html#svc2-title">Chemické peelingy</a>
-              <a href="index.html#svc3-title">Microneedling</a>
-              <a href="index.html#svc4-title">Anti Spot Therapy</a>
-              <a href="index.html#svc5-title">Masáže</a>
-              <a href="index.html#svc6-title">Laminace řas a obočí</a>
-              <a href="index.html#svc7-title">Make-up</a>
-              <a href="index.html#svc8-title">Doplňkové služby</a>
-              <div class="dropdown-cta">
-                <a href="https://noona.app/cs/janeskinsalonjanaszymikova" target="_blank" rel="noopener">OBJEDNAT SE</a>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li><a href="index.html#about">O mně</a></li>
-        <li><a href="index.html#contact">Ceník</a></li>
-        <li><a href="index.html#brides">Pro nevěsty</a></li>
-        <li><a href="index.html#contact">Kontakt</a></li>
-      </ul>
-    </nav>
-
-    <a href="https://noona.app/cs/janeskinsalonjanaszymikova" target="_blank" rel="noopener" class="btn btn-primary nav-cta">Objednat se</a>
-
-    <button class="hamburger" id="hamburger" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobile-menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </div>
-</header>
-
-<div class="mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
-
-<nav class="mobile-menu" id="mobile-menu" aria-label="Mobilní navigace">
-  <a href="index.html#services-v2" class="mobile-nav-link">Služby</a>
-  <a href="index.html#about" class="mobile-nav-link">O mně</a>
-  <a href="index.html#contact" class="mobile-nav-link">Ceník</a>
-  <a href="index.html#brides" class="mobile-nav-link">Pro nevěsty</a>
-  <a href="index.html#contact" class="mobile-nav-link">Kontakt</a>
-  <a href="https://noona.app/cs/janeskinsalonjanaszymikova" target="_blank" rel="noopener" class="mobile-cta">Objednat se</a>
-</nav>
+  <!-- Nav je načten dynamicky z _nav.html přes _shared.js -->
+  <div id="nav-placeholder"></div>
 
   <main id="main">
 
@@ -2166,7 +1699,7 @@
       <div class="container">
         <div class="about-grid">
           <div class="about-photo fade-in">
-            <img src="DSC_9524.jpg" alt="Jana Szymiková — majitelka salonu JANESKIN" style="width:100%;height:100%;object-fit:cover;object-position:center 15%;transform:scale(1.45);transform-origin:center 20%;display:block;">
+            <img src="janeskin-portren.webp" alt="Jana Szymiková — majitelka salonu JANESKIN" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
           </div>
           <div class="about-text fade-in delay-2">
             <span class="label">O mně</span>
@@ -2203,7 +1736,7 @@
               <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80" alt="Kosmetická péče — ošetření pleti">
             </div>
             <div class="service-card-body">
-              <h3 id="svc1-title">Kosmetická péče</h3>
+              <h4 id="svc1-title">Kosmetická péče</h4>
               <p>Specializovaná ošetření s kosmeceutikou Larens — od hluboké hydratace přes lifting až po řešení akné, pigmentací či citlivé pleti.</p>
               <div class="service-meta">
                 <span class="service-price">od 1 100 Kč</span>
@@ -2223,7 +1756,7 @@
               <img src="peell-1080x675.jpg" alt="Chemické peelingy — péče o pleť">
             </div>
             <div class="service-card-body">
-              <h3 id="svc2-title">Chemické peelingy</h3>
+              <h4 id="svc2-title">Chemické peelingy</h4>
               <p>Povrchové chemické peelingy s přírodními peptidy rybího kolagenu. Pleť se zjemní, vyhladí a projasní bez olupování.</p>
               <div class="service-meta">
                 <span class="service-price">od 1 100 Kč</span>
@@ -2243,7 +1776,7 @@
               <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=600&q=80" alt="Microneedling s Exosomy — ošetření">
             </div>
             <div class="service-card-body">
-              <h3 id="svc3-title">Microneedling s Exosomy</h3>
+              <h4 id="svc3-title">Microneedling s Exosomy</h4>
               <p>Moderní estetická procedura spojující exosomy, kyselinu hyaluronovou a růstové faktory pro omlazení a zpevnění pleti.</p>
               <div class="service-meta">
                 <span class="service-price">2 300 Kč</span>
@@ -2260,10 +1793,10 @@
           <article class="service-card fade-in delay-2" aria-labelledby="svc4-title">
             <div class="service-card-img">
               <span class="service-tag">Pigmentace</span>
-              <img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=600&q=80" alt="Anti Spot Therapy — rozjasnění pleti">
+              <img src="janeskin-plet.webp" alt="Anti Spot Therapy — rozjasnění pleti">
             </div>
             <div class="service-card-body">
-              <h3 id="svc4-title">Anti Spot Therapy</h3>
+              <h4 id="svc4-title">Anti Spot Therapy</h4>
               <p>Rozjasňující procedura zaměřená na pigmentové skvrny — po slunci, hormonální, po akné. Sjednocení tónu pleti.</p>
               <div class="service-meta">
                 <span class="service-price">1 100 Kč</span>
@@ -2283,7 +1816,7 @@
               <img src="16987660-86e363.webp" alt="Kosmetické masáže — masáž obličeje">
             </div>
             <div class="service-card-body">
-              <h3 id="svc5-title">Kosmetické masáže</h3>
+              <h4 id="svc5-title">Kosmetické masáže</h4>
               <p>Tři typy masáží obličeje, krku a dekoltu — klasická, liftingová a mikromasáž očního okolí. Relaxace i omlazení.</p>
               <div class="service-meta">
                 <span class="service-price">od 600 Kč</span>
@@ -2303,7 +1836,7 @@
               <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Laminace řas a obočí">
             </div>
             <div class="service-card-body">
-              <h3 id="svc6-title">Laminace řas a obočí</h3>
+              <h4 id="svc6-title">Laminace řas a obočí</h4>
               <p>Pokročilá laminace od InLei® — natočení, barvení a výživa řas i obočí. Zahušťuje řasy až o 25 %.</p>
               <div class="service-meta">
                 <span class="service-price">od 450 Kč</span>
@@ -2323,7 +1856,7 @@
               <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=600&q=80" alt="Make-up a vizážistika">
             </div>
             <div class="service-card-body">
-              <h3 id="svc7-title">Make-up a vizážistika</h3>
+              <h4 id="svc7-title">Make-up a vizážistika</h4>
               <p>Svatební líčení, foto vizáž, kurzy líčení s Larens Colour i kompletní make-up proměny včetně účesů.</p>
               <div class="service-meta">
                 <span class="service-price">od 800 Kč</span>
@@ -2343,7 +1876,7 @@
               <img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=600&q=80" alt="Doplňkové kosmetické služby">
             </div>
             <div class="service-card-body">
-              <h3 id="svc8-title">Doplňkové služby</h3>
+              <h4 id="svc8-title">Doplňkové služby</h4>
               <p>Barvení a úprava obočí a řas, epilace, nadstandardní masky a ampule, lehké denní líčení po ošetření.</p>
               <div class="service-meta">
                 <span class="service-price">od 80 Kč</span>
@@ -2440,7 +1973,7 @@
 
           <!-- Karta 4 -->
           <a href="#contact" class="svc-card fade-in delay-2" aria-label="Anti Spot Therapy">
-            <img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=600&q=80" alt="Anti Spot Therapy — rozjasnění pleti">
+            <img src="janeskin-plet.webp" alt="Anti Spot Therapy — rozjasnění pleti">
             <span class="svc-tag-v2">Pigmentace</span>
             <div class="svc-overlay-v2"></div>
             <div class="svc-content-v2">
@@ -2681,7 +2214,7 @@
             <a href="#contact" class="link-arrow">Více o značce Larens <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
           </div>
           <div class="larens-visual fade-in delay-2">
-            <img src="ReHarmony Serum PRO.jpeg" alt="Larens ReHarmony Serum PRO — kosmeceutické sérum" style="width:100%;height:100%;object-fit:cover;object-position:center;border-radius:16px;display:block;">
+            <img src="ReHarmony Serum PRO.jpeg" alt="Larens ReHarmony Serum PRO — kosmeceutické sérum">
           </div>
         </div>
       </div>
@@ -2767,92 +2300,6 @@
     </section>
 
     <!-- ===========================
-         EXTERNAL SYSTEMS
-    =========================== -->
-    <section id="ext-sys">
-      <div class="ext-sys-header fade-in">
-        <h2>External Systems</h2>
-        <p>aReception integrates with enterprise and facility infrastructure to support security, operations, and communication workflows.</p>
-      </div>
-
-      <div class="ext-sys-grid">
-
-        <!-- Card 1: Enterprise System Integrations -->
-        <div class="ext-sys-card fade-in delay-1">
-          <div class="ext-sys-icon">
-            <div class="ext-sys-icon-inner">
-              <!-- left bracket < -->
-              <div style="position:absolute;inset:27.57% 67.96% 27.66% 2.5%;">
-                <img src="https://www.figma.com/api/mcp/asset/dd320ef3-97b2-48bc-a0bc-6a41b94e4412" alt="">
-              </div>
-              <!-- slash / -->
-              <div style="position:absolute;inset:11.67% 37.9%;">
-                <img src="https://www.figma.com/api/mcp/asset/f76bc446-db43-4eb4-9a9f-b6a07185d421" alt="">
-              </div>
-              <!-- right bracket > -->
-              <div style="position:absolute;inset:27.57% 2.5% 27.66% 67.97%;">
-                <img src="https://www.figma.com/api/mcp/asset/a85c7850-21a0-47bd-99df-510b0b30e179" alt="">
-              </div>
-            </div>
-          </div>
-          <h3>Enterprise System Integrations</h3>
-          <ul class="ext-sys-list">
-            <li>Access control systems</li>
-            <li>Building management systems (BMS)</li>
-            <li>Safety &amp; evacuation systems</li>
-            <li>Document &amp; workflow management systems</li>
-          </ul>
-        </div>
-
-        <!-- Card 2: Real-time communication -->
-        <div class="ext-sys-card fade-in delay-2">
-          <div class="ext-sys-icon">
-            <!-- inner has its own gradient + glow bg -->
-            <div style="position:relative;width:46px;height:46px;overflow:hidden;border-radius:16px;background:linear-gradient(43.53deg,rgba(249,245,255,.5) 54.794%,rgba(233,218,255,.5) 95.398%);">
-              <!-- background glow -->
-              <div style="position:absolute;inset:-11.43%;">
-                <img src="https://www.figma.com/api/mcp/asset/3e943dad-267d-43d5-9f91-3bdce5c5b948" alt="" style="position:absolute;display:block;width:100%;height:100%;max-width:none;">
-              </div>
-              <!-- bell icon, centered 32×32 -->
-              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;overflow:hidden;">
-                <div style="position:absolute;inset:87.5% 38.92% 0% 30.46%;">
-                  <img src="https://www.figma.com/api/mcp/asset/4969e9e1-9e2b-4b3b-9b88-7a73ead0a1ff" alt="" style="position:absolute;display:block;width:100%;height:100%;max-width:none;">
-                </div>
-                <div style="position:absolute;inset:8.33% 12.56% 16.67% 4.1%;">
-                  <img src="https://www.figma.com/api/mcp/asset/f679a32a-ba9b-429a-9df3-5bdb39caac85" alt="" style="position:absolute;display:block;width:100%;height:100%;max-width:none;">
-                </div>
-                <div style="position:absolute;inset:0% 4.23% 58.33% 54.1%;">
-                  <img src="https://www.figma.com/api/mcp/asset/6778319a-f038-4a74-967d-6cec921a3a9f" alt="" style="position:absolute;display:block;width:100%;height:100%;max-width:none;">
-                </div>
-              </div>
-            </div>
-          </div>
-          <h3>Real-time communication &amp; alerts</h3>
-          <ul class="ext-sys-list">
-            <li>SMS, phone calls, and email notifications</li>
-          </ul>
-        </div>
-
-        <!-- Card 3: API-ready architecture -->
-        <div class="ext-sys-card fade-in delay-3">
-          <div class="ext-sys-icon">
-            <div class="ext-sys-icon-inner">
-              <div style="position:absolute;inset:4.17%;">
-                <img src="https://www.figma.com/api/mcp/asset/b18b7a49-0ccd-4982-a425-bdaad8b33e85" alt="">
-              </div>
-            </div>
-          </div>
-          <h3>API-ready architecture</h3>
-          <ul class="ext-sys-list">
-            <li><span class="normal">REST API </span>for third-party integrations</li>
-            <li><span class="normal">Designed for custom and low-code workflows</span></li>
-          </ul>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ===========================
          9. DÁRKOVÉ POUKAZY
     =========================== -->
     <section id="vouchers" aria-labelledby="vouchers-heading">
@@ -2865,39 +2312,33 @@
             <div class="vouchers-features">
               <div class="voucher-feature">
                 <div class="voucher-feature-icon" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M19 8V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v2"/><line x1="12" y1="8" x2="12" y2="21"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
                 <span>Tištěný poukaz v luxusní obálce</span>
               </div>
               <div class="voucher-feature">
                 <div class="voucher-feature-icon" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
                 <span>Elektronický poukaz emailem obratem</span>
               </div>
               <div class="voucher-feature">
                 <div class="voucher-feature-icon" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
                 <span>Hodnota 1 000 / 1 500 / 2 000 Kč</span>
               </div>
               <div class="voucher-feature">
                 <div class="voucher-feature-icon" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
                 <span>Platnost 6 měsíců od zakoupení</span>
               </div>
             </div>
             <a href="#contact" class="btn btn-primary mt-32">Objednat poukaz →</a>
           </div>
-          <div class="vouchers-visual fade-in delay-2" aria-hidden="true">
-            <div class="voucher-card-mockup">
-              <p class="vcm-label">Dárkový poukaz</p>
-              <p class="vcm-name">JANESKIN</p>
-              <div class="vcm-line"></div>
-              <p class="vcm-value">1 500 Kč</p>
-              <p style="font-size: 0.75rem; color: #6B5D4F; margin-top: 8px;">Platnost 6 měsíců</p>
-            </div>
+          <div class="vouchers-visual fade-in delay-2">
+            <img src="poukazy-janeskin.webp" alt="Dárkový poukaz JANESKIN">
           </div>
         </div>
       </div>
@@ -3028,26 +2469,6 @@
       </div>
     </section>
 
-    <!-- ===========================
-         13a. ZÁVĚREČNÉ CTA
-    =========================== -->
-    <section id="final-cta" aria-label="Výzva k akci">
-      <div class="container">
-        <div class="fade-in">
-          <span class="label">Začněte dnes</span>
-          <h2>Připravte své pleti to nejlepší</h2>
-          <p>Rezervujte si termín online nebo nám zavolejte. Rádi vám poradíme s výběrem ošetření.</p>
-          <div class="final-cta-btns">
-            <a href="#contact" class="btn btn-primary">Objednat se online</a>
-            <a href="tel:+420000000000" class="btn btn-outline-dark">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.98-.98a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              Zavolat
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
   <!-- ===========================
        KONTAKTNÍ FORMULÁŘ
   =========================== -->
@@ -3104,10 +2525,27 @@
        13b. FOOTER
   =========================== -->
   <footer role="contentinfo">
+
+  <!-- CTA nad patičkou -->
+  <div class="footer-cta">
+    <span class="label">Začněte dnes</span>
+    <h2>Připravte své pleti to nejlepší</h2>
+    <p>Rezervujte si termín online nebo nám zavolejte. Rádi vám poradíme s výběrem ošetření.</p>
+    <div class="final-cta-btns">
+      <a href="#contact" class="btn btn-primary">Objednat se online</a>
+      <a href="tel:+420000000000" class="btn btn-outline-dark" style="color:#fff;border-color:rgba(255,255,255,0.3);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.98-.98a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Zavolat
+      </a>
+    </div>
+  </div>
+
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="footer-logo" aria-label="JANESKIN — zpět na začátek">JANESKIN</a>
+        <a href="index.html" class="footer-logo" aria-label="JANESKIN — zpět na začátek">
+          <img src="logo-janeskin.svg" alt="JANESKIN" class="footer-cta-logo" style="margin:0 0 12px;">
+        </a>
         <p>Kosmetický salon Jana Szymiková<br>Dolní Lutyně — Specializovaná péče o pleť</p>
         <div class="footer-social" role="list" aria-label="Sociální sítě">
           <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" role="listitem" aria-label="Instagram JANESKIN">
@@ -3117,7 +2555,7 @@
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
             </svg>
           </a>
-          <a href="#" role="listitem" aria-label="Facebook JANESKIN">
+          <a href="https://www.facebook.com/people/Salon-Jana-Szymiková/61569339962095/" target="_blank" rel="noopener" role="listitem" aria-label="Facebook JANESKIN">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" aria-hidden="true">
               <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
             </svg>
