@@ -58,7 +58,7 @@
 }
 
 .nav-links a {
-  font-size: 0.875rem;
+  font-size: var(--size-small);
   font-weight: 500;
   color: rgba(255, 255, 255, 0.85);
   transition: color var(--transition);
@@ -140,7 +140,7 @@
 }
 
 .dropdown-menu a {
-  font-size: 0.82rem;
+  font-size: var(--size-small);
   font-weight: 500;
   color: var(--color-text-soft) !important;
   padding: 14px 20px;
@@ -165,10 +165,10 @@
   padding: 10px 24px !important;
   background: var(--color-text);
   color: var(--color-white) !important;
-  font-size: 0.75rem !important;
+  font-size: var(--size-label) !important;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: var(--tracking-label);
   border-radius: 0;
   border-right: none !important;
   transition: background var(--transition);
@@ -233,7 +233,7 @@
   display: block;
   padding: 16px 0;
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: var(--size-h4);
   font-weight: 500;
   color: var(--color-text);
   border-bottom: 1px solid var(--color-border);
@@ -252,7 +252,7 @@
   color: var(--color-text);
   border-radius: 8px;
   font-family: var(--font-sans);
-  font-size: 0.9rem;
+  font-size: var(--size-meta);
   font-weight: 500;
   border-bottom: none;
 }
