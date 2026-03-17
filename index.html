@@ -3059,7 +3059,7 @@
         <p>Zašleme vám odpověď co nejdříve.</p>
       </div>
 
-      <form class="contact-form fade-in delay-1" action="https://formspree.io/travis@seznam.cz" method="post" novalidate>
+      <form class="contact-form fade-in delay-1" action="https://formsubmit.co/ajax/travis@seznam.cz" method="post" novalidate>
         <div class="form-row">
           <div class="form-field">
             <label for="cf-jmeno">Jméno</label>
@@ -3225,8 +3225,17 @@
 
         fetch(form.action, {
           method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            jmeno:    document.getElementById('cf-jmeno').value.trim(),
+            prijmeni: document.getElementById('cf-prijmeni').value.trim(),
+            email:    document.getElementById('cf-email').value.trim(),
+            telefon:  document.getElementById('cf-telefon').value.trim(),
+            zprava:   document.getElementById('cf-zprava').value.trim(),
+          })
         })
         .then(function (res) {
           if (res.ok) {
