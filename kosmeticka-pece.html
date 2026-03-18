@@ -295,19 +295,47 @@
       line-height: var(--leading-body);
       margin-bottom: 36px;
     }
-    .hero-meta {
+    .hero-stats {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 12px;
     }
-    .hero-meta-item {
+    .hero-stat {
       display: flex;
       align-items: center;
-      gap: 8px;
-      color: rgba(255,255,255,0.65);
-      font-size: var(--size-small);
+      gap: 16px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius);
+      padding: 16px 22px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
-    .hero-meta-item svg { flex-shrink: 0; }
+    .hero-stat svg {
+      color: var(--color-accent);
+      flex-shrink: 0;
+    }
+    .hero-stat-value {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: var(--size-h5);
+      font-weight: 500;
+      color: var(--color-white);
+      line-height: var(--leading-heading);
+    }
+    .hero-stat-label {
+      display: block;
+      font-size: var(--size-label);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-label);
+      color: rgba(255, 255, 255, 0.45);
+      margin-top: 3px;
+    }
+    @media (max-width: 600px) {
+      .hero-stats { gap: 10px; }
+      .hero-stat { padding: 14px 18px; }
+    }
 
     /* ===========================
        INTRO
@@ -366,109 +394,6 @@
       .intro-photo { aspect-ratio: 4/3; max-width: 100%; }
     }
 
-    /* ===========================
-       OŠETŘENÍ (TYPY)
-    =========================== */
-    #treatments { background: var(--color-bg-alt); }
-
-    .treatments-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    @media (max-width: 1000px) { .treatments-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 600px) { .treatments-grid { grid-template-columns: 1fr; } }
-
-    .treatment-card {
-      background: var(--color-white);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(44,36,32,0.06);
-      transition: transform var(--transition), box-shadow var(--transition);
-      display: flex;
-      flex-direction: column;
-      cursor: pointer;
-    }
-    .treatment-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(44,36,32,0.12);
-    }
-
-    /* FOTO: každá karta — produkt nebo aplikace daného ošetření */
-    .treatment-card-img {
-      height: 180px;
-      background: var(--color-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 8px;
-      position: relative;
-      overflow: hidden;
-    }
-    .treatment-card-img .photo-hint {
-      font-size: 0.7rem;
-      color: var(--color-text-soft);
-      font-style: italic;
-      text-align: center;
-      padding: 0 12px;
-    }
-
-    .treatment-tag {
-      position: absolute;
-      top: 12px; right: 12px;
-      background: var(--color-accent);
-      color: var(--color-text);
-      font-size: 0.7rem;
-      font-weight: 500;
-      padding: 4px 10px;
-      border-radius: 20px;
-    }
-    .treatment-tag.new { background: #2C2420; color: white; }
-
-    .treatment-card-body {
-      padding: 24px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .treatment-card-body h4 { font-size: var(--size-h4); margin-bottom: 10px; }
-    .treatment-card-body .treatment-for {
-      font-size: var(--size-label);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: var(--tracking-label);
-      color: var(--color-accent);
-      margin-bottom: 10px;
-    }
-    .treatment-card-body p {
-      color: var(--color-text-soft);
-      font-size: var(--size-small);
-      line-height: var(--leading-body);
-      flex: 1;
-      margin-bottom: 16px;
-    }
-    .treatment-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid var(--color-border);
-      padding-top: 16px;
-    }
-    .treatment-price {
-      font-family: var(--font-serif);
-      font-size: var(--size-h5);
-      font-weight: 600;
-      color: var(--color-accent);
-    }
-    .treatment-duration {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: var(--size-small);
-      color: var(--color-text-soft);
-    }
 
     /* ===========================
        PRŮBĚH OŠETŘENÍ
@@ -939,18 +864,27 @@
         <span class="label">Specializovaná péče</span>
         <h1>Kosmetická péče<br>pro <em>každý typ pleti</em></h1>
         <p class="hero-subtitle">Individuálně sestavená ošetření s kosmeceutikou Larens — pro hydrataci, lifting, akné i citlivou pleť. Každé sezení začíná nasloucháním.</p>
-        <div class="hero-meta" role="list">
-          <div class="hero-meta-item" role="listitem">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            60 – 120 minut
+        <div class="hero-stats" role="list">
+          <div class="hero-stat" role="listitem">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <div>
+              <span class="hero-stat-value">60–120 min</span>
+              <span class="hero-stat-label">Délka ošetření</span>
+            </div>
           </div>
-          <div class="hero-meta-item" role="listitem">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="2" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            od 1 100 Kč
+          <div class="hero-stat" role="listitem">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <div>
+              <span class="hero-stat-value">od 1 100 Kč</span>
+              <span class="hero-stat-label">Cena ošetření</span>
+            </div>
           </div>
-          <div class="hero-meta-item" role="listitem">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-            Pro ženy i muže
+          <div class="hero-stat" role="listitem">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <div>
+              <span class="hero-stat-value">Pro ženy i muže</span>
+              <span class="hero-stat-label">Vhodné pro každého</span>
+            </div>
           </div>
         </div>
       </div>
@@ -966,7 +900,7 @@
                ruce aplikují sérum štětcem nebo prsty. Teplé světlo, neutrální pozadí.
                Formát: 600×800px, border-radius 16px. -->
           <div class="intro-photo fade-in" aria-hidden="true">
-            <img src="janeskin-portren.webp" alt="Jana Szymiková, kosmetička JANESKIN" loading="lazy">
+            <img src="janeskin-vysetreni-detail.webp" alt="Jana Szymiková při kosmetickém ošetření" loading="lazy">
           </div>
           <div class="intro-text fade-in delay-2">
             <span class="label">Přístup k péči</span>
@@ -985,138 +919,6 @@
       </div>
     </section>
 
-    <!-- ===========================
-         TYPY OŠETŘENÍ
-    =========================== -->
-    <section id="treatments" aria-labelledby="treatments-heading">
-      <div class="container">
-        <div class="section-header fade-in">
-          <span class="label">Co nabízím</span>
-          <h2 id="treatments-heading">Typy kosmetických ošetření</h2>
-          <p>Vyberte ošetření podle vašeho cíle — nebo mi nechte výběr na mně po konzultaci</p>
-        </div>
-
-        <div class="treatments-grid">
-
-          <!-- Karta 1 -->
-          <article class="treatment-card fade-in delay-1" aria-labelledby="t1-title">
-            <div class="treatment-card-img" role="img" aria-label="Collagen Intensive Hydroboost">
-              <img src="2025-02-12.webp" alt="Hydratační ošetření pleti" loading="lazy">
-              <span class="treatment-tag">Ideální na začátek</span>
-            </div>
-            <div class="treatment-card-body">
-              <p class="treatment-for">Hydratace · Rozjasnění</p>
-              <h4 id="t1-title">Collagen Intensive Hydroboost</h4>
-              <p>Signaturní ošetření salonu JANESKIN. Kombinace liposomálního kolagenu, kyseliny hyaluronové a peptidů dodá pleti okamžitou hloubkovou hydrataci a zdravou zářivost. Pleť po ošetření vypadá odpočatě a probudile.</p>
-              <div class="treatment-footer">
-                <span class="treatment-price">1 100 Kč</span>
-                <span class="treatment-duration">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  60 min
-                </span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Karta 2 -->
-          <article class="treatment-card fade-in delay-2" aria-labelledby="t2-title">
-            <div class="treatment-card-img" role="img" aria-label="Age Revive Lifting">
-              <img src="2025-02-12 (1).webp" alt="Liftingové ošetření s pleťovou maskou" loading="lazy">
-            </div>
-            <div class="treatment-card-body">
-              <p class="treatment-for">Anti-aging · Zpevnění</p>
-              <h4 id="t2-title">Age Revive Lifting</h4>
-              <p>Ošetření zaměřené na zpevnění kontur obličeje, redukci vrásek a omlazení pleti. Kombinuje liftingové masážní techniky s peptidovými séry Larens, která stimulují přirozenou tvorbu kolagenu a elastinu.</p>
-              <div class="treatment-footer">
-                <span class="treatment-price">1 400 Kč</span>
-                <span class="treatment-duration">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  90 min
-                </span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Karta 3 -->
-          <article class="treatment-card fade-in delay-1" aria-labelledby="t3-title">
-            <div class="treatment-card-img" role="img" aria-label="Clear Skin Therapy">
-              <img src="peell-1080x675.jpg" alt="Čisticí peeling ošetření" loading="lazy">
-            </div>
-            <div class="treatment-card-body">
-              <p class="treatment-for">Akné · Problematická pleť</p>
-              <h4 id="t3-title">Clear Skin Therapy</h4>
-              <p>Komplexní ošetření pro aknózní a nečistou pleť. Hloubkové čištění ultrazvukovou špachtlí, regulace mazových žlaz a antibakteriální péče s Larens přípravky bez dráždivých složek. Výsledek: čistá, zklidněná pleť bez zarudnutí.</p>
-              <div class="treatment-footer">
-                <span class="treatment-price">1 200 Kč</span>
-                <span class="treatment-duration">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  75 min
-                </span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Karta 4 -->
-          <article class="treatment-card fade-in delay-2" aria-labelledby="t4-title">
-            <div class="treatment-card-img" role="img" aria-label="Sensitive Skin Relief">
-              <img src="JANESKIN-PLET.webp" alt="Péče o citlivou pleť" loading="lazy">
-            </div>
-            <div class="treatment-card-body">
-              <p class="treatment-for">Citlivá · Reaktivní pleť</p>
-              <h4 id="t4-title">Sensitive Skin Relief</h4>
-              <p>Péče navržená pro citlivou, reaktivní nebo kuprózu pleť. Pracuji výhradně s jemnými formulacemi bez parfemace a dráždivých látek. Ošetření zklidňuje zarudnutí, posiluje kožní bariéru a obnovuje komfort pleti.</p>
-              <div class="treatment-footer">
-                <span class="treatment-price">1 100 Kč</span>
-                <span class="treatment-duration">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  60 min
-                </span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Karta 5 -->
-          <article class="treatment-card fade-in delay-1" aria-labelledby="t5-title">
-            <div class="treatment-card-img" role="img" aria-label="Glow Radiance Treatment">
-              <img src="ReHarmony Serum PRO.jpeg" alt="Larens ReHarmony Serum PRO — vitamín C" loading="lazy">
-            </div>
-            <div class="treatment-card-body">
-              <p class="treatment-for">Rozjasnění · Únava pleti</p>
-              <h4 id="t5-title">Glow Radiance Treatment</h4>
-              <p>Ošetření pro pleť bez lesku, šedivou, unavenou nebo bezbarevnou. Enzymatický peeling, vitamínová infúze a boostující maska s vysokou koncentrací vitamínu C a peptidů. Pleť zazáří okamžitě po ošetření.</p>
-              <div class="treatment-footer">
-                <span class="treatment-price">1 300 Kč</span>
-                <span class="treatment-duration">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  75 min
-                </span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Karta 6 -->
-          <article class="treatment-card fade-in delay-2" aria-labelledby="t6-title">
-            <div class="treatment-card-img" role="img" aria-label="Nourishing Regeneration">
-              <img src="16987660-86e363.webp" alt="Klientka při kosmetickém ošetření" loading="lazy">
-              <span class="treatment-tag new">Výživa &amp; Regenerace</span>
-            </div>
-            <div class="treatment-card-body">
-              <p class="treatment-for">Suchá · Zralá pleť</p>
-              <h4 id="t6-title">Nourishing Regeneration</h4>
-              <p>Hluboce vyživující ošetření pro suchou, zralou nebo oslablenou pleť. Intenzivní výživná maska na bázi peptidů a přírodních olejů zanechá vaši pleť hebkou, naplněnou a spokojenou. Ideální v chladných měsících nebo po náročném období.</p>
-              <div class="treatment-footer">
-                <span class="treatment-price">1 250 Kč</span>
-                <span class="treatment-duration">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  90 min
-                </span>
-              </div>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
 
     <!-- ===========================
          PRŮBĚH OŠETŘENÍ
@@ -1367,7 +1169,7 @@
                5–7 lahviček a tubiček seřazených na bílém nebo béžovém podkladu,
                teplé světlo shora, čtvercový formát -->
           <div class="larens-photo fade-in" aria-hidden="true">
-            <img src="ReHarmony Serum PRO.jpeg" alt="Larens ReHarmony Serum PRO" loading="lazy">
+            <img src="detail_larens-50-ml-biopeptide.jpg" alt="Larens Biopeptide sérum — detail produktu" loading="lazy">
           </div>
           <div class="larens-detail-text fade-in delay-2">
             <span class="label">Proč Larens</span>
@@ -1584,7 +1386,7 @@
         <ul>
           <li><a href="index.html#services-v2">Služby</a></li>
           <li><a href="index.html#about">O mně</a></li>
-          <li><a href="index.html#contact">Ceník</a></li>
+          <li><a href="cenik.html">Ceník</a></li>
           <li><a href="index.html#brides">Pro nevěsty</a></li>
           <li><a href="index.html#vouchers">Dárkové poukazy</a></li>
           <li><a href="index.html#contact">Kontakt</a></li>

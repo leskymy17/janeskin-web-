@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ceník kosmetických služeb JANESKIN — ošetření pleti, masáže, laminace, make-up a vizáž. Salon Jana Szymiková, Dolní Lutyně.">
+  <title>Ceník — JANESKIN</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_variables.css">
+  <link rel="stylesheet" href="_shared.css">
+  <style>
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: var(--leading-body);
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== TYPOGRAPHY ===== */
+    h1, h2, h3, h4, h5 {
+      font-family: var(--font-serif);
+      font-weight: 500;
+      line-height: var(--leading-heading);
+      letter-spacing: var(--tracking-heading);
+    }
+    h1 { font-size: var(--size-h1); }
+    h2 { font-size: var(--size-h2); }
+    h3 { font-size: var(--size-h3); }
+    h4 { font-size: var(--size-h4); }
+    h5 { font-size: var(--size-h5); }
+    body { font-size: var(--size-body); letter-spacing: var(--tracking-body); }
+
+    .label {
+      font-family: var(--font-sans);
+      font-size: var(--size-label);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-label);
+      color: var(--color-accent);
+    }
+
+    /* ===== LAYOUT ===== */
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 80px 0; }
+    @media (max-width: 768px) { section { padding: 56px 0; } }
+
+    .bg-alt { background-color: var(--color-bg-alt); }
+
+    .section-header {
+      margin-bottom: 48px;
+    }
+    .section-header .label { margin-bottom: 10px; display: block; }
+    .section-header h2 { margin-bottom: 12px; }
+    .section-header p {
+      font-size: var(--size-body);
+      color: var(--color-text-soft);
+      max-width: 580px;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-family: var(--font-sans);
+      font-size: var(--size-meta);
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all var(--transition);
+      border: 2px solid transparent;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--color-accent);
+      color: var(--color-text);
+      border-color: var(--color-accent);
+    }
+    .btn-primary:hover {
+      background: var(--color-accent-hover);
+      border-color: var(--color-accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(201, 169, 110, 0.35);
+    }
+    .btn-outline-dark {
+      background: transparent;
+      color: var(--color-text);
+      border-color: var(--color-border);
+    }
+    .btn-outline-dark:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    /* ===== SCROLL ANIMATIONS ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in.delay-1 { transition-delay: 0.1s; }
+    .fade-in.delay-2 { transition-delay: 0.2s; }
+    .fade-in.delay-3 { transition-delay: 0.3s; }
+    .fade-in.delay-4 { transition-delay: 0.4s; }
+
+    /* ===== FOOTER CTA ===== */
+    .footer-cta {
+      position: relative;
+      text-align: center;
+      padding: 96px 24px;
+      background-color: #000;
+      background-image: url('footer-bg.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .footer-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .footer-cta::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, #000 0%, rgba(0,0,0,0) 45%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .footer-cta > * { position: relative; z-index: 1; }
+    .footer-cta .label { margin-bottom: 12px; display: block; color: var(--color-accent); }
+    .footer-cta h2 { color: #fff; margin-bottom: 16px; }
+    .footer-cta p { color: rgba(255,255,255,0.6); max-width: 480px; margin: 0 auto 40px; font-size: var(--size-body); }
+    .final-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* ===== FOOTER ===== */
+    footer { background: #000; color: rgba(255,255,255,0.65); }
+    footer > .container { padding-top: 64px; padding-bottom: 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand p { font-size: var(--size-small); line-height: var(--leading-body); max-width: 280px; }
+    .footer-brand .footer-social { display: flex; gap: 12px; margin-top: 20px; }
+    .footer-social a {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition);
+    }
+    .footer-social a:hover { background: var(--color-accent); }
+    .footer-nav h4 {
+      font-family: var(--font-sans); font-size: var(--size-label); text-transform: uppercase;
+      letter-spacing: var(--tracking-label); font-weight: 500; color: var(--color-white); margin-bottom: 16px;
+    }
+    .footer-nav ul { list-style: none; }
+    .footer-nav ul li { margin-bottom: 8px; }
+    .footer-nav ul a { font-size: var(--size-small); color: rgba(255,255,255,0.6); transition: color var(--transition); }
+    .footer-nav ul a:hover { color: var(--color-accent); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: var(--size-small); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: var(--size-small); color: rgba(255,255,255,0.5); transition: color var(--transition); }
+    .footer-legal a:hover { color: var(--color-accent); }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ===========================
+       HERO
+    =========================== */
+    #hero {
+      padding-top: 148px;
+      padding-bottom: 64px;
+      position: relative;
+      overflow: hidden;
+      background-color: #1a1410;
+      background-image: url('1k689n.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(20,14,10,0.82) 40%, rgba(20,14,10,0.45) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    #hero .container { position: relative; z-index: 1; }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .breadcrumb a, .breadcrumb span {
+      font-size: var(--size-small);
+      color: rgba(255,255,255,0.55);
+      transition: color var(--transition);
+    }
+    .breadcrumb a:hover { color: var(--color-accent); }
+    .breadcrumb .sep { color: rgba(255,255,255,0.25); }
+
+    .hero-text { max-width: 600px; }
+    .hero-text .label { margin-bottom: 14px; display: block; }
+    .hero-text h1 {
+      font-weight: 400;
+      color: var(--color-white);
+      margin-bottom: 18px;
+    }
+    .hero-text h1 em { font-style: italic; color: var(--color-accent); }
+    .hero-subtitle {
+      color: rgba(255,255,255,0.7);
+      font-size: var(--size-body);
+      line-height: var(--leading-body);
+      max-width: 500px;
+    }
+
+    /* ===========================
+       FILTER BAR
+    =========================== */
+    #filter-bar {
+      position: sticky;
+      top: 72px;
+      z-index: 50;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      box-shadow: 0 2px 12px rgba(44,36,32,0.05);
+    }
+
+    .filter-inner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 24px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .filter-inner::-webkit-scrollbar { display: none; }
+
+    .filter-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 18px;
+      font-family: var(--font-sans);
+      font-size: var(--size-small);
+      font-weight: 500;
+      border-radius: 100px;
+      border: 1.5px solid var(--color-border);
+      background: transparent;
+      color: var(--color-text-soft);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background var(--transition), border-color var(--transition), color var(--transition);
+    }
+    .filter-btn:hover {
+      border-color: var(--color-accent);
+      color: var(--color-text);
+    }
+    .filter-btn.active {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: var(--color-text);
+    }
+    .filter-btn:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+
+    /* ===========================
+       SERVICES LIST
+    =========================== */
+    #services { padding-top: 64px; padding-bottom: 72px; }
+
+    #services-container {
+      transition: opacity 0.2s ease;
+    }
+
+    .category-group {
+      margin-bottom: 56px;
+    }
+    .category-group:last-child { margin-bottom: 0; }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 16px;
+      margin-bottom: 4px;
+    }
+    .category-header-line {
+      flex: 1;
+      height: 1px;
+      background: var(--color-border);
+    }
+    .category-note {
+      font-size: var(--size-label);
+      font-weight: 500;
+      color: var(--color-text-soft);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-label);
+      white-space: nowrap;
+    }
+
+    .service-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 32px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .service-row:first-of-type { border-top: 1px solid var(--color-border); }
+
+    .service-info {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .service-name {
+      font-size: var(--size-body);
+      font-weight: 500;
+      color: var(--color-text);
+    }
+    .service-desc {
+      font-size: var(--size-small);
+      color: var(--color-text-soft);
+      line-height: var(--leading-body);
+    }
+
+    .service-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+      flex-shrink: 0;
+      min-width: 120px;
+    }
+    .service-price {
+      font-family: var(--font-serif);
+      font-size: var(--size-h5);
+      font-weight: 500;
+      color: var(--color-text);
+      white-space: nowrap;
+    }
+    .service-price.is-free {
+      color: var(--color-accent);
+    }
+    .service-duration {
+      font-size: var(--size-small);
+      color: var(--color-text-soft);
+      white-space: nowrap;
+    }
+
+    @media (max-width: 600px) {
+      .service-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .service-right {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        min-width: auto;
+      }
+      .service-price { font-size: var(--size-body); font-weight: 600; }
+    }
+
+    /* ===========================
+       PACKAGES
+    =========================== */
+    #packages { padding-top: 72px; padding-bottom: 80px; }
+
+    .packages-group {
+      margin-bottom: 48px;
+    }
+    .packages-group:last-child { margin-bottom: 0; }
+
+    .packages-group-label {
+      font-family: var(--font-sans);
+      font-size: var(--size-label);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-label);
+      color: var(--color-text-soft);
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 960px) {
+      .packages-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .packages-grid { grid-template-columns: 1fr; }
+    }
+
+    .package-card {
+      background: var(--color-bg);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: box-shadow var(--transition), border-color var(--transition);
+    }
+    .package-card:hover {
+      box-shadow: 0 8px 32px rgba(44,36,32,0.1);
+      border-color: rgba(219,176,97,0.4);
+    }
+    .package-name {
+      font-family: var(--font-serif);
+      font-size: var(--size-h5);
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: var(--leading-heading);
+    }
+    .package-note {
+      font-size: var(--size-small);
+      color: var(--color-text-soft);
+      line-height: var(--leading-body);
+      margin-bottom: 4px;
+    }
+    .package-pricing {
+      margin-top: 10px;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .package-price {
+      font-family: var(--font-serif);
+      font-size: var(--size-h4);
+      font-weight: 500;
+      color: var(--color-text);
+    }
+    .package-old-price {
+      font-size: var(--size-small);
+      color: var(--color-text-soft);
+      text-decoration: line-through;
+    }
+    .package-savings {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 8px;
+      padding: 4px 12px;
+      background: rgba(219,176,97,0.14);
+      color: var(--color-accent);
+      font-family: var(--font-sans);
+      font-size: var(--size-label);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-label);
+      border-radius: 100px;
+      white-space: nowrap;
+      align-self: flex-start;
+    }
+
+    /* ===========================
+       INFO BOX
+    =========================== */
+    #info { padding: 0 0 80px; }
+
+    .info-box {
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 36px 40px;
+      background: var(--color-bg-alt);
+    }
+    .info-box-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-sans);
+      font-size: var(--size-body);
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: 20px;
+    }
+    .info-box-title svg { color: var(--color-accent); flex-shrink: 0; }
+    .info-box ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .info-box ul li {
+      font-size: var(--size-small);
+      color: var(--color-text-soft);
+      line-height: var(--leading-body);
+      padding-left: 18px;
+      position: relative;
+    }
+    .info-box ul li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-size: 1.2em;
+      line-height: 1;
+      top: 3px;
+    }
+    @media (max-width: 768px) {
+      .info-box { padding: 24px 20px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Nav je načten dynamicky z _nav.html přes _shared.js -->
+  <div id="nav-placeholder"></div>
+
+  <main>
+
+    <!-- ========================
+         HERO
+    ========================= -->
+    <section id="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Drobečková navigace">
+          <a href="index.html">Úvod</a>
+          <span class="sep" aria-hidden="true">›</span>
+          <span aria-current="page">Ceník</span>
+        </nav>
+        <div class="hero-text fade-in">
+          <span class="label">Přehled cen</span>
+          <h1 id="hero-title">Ceník <em>služeb</em></h1>
+          <p class="hero-subtitle">Přehled všech služeb a jejich cen. Každé ošetření je přizpůsobeno aktuálnímu stavu Vaší pleti.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================
+         FILTER BAR
+    ========================= -->
+    <div id="filter-bar" role="navigation" aria-label="Filtrování kategorií">
+      <div class="filter-inner" role="group" aria-label="Kategorie služeb">
+        <button class="filter-btn active" data-filter="vse" aria-pressed="true">Vše</button>
+        <button class="filter-btn" data-filter="pece-o-plet" aria-pressed="false">Péče o pleť</button>
+        <button class="filter-btn" data-filter="chemicke-peelingy" aria-pressed="false">Chemické peelingy</button>
+        <button class="filter-btn" data-filter="microneedling" aria-pressed="false">Microneedling</button>
+        <button class="filter-btn" data-filter="depigmentace" aria-pressed="false">Depigmentace</button>
+        <button class="filter-btn" data-filter="masaze" aria-pressed="false">Masáže</button>
+        <button class="filter-btn" data-filter="laminace" aria-pressed="false">Laminace</button>
+        <button class="filter-btn" data-filter="makeup-vizaz" aria-pressed="false">Make-up &amp; vizáž</button>
+        <button class="filter-btn" data-filter="doplnkove" aria-pressed="false">Doplňkové služby</button>
+      </div>
+    </div>
+
+    <!-- ========================
+         SERVICES LIST
+    ========================= -->
+    <section id="services" aria-label="Seznam služeb">
+      <div class="container">
+        <div id="services-container" aria-live="polite" aria-atomic="true">
+          <!-- Vykresleno JavaScriptem z dat CENIK níže -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================
+         PACKAGES
+    ========================= -->
+    <section id="packages" class="bg-alt" aria-labelledby="packages-title">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="label">Výhodněji</span>
+          <h2 id="packages-title">Zvýhodněné balíčky</h2>
+          <p>Opakované procedury za zvýhodněné ceny — pro viditelné a trvalé výsledky.</p>
+        </div>
+
+        <!-- Balíčky masáží -->
+        <div class="packages-group fade-in delay-1">
+          <p class="packages-group-label">Balíčky masáží</p>
+          <div class="packages-grid" id="pkg-masaze"></div>
+        </div>
+
+        <!-- Balíčky kúr -->
+        <div class="packages-group fade-in delay-2">
+          <p class="packages-group-label">Balíčky kúr</p>
+          <div class="packages-grid" id="pkg-kury"></div>
+        </div>
+
+        <!-- Balíčky pro nevěsty -->
+        <div class="packages-group fade-in delay-3">
+          <p class="packages-group-label">Balíčky pro nevěsty</p>
+          <div class="packages-grid" id="pkg-nevesty"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================
+         INFO BOX
+    ========================= -->
+    <section id="info" aria-label="Důležité informace">
+      <div class="container">
+        <div class="info-box fade-in">
+          <p class="info-box-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            Důležité informace
+          </p>
+          <ul>
+            <li>Kontraindikací pro veškeré kosmetické aplikace je alergie na bílkoviny z ryb.</li>
+            <li>Použití přístrojů a výběr aktivních látek je vždy přizpůsoben typu a stavu pleti.</li>
+            <li>Ceny jsou platné od roku 2025. Salon si vyhrazuje právo na změnu ceníku.</li>
+            <li>Platba: okamžitým převodem přes QR kód nebo v hotovosti.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================
+       FOOTER CTA + FOOTER
+  ========================= -->
+  <footer role="contentinfo">
+
+    <div class="footer-cta">
+      <span class="label">Začněte dnes</span>
+      <h2>Máte zájem o některou ze služeb?</h2>
+      <p>Rezervujte si termín online nebo nám zavolejte. Rádi vám poradíme s výběrem ošetření.</p>
+      <div class="final-cta-btns">
+        <a href="https://noona.app/cs/janeskinsalonjanaszymikova" target="_blank" rel="noopener" class="btn btn-primary">Objednat se online</a>
+        <a href="tel:+420000000000" class="btn btn-outline-dark" style="color:#fff;border-color:rgba(255,255,255,0.3);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.98-.98a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Zavolat
+        </a>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" aria-label="JANESKIN — zpět na začátek">
+            <img src="logo-janeskin.svg" alt="JANESKIN" style="width:160px;filter:brightness(0) invert(1) sepia(0.35) saturate(0.8);margin-bottom:12px;">
+          </a>
+          <p>Kosmetický salon Jana Szymiková<br>Dolní Lutyně — Specializovaná péče o pleť</p>
+          <div class="footer-social" role="list" aria-label="Sociální sítě">
+            <a href="https://www.instagram.com/salon_janaszymikova/" target="_blank" rel="noopener" role="listitem" aria-label="Instagram JANESKIN">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </a>
+            <a href="https://www.facebook.com/people/Salon-Jana-Szymiková/61569339962095/" target="_blank" rel="noopener" role="listitem" aria-label="Facebook JANESKIN">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" aria-hidden="true">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <nav class="footer-nav" aria-label="Navigace footeru">
+          <h4>Navigace</h4>
+          <ul>
+            <li><a href="index.html#services-v2">Služby</a></li>
+            <li><a href="index.html#about">O mně</a></li>
+            <li><a href="cenik.html" aria-current="page">Ceník</a></li>
+            <li><a href="index.html#brides">Pro nevěsty</a></li>
+            <li><a href="index.html#vouchers">Dárkové poukazy</a></li>
+            <li><a href="index.html#contact">Kontakt</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer-nav">
+          <h4>Kontakt</h4>
+          <ul>
+            <li><a href="tel:+420000000000">+420 000 000 000</a></li>
+            <li><a href="mailto:info@janeskin.cz">info@janeskin.cz</a></li>
+            <li style="color: rgba(255,255,255,0.6); font-size: var(--size-small); padding: 4px 0;">Dolní Lutyně</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 JANESKIN — Salon Jana Szymiková. Všechna práva vyhrazena.</p>
+        <nav class="footer-legal" aria-label="Právní dokumenty">
+          <a href="#">Obchodní podmínky</a>
+          <a href="#">Reklamační řád</a>
+          <a href="#">Ochrana osobních údajů (GDPR)</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="_shared.js"></script>
+
+  <script>
+    /* ============================================================
+       CENÍK DATA — EDITOVATELNÝ ZDROJ
+       Upravujte zde, HTML se vygeneruje automaticky.
+    ============================================================ */
+    const CENIK = [
+      {
+        id: 'pece-o-plet',
+        label: 'Péče o pleť',
+        note: null,
+        services: [
+          {
+            name: 'První návštěva salonu',
+            desc: 'Vstupní konzultace a seznámení s vaší pletí — společně nastavíme plán péče.',
+            duration: '30 min',
+            price: 'zdarma',
+            free: true
+          },
+          {
+            name: 'Collagen Intensive Hydroboost',
+            desc: 'Hydratační ošetření s masáží — dodá pleti hydrataci, zářivost a jemnost.',
+            duration: '90 min',
+            price: '1 300 Kč'
+          },
+          {
+            name: 'Collagen Lifting Therapy',
+            desc: 'Liftingové ošetření s masáží — zanechává pokožku svěží, napnutou a hydratovanou.',
+            duration: '90 min',
+            price: '1 300 Kč'
+          },
+          {
+            name: 'Acne Skin Therapy',
+            desc: 'Ošetření aknózní pleti bez masáže — čistící, zklidňující a protizánětlivý účinek.',
+            duration: '90 min',
+            price: '1 300 Kč'
+          },
+          {
+            name: 'Sensitive Skin Therapy',
+            desc: 'Ošetření citlivé pleti s masáží — snížení zarudnutí, posílení vlásečnic, hydratace.',
+            duration: '90 min',
+            price: '1 300 Kč'
+          },
+          {
+            name: 'Anti-Aging Express Luxe',
+            desc: 'Expresní ošetření s růstovými faktory bez masáže — okamžitý liftingový efekt.',
+            duration: '60 min',
+            price: '1 400 Kč'
+          },
+          {
+            name: 'Anti-Aging Relax Luxe',
+            desc: 'Luxusní ošetření s růstovými faktory a masáží — omlazení s hlubokou relaxací.',
+            duration: '120 min',
+            price: '1 800 Kč'
+          },
+          {
+            name: 'Intensive Lifting Detox+',
+            desc: 'Detoxikační ošetření — ideální před důležitou událostí, redukuje volné radikály.',
+            duration: '60 min',
+            price: '1 100 Kč'
+          },
+          {
+            name: 'ReHarmony Treatment',
+            desc: 'Harmonizační péče s exosomy — hloubková výživa a regenerace i té nejnáročnější pleti.',
+            duration: '90 min',
+            price: '1 800 Kč'
+          }
+        ]
+      },
+      {
+        id: 'chemicke-peelingy',
+        label: 'Chemické peelingy',
+        note: null,
+        services: [
+          {
+            name: 'Chemický Peeling',
+            desc: 'Povrchový peeling s peptidy rybího kolagenu — zjemnění, vyhlazení a projasnění pleti.',
+            duration: '60 min',
+            price: '1 100 Kč'
+          },
+          {
+            name: 'Chemický Peeling Luxe',
+            desc: 'Peeling s růstovými faktory z Bio-placenty — intenzivnější regenerace a obnova.',
+            duration: '60 min',
+            price: '1 500 Kč'
+          }
+        ]
+      },
+      {
+        id: 'microneedling',
+        label: 'Microneedling',
+        note: null,
+        services: [
+          {
+            name: 'Microneedling s Exosomy a Peptidy',
+            desc: 'Mikrojehličkování s exosomy, kyselinou hyaluronovou a růstovými faktory.',
+            duration: '90 min',
+            price: '2 300 Kč'
+          }
+        ]
+      },
+      {
+        id: 'depigmentace',
+        label: 'Depigmentace',
+        note: null,
+        services: [
+          {
+            name: 'Anti Spot Therapy',
+            desc: 'Depigmentační ošetření — redukce skvrn a sjednocení tónu pleti.',
+            duration: '60 min',
+            price: '1 100 Kč'
+          }
+        ]
+      },
+      {
+        id: 'masaze',
+        label: 'Kosmetické masáže',
+        note: null,
+        services: [
+          {
+            name: 'Kosmetická masáž obličeje, krku a dekoltu',
+            desc: 'Masáž s pleťovou maskou — zlepšení prokrvení, odplavení únavy, zpomalení stárnutí.',
+            duration: '60 min',
+            price: '1 000 Kč'
+          },
+          {
+            name: 'Liftingová masáž obličeje',
+            desc: 'Speciální omlazující masážní tahy s liftingovou maskou — viditelný efekt po první proceduře.',
+            duration: '90 min',
+            price: '1 200 Kč'
+          },
+          {
+            name: 'Mikromasáž očního okolí',
+            desc: 'Jemná masáž s alginátovou maskou — proti kruhům, váčkům a únavě očí.',
+            duration: '45 min',
+            price: '600 Kč'
+          }
+        ]
+      },
+      {
+        id: 'laminace',
+        label: 'Laminace řas a obočí',
+        note: null,
+        services: [
+          {
+            name: 'Lash Filler — Laminace řas',
+            desc: 'Pokročilá laminace řas od InLei® s barvením a výživou — zahušťuje řasy až o 25 %.',
+            duration: '60–90 min',
+            price: '1 000 Kč'
+          },
+          {
+            name: 'Brow Bomber — Laminace obočí',
+            desc: 'Laminace obočí s barvením v ombré efektu, epilací a výživou.',
+            duration: '60–90 min',
+            price: '1 000 Kč'
+          },
+          {
+            name: 'Balíček Lash Filler & Brow Bomber',
+            desc: 'Zvýhodněná kombinace laminace řas i obočí v jedné proceduře.',
+            duration: '90–120 min',
+            price: '1 800 Kč'
+          },
+          {
+            name: 'Celková úprava obočí',
+            desc: 'Čištění, vyměření, barvení hybridní barvou, ombré efekt, epilace, korekce.',
+            duration: '45 min',
+            price: '450 Kč'
+          }
+        ]
+      },
+      {
+        id: 'makeup-vizaz',
+        label: 'Make-up & vizážistika',
+        note: null,
+        services: [
+          {
+            name: 'Poradenství v péči o pleť a líčení',
+            desc: 'Osobní konzultace — správná péče, vhodné přípravky, základy líčení.',
+            duration: '90 min',
+            price: '1 200 Kč'
+          },
+          {
+            name: 'Mini kurz líčení s Larens Colour',
+            desc: 'Naučíte se správně připravit pleť a vytvořit denní i večerní look.',
+            duration: '90–120 min',
+            price: '1 500 Kč'
+          },
+          {
+            name: 'Proměna s Larens Colour',
+            desc: 'Kompletní make-up proměna včetně úpravy vlasů.',
+            duration: '90–180 min',
+            price: '2 000 Kč'
+          },
+          {
+            name: 'Foto vizáž — Make-up',
+            desc: 'Profesionální foto make-up přizpůsobený fotografickému osvětlení.',
+            duration: '60 min',
+            price: 'od 800 Kč'
+          },
+          {
+            name: 'Foto vizáž — Účes',
+            desc: 'Účes pro profesionální focení.',
+            duration: '60 min',
+            price: 'od 800 Kč'
+          },
+          {
+            name: 'Foto vizáž komplet',
+            desc: 'Make-up i účes pro focení v jednom.',
+            duration: '120 min',
+            price: 'od 1 500 Kč'
+          },
+          {
+            name: 'Svatební vizáž — Nevěsta',
+            desc: 'Svatební líčení včetně zkoušky a nalepení řas.',
+            duration: '120 min',
+            price: 'od 3 500 Kč'
+          },
+          {
+            name: 'Svatební vizáž komplet — Nevěsta',
+            desc: 'Svatební líčení + účes včetně zkoušky.',
+            duration: '210 min',
+            price: 'od 4 500 Kč'
+          },
+          {
+            name: 'Vizáž svatebčanka — Make-up',
+            desc: 'Líčení pro svatební hosty.',
+            duration: '60 min',
+            price: 'od 800 Kč'
+          },
+          {
+            name: 'Vizáž svatebčanka komplet',
+            desc: 'Make-up + účes pro svatební hosty.',
+            duration: '120 min',
+            price: 'od 1 500 Kč'
+          },
+          {
+            name: 'Lepení řas',
+            desc: 'Jednorázové nalepení řas ke službám vizáže.',
+            duration: '—',
+            price: 'od 150 Kč'
+          }
+        ]
+      },
+      {
+        id: 'doplnkove',
+        label: 'Doplňkové služby',
+        note: 'pouze ke kosmetickému ošetření',
+        services: [
+          { name: 'Úprava obočí pinzetou',    desc: '',  duration: '15 min', price: '80 Kč' },
+          { name: 'Barvení obočí',             desc: '',  duration: '15 min', price: '100 Kč' },
+          { name: 'Barvení řas',               desc: '',  duration: '15 min', price: '100 Kč' },
+          { name: 'Barvení obočí a řas',       desc: '',  duration: '20 min', price: '150 Kč' },
+          { name: 'Epilace obočí',             desc: '',  duration: '15 min', price: '100 Kč' },
+          { name: 'Epilace horního rtu',        desc: '',  duration: '15 min', price: '100 Kč' },
+          { name: 'Epilace brady',             desc: '',  duration: '15 min', price: '100 Kč' },
+          { name: 'Alginátová maska',          desc: '',  duration: '20 min', price: '250 Kč' },
+          { name: 'BioRenew maska',            desc: '',  duration: '30 min', price: '450 Kč' },
+          { name: 'Ampule Anti Aging / Anti Acne', desc: '', duration: '20 min', price: '150 Kč' },
+          { name: 'Lehké denní líčení po ošetření', desc: '', duration: '15 min', price: 'od 250 Kč' }
+        ]
+      }
+    ];
+
+    /* ============================================================
+       BALÍČKY DATA
+    ============================================================ */
+    const BALICKY = {
+      masaze: [
+        { name: '5× Kosmetická masáž',           note: null,                                        oldPrice: '5 000 Kč',  price: '4 500 Kč',  savings: 'ušetříte 500 Kč' },
+        { name: '10× Kosmetická masáž',           note: null,                                        oldPrice: '10 000 Kč', price: '8 000 Kč',  savings: 'ušetříte 2 000 Kč' },
+        { name: '5× Liftingová masáž',            note: null,                                        oldPrice: '6 000 Kč',  price: '5 500 Kč',  savings: 'ušetříte 500 Kč' },
+        { name: '10× Liftingová masáž',           note: null,                                        oldPrice: '12 000 Kč', price: '10 000 Kč', savings: 'ušetříte 2 000 Kč' },
+        { name: '5× Mikromasáž očního okolí',     note: null,                                        oldPrice: '3 000 Kč',  price: '2 500 Kč',  savings: 'ušetříte 500 Kč' },
+        { name: '10× Mikromasáž očního okolí',    note: null,                                        oldPrice: '6 000 Kč',  price: '4 000 Kč',  savings: 'ušetříte 2 000 Kč' }
+      ],
+      kury: [
+        { name: 'Intensive Lifting Detox+ — kúra 5 ošetření', note: '1× za 10 dní',                       oldPrice: null, price: '5 500 Kč', savings: null },
+        { name: 'Chemický Peeling — kúra 4 ošetření',         note: '1× za 10 dní, září–duben',            oldPrice: null, price: '4 400 Kč', savings: null },
+        { name: 'Chemický Peeling Luxe — kúra 4 ošetření',    note: '1× za 10 dní, září–duben',            oldPrice: null, price: '6 400 Kč', savings: null },
+        { name: 'Anti Spot Therapy — kúra 6 ošetření',        note: '1× za 10 dní, září–květen',           oldPrice: null, price: '6 600 Kč', savings: null },
+        { name: 'Microneedling — kúra 2 ošetření',            note: 'V rozmezí 4–6 týdnů, září–duben',     oldPrice: null, price: '4 600 Kč', savings: null }
+      ],
+      nevesty: [
+        { name: 'Zvýhodněný balíček krásy pro nevěstu', note: '3× ošetření pleti dle zvolené problematiky, 1× za 4 týdny', oldPrice: '3 900 Kč', price: '3 500 Kč', savings: 'ušetříte 400 Kč' }
+      ]
+    };
+
+    /* ============================================================
+       RENDER SERVICES
+    ============================================================ */
+    function renderServices() {
+      const container = document.getElementById('services-container');
+      container.innerHTML = CENIK.map(cat => {
+        const servicesHTML = cat.services.map(svc => `
+          <div class="service-row">
+            <div class="service-info">
+              <span class="service-name">${svc.name}</span>
+              ${svc.desc ? `<span class="service-desc">${svc.desc}</span>` : ''}
+            </div>
+            <div class="service-right">
+              <span class="service-price${svc.free ? ' is-free' : ''}">${svc.price}</span>
+              <span class="service-duration">${svc.duration}</span>
+            </div>
+          </div>
+        `).join('');
+
+        return `
+          <div class="category-group" data-category="${cat.id}">
+            <div class="category-header">
+              <span class="label">${cat.label}</span>
+              ${cat.note ? `<span class="category-note">${cat.note}</span>` : ''}
+              <span class="category-header-line" aria-hidden="true"></span>
+            </div>
+            ${servicesHTML}
+          </div>
+        `;
+      }).join('');
+
+      // Spusť fade-in observer na nové prvky
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+      }, { threshold: 0.05, rootMargin: '0px 0px -24px 0px' });
+      container.querySelectorAll('.category-group').forEach((el, i) => {
+        el.classList.add('fade-in');
+        if (i > 0) el.style.transitionDelay = Math.min(i * 0.05, 0.3) + 's';
+        observer.observe(el);
+      });
+    }
+
+    /* ============================================================
+       RENDER PACKAGES
+    ============================================================ */
+    function renderPackageCard(pkg) {
+      return `
+        <article class="package-card">
+          <p class="package-name">${pkg.name}</p>
+          ${pkg.note ? `<p class="package-note">${pkg.note}</p>` : ''}
+          <div class="package-pricing">
+            <span class="package-price">${pkg.price}</span>
+            ${pkg.oldPrice ? `<span class="package-old-price">místo ${pkg.oldPrice}</span>` : ''}
+          </div>
+          ${pkg.savings ? `<span class="package-savings">${pkg.savings}</span>` : ''}
+        </article>
+      `;
+    }
+
+    function renderPackages() {
+      document.getElementById('pkg-masaze').innerHTML  = BALICKY.masaze.map(renderPackageCard).join('');
+      document.getElementById('pkg-kury').innerHTML    = BALICKY.kury.map(renderPackageCard).join('');
+      document.getElementById('pkg-nevesty').innerHTML = BALICKY.nevesty.map(renderPackageCard).join('');
+    }
+
+    /* ============================================================
+       FILTER LOGIC
+    ============================================================ */
+    function initFilter() {
+      const buttons  = document.querySelectorAll('.filter-btn');
+      const container = document.getElementById('services-container');
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.dataset.filter;
+
+          // Aktualizuj aktivní tlačítko
+          buttons.forEach(b => {
+            b.classList.toggle('active', b === btn);
+            b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+          });
+
+          // Fade → přepni → fade in
+          container.style.opacity = '0';
+          container.style.pointerEvents = 'none';
+
+          setTimeout(() => {
+            document.querySelectorAll('.category-group').forEach(group => {
+              const show = filter === 'vse' || group.dataset.category === filter;
+              group.style.display = show ? '' : 'none';
+            });
+            container.style.opacity = '1';
+            container.style.pointerEvents = '';
+          }, 200);
+        });
+      });
+    }
+
+    /* ============================================================
+       INIT
+    ============================================================ */
+    renderServices();
+    renderPackages();
+    initFilter();
+
+  </script>
+
+</body>
+</html>
